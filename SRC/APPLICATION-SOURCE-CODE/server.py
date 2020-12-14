@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request
 app = Flask(__name__)
 PORT = 44444
+HOST = 'delta-tomcat-vm'
 
 print('here')
 
@@ -18,6 +19,6 @@ def index():
     return render_template('index.html')
 
 
-# if __name__ == '__main__':  
-#     app.run(port=str(PORT), debug=True)
-#     print('server running at port ', PORT)
+if __name__ == '__main__':  
+    app.run(host=HOST, port=str(PORT), debug=True)
+    print('server running at port ', PORT)
