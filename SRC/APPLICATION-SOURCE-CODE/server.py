@@ -4,7 +4,7 @@ PORT = 44444
 
 print('here')
 
-@app.route('/search')o
+@app.route('/search')
 def search_return_html():
     query = request.args.get('query')
     # with connector get to your mysql server and query the DB
