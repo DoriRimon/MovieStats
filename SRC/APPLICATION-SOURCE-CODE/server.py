@@ -1,7 +1,10 @@
 from flask import Flask, render_template, request
 app = Flask(__name__)
+PORT = 44444
 
-@app.route('/search')
+print('here')
+
+@app.route('/search')o
 def search_return_html():
     query = request.args.get('query')
     # with connector get to your mysql server and query the DB
@@ -15,7 +18,6 @@ def index():
     return render_template('index.html')
 
 
-if __name__ == '__main__':
-    app.run(port="8888", debug=True)
-    port = 44444
-    print('server running at port ', port)
+if __name__ == '__main__':  
+    app.run(port=str(PORT), debug=True)
+    print('server running at port ', PORT)
