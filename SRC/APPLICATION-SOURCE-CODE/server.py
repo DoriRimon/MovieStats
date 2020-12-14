@@ -18,6 +18,6 @@ def index():
     return render_template('index.html')
 
 
-if __name__ == '__main__':  
-    app.run(port=str(PORT), debug=True)
-    print('server running at port ', PORT)
+# if __name__ == '__main__':  
+#     app.run(port=str(PORT), debug=True)
+#     print('server running at port ', PORT)
