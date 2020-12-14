@@ -17,3 +17,5 @@ def index():
 
 if __name__ == '__main__':
     app.run(port="8888", debug=True)
+    port = 44444
+    print('server running at port ', port)
