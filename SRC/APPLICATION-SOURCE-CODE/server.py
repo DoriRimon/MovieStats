@@ -1,9 +1,13 @@
 from flask import Flask, render_template, request
+import pandas
+
 app = Flask(__name__)
 PORT = 44444
 HOST = 'delta-tomcat-vm'
 
-print('here')
+# print('here')
+df = pandas.read_csv('/static/data/filename.csv')
+df.head()
 
 @app.route('/search')
 def search_return_html():
