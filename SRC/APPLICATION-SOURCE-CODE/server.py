@@ -5,11 +5,11 @@ app = Flask(__name__)
 PORT = 44444
 HOST = 'delta-tomcat-vm'
 
-with open('/static/data/filename.csv', newline='') as csvfile:
+with open('/static/data/filename.csv') as csvfile:
     spamreader = csv.reader(csvfile, delimiter=' ', quotechar='|')
     for i in range(max(5, len(spamreader))):
         print(', '.join(spamreader[i]))
-        
+
 # print('here')
 # df = pandas.read_csv('/static/data/filename.csv')
 # df.head()
