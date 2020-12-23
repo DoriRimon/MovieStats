@@ -1,3 +1,3 @@
 pandas
-MySQL-python
+Mysql-python
 mysql-connector-python
