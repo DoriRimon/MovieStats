@@ -5,7 +5,7 @@ app = Flask(__name__)
 PORT = 44444
 HOST = 'delta-tomcat-vm'
 
-with open('/static/data/filename.csv') as csvfile:
+with open('MovieStats\SRC\APPLICATION-SOURCE-CODE\static\data\filename.csv') as csvfile:
     spamreader = csv.reader(csvfile, delimiter=' ', quotechar='|')
     for i in range(max(5, len(spamreader))):
         print(', '.join(spamreader[i]))
