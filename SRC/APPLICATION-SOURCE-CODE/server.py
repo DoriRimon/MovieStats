@@ -1,13 +1,16 @@
 from flask import Flask, render_template, request
 import csv
-from pathlib import Path
+import os.path
+
+
 
 app = Flask(__name__)
 PORT = 44444
 HOST = 'delta-tomcat-vm'
 
-path = Path(__file__).parent / "/static/data/filename.csv"
-with path.open() as f:
+my_path = os.path.abspath(os.path.dirname(__file__))
+path = os.path.join(my_path, "/static/data/filename.csv")
+with open(path) as f:
     test = list(csv.reader(f))
     print(test)
 
