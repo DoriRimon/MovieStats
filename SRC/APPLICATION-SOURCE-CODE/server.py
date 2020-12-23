@@ -1,14 +1,20 @@
 from flask import Flask, render_template, request
 import csv
+from pathlib import Path
 
 app = Flask(__name__)
 PORT = 44444
 HOST = 'delta-tomcat-vm'
 
-with open('MovieStats\SRC\APPLICATION-SOURCE-CODE\static\data\filename.csv') as csvfile:
-    spamreader = csv.reader(csvfile, delimiter=' ', quotechar='|')
-    for i in range(max(5, len(spamreader))):
-        print(', '.join(spamreader[i]))
+path = Path(__file__).parent / "/static/data/filename.csv"
+with path.open() as f:
+    test = list(csv.reader(f))
+    print(test)
+
+# with open('MovieStats\SRC\APPLICATION-SOURCE-CODE\static\data\filename.csv') as csvfile:
+#     spamreader = csv.reader(csvfile, delimiter=' ', quotechar='|')
+#     for i in range(max(5, len(spamreader))):
+#         print(', '.join(spamreader[i]))
 
 # print('here')
 # df = pandas.read_csv('/static/data/filename.csv')
