@@ -1,10 +1,26 @@
 import csv
 import os.path
+import pandas as pd
 import mysql.connector
+
+NAME = 'DbMysql04'
+HOST = 'mysqlsrv1.cs.tau.ac.il'
+LOCAL = '127.0.0.1'
 
 # connection to server details
 
-# my_sql_connector
+# my_sql_connector\
+
+ctx = mysql.connector.connect(user=NAME, password=NAME, host=LOCAL, database=NAME)
+cursor = ctx.cursor()
+
+query = 'CREATE TABLE IF NOT EXISTS movie_names (id INT PRIMARY KEY, name VARCHAR(100) NOT NULL)'
+
+cursor.execute(query)
+push_csv(cursor)
+
+cursor.close()
+ctx.close()
 
 # definitions on how to insert different data to DB
 
@@ -13,10 +29,17 @@ import mysql.connector
 
 # retrieve data form csv
 
-my_path = os.path.abspath(os.path.dirname(__file__))
-path = os.path.join(my_path, "static/data/filename.csv")
-with open(path) as f:
-    test = list(csv.reader(f))
-    print(test)
+def push_csv(curser):
+    df = pd.read_csv('./static/data/movies.csv')
+    for index, row in df.iterrows():
+        query_params = row['imdb_title_id'], row['title']
+        query = 'insert into movie_names (id, name) values (%d, %s)'
+        curser.execute(query, query_params) 
+
+# my_path = os.path.abspath(os.path.dirname(__file__))
+# path = os.path.join(my_path, "static/data/movies.csv")
+# with open(path) as f:
+#     test = list(csv.reader(f))
+#     print(test)
 
 # insert data to DB
