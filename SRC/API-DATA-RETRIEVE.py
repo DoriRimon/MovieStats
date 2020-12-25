@@ -9,7 +9,7 @@ LOCAL = '127.0.0.1'
 
 # connection to server details
 
-# my_sql_connector\
+# my_sql_connector
 
 ctx = mysql.connector.connect(user=NAME, password=NAME, host=LOCAL, database=NAME)
 cursor = ctx.cursor()
