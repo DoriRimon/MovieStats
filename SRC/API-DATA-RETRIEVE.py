@@ -21,7 +21,8 @@ def push_csv(curser):
 
 result = requests.get('https://api.themoviedb.org/3/movie/550?api_key=7e759b2920f15726a47aecff3b17d4fb')
 # check result
-result_dict = json.loads(result)
+result_dict = result.json()
+# result_dict = json.loads(result)
 print(result_dict['id'])
 
 # connection to server details
