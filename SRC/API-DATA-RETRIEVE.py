@@ -12,7 +12,7 @@ LOCAL = '127.0.0.1'
 
 # my_sql_connector
 
-ctx = mysql.connector.connect(user=NAME, password=NAME, host=LOCAL, database=NAME)
+ctx = mysql.connector.connect(user=NAME, password=NAME, host=HOST, database=NAME)
 cursor = ctx.cursor()
 
 query = 'CREATE TABLE IF NOT EXISTS movie_names (id INT PRIMARY KEY, name VARCHAR(100) NOT NULL)'
