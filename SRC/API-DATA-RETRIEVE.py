@@ -8,6 +8,15 @@ NAME = 'DbMysql04'
 HOST = 'mysqlsrv1.cs.tau.ac.il'
 LOCAL = '127.0.0.1'
 
+# retrieve data form csv
+
+def push_csv(curser):
+    df = pd.read_csv('./static/data/movies.csv')
+    for index, row in df.iterrows():
+        query_params = row['imdb_title_id'], row['title']
+        query = 'insert into movie_names (id, name) values (%d, %s)'
+        curser.execute(query, query_params) 
+
 # connection to server details
 
 # my_sql_connector
@@ -31,15 +40,6 @@ result = requests.get('https://api.themoviedb.org/3/movie/550?api_key=7e759b2920
 # check result
 result_dict = json.loads(result)
 print(result_dict['id'])
-
-# retrieve data form csv
-
-def push_csv(curser):
-    df = pd.read_csv('./static/data/movies.csv')
-    for index, row in df.iterrows():
-        query_params = row['imdb_title_id'], row['title']
-        query = 'insert into movie_names (id, name) values (%d, %s)'
-        curser.execute(query, query_params) 
 
 # my_path = os.path.abspath(os.path.dirname(__file__))
 # path = os.path.join(my_path, "static/data/movies.csv")
