@@ -11,7 +11,7 @@ LOCAL = '127.0.0.1'
 # retrieve data form csv
 
 def push_csv(curser):
-    df = pd.read_csv('./static/data/movies.csv')
+    df = pd.read_csv('./APPLICATION-SOURCE-CODE/static/data/movies.csv')
     for index, row in df.iterrows():
         query_params = row['imdb_title_id'], row['title']
         query = 'insert into movie_names (id, name) values (%d, %s)'
