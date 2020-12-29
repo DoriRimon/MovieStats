@@ -15,15 +15,7 @@ def push_csv(curser):
     for index, row in df.iterrows():
         query_params = row['imdb_title_id'], row['title']
         query = 'insert into movie_names (id, name) values (%d, %s)'
-        curser.execute(query, query_params) 
-
-# retrieve data from API
-
-result = requests.get('https://api.themoviedb.org/3/movie/550?api_key=7e759b2920f15726a47aecff3b17d4fb')
-# check result
-result_dict = result.json()
-# result_dict = json.loads(result)
-print(result_dict['id'])
+        curser.execute(query, query_params, multi=False) 
 
 # connection to server details
 
@@ -40,12 +32,13 @@ push_csv(cursor)
 cursor.close()
 ctx.close()
 
-# definitions on how to insert different data to DB
+# retrieve data from API
 
-# my_path = os.path.abspath(os.path.dirname(__file__))
-# path = os.path.join(my_path, "static/data/movies.csv")
-# with open(path) as f:
-#     test = list(csv.reader(f))
-#     print(test)
+result = requests.get('https://api.themoviedb.org/3/movie/550?api_key=7e759b2920f15726a47aecff3b17d4fb')
+# check result
+result_dict = result.json()
+print(result_dict['id'])
+
+# definitions on how to insert different data to DB
 
 # insert data to DB
