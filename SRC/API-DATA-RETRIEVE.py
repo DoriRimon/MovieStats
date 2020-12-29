@@ -11,7 +11,7 @@ LOCAL = '127.0.0.1'
 # helping methods
 
 def imdb_id_to_id(imdb_id):
-    return int(id[2:])
+    return int(imdb_id[2:])
 
 # retrieve data form csv
 
