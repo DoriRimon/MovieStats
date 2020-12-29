@@ -13,7 +13,7 @@ path = os.path.join(my_path, "static/data/filename.csv")
 with open(path) as f:
     # reader = csv.reader(f)
     test = list(csv.reader(f))
-    print(test)
+    # print(test)
 
 # with open('MovieStats\SRC\APPLICATION-SOURCE-CODE\static\data\filename.csv') as csvfile:
 #     spamreader = csv.reader(csvfile, delimiter=' ', quotechar='|')

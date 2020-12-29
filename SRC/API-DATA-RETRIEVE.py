@@ -1,6 +1,7 @@
-import csv
 import os.path
 import pandas as pd
+import requests
+import json
 import mysql.connector
 
 NAME = 'DbMysql04'
@@ -26,6 +27,10 @@ ctx.close()
 
 # retrieve data from API
 
+result = requests.get('https://api.themoviedb.org/3/movie/550?api_key=7e759b2920f15726a47aecff3b17d4fb')
+# check result
+result_dict = json.loads(result)
+print(result_dict['id'])
 
 # retrieve data form csv
 
