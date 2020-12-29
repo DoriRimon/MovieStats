@@ -8,14 +8,19 @@ NAME = 'DbMysql04'
 HOST = 'mysqlsrv1.cs.tau.ac.il'
 LOCAL = '127.0.0.1'
 
+# helping methods
+
+def imdb_id_to_id(imdb_id):
+    return int(id[2:])
+
 # retrieve data form csv
 
 def push_csv(curser):
     df = pd.read_csv('./APPLICATION-SOURCE-CODE/static/data/movies.csv')
     for index, row in df.iterrows():
-        query_params = row['imdb_title_id'], row['title']
+        query_params = imdb_id_to_id(row['imdb_title_id']), row['title']
         print('params: ', query_params)
-        query = 'insert into movie_names (id, name) values (%s, %s)'
+        query = 'insert into movie_names (id, name) values (%d, %s)'
         curser.execute(query, query_params, multi=False) 
 
 # connection to server details
@@ -42,4 +47,9 @@ print(result_dict['id'])
 
 # definitions on how to insert different data to DB
 
-# insert data to DB
+# insert data to DB\
+
+
+
+
+
