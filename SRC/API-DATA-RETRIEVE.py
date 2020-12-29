@@ -20,7 +20,7 @@ def push_csv(curser):
     for index, row in df.iterrows():
         query_params = imdb_id_to_id(row['imdb_title_id']), row['title']
         print('params: ', query_params)
-        query = 'insert into movie_names (id, name) values (%d, %s)'
+        query = 'insert into movie_names (id, name) values (%s, %s)'
         curser.execute(query, query_params, multi=False) 
 
 # connection to server details
