@@ -8,48 +8,71 @@ NAME = 'DbMysql04'
 HOST = 'mysqlsrv1.cs.tau.ac.il'
 LOCAL = '127.0.0.1'
 
-# helping methods
 
+'''
+helping methods
+'''
+
+# creating tables
+def create_tables(cursor):
+    query = 'CREATE TABLE IF NOT EXISTS movie_names (id INT PRIMARY KEY, name VARCHAR(100) NOT NULL)'
+    cursor.execute(query)
+
+
+# convert ids
 def imdb_id_to_id(imdb_id):
     return int(imdb_id[2:])
 
-# retrieve data form csv
 
-def push_csv(curser):
+'''
+definitions on how to insert different data to DB
+'''
+
+# retrieve data form csv and insert
+def push_csv(curosr):
     df = pd.read_csv('./APPLICATION-SOURCE-CODE/static/data/movies.csv')
     for index, row in df.iterrows():
         query_params = imdb_id_to_id(row['imdb_title_id']), row['title']
-        print('params: ', query_params)
+        # print('params: ', query_params)
         query = 'insert into movie_names (id, name) values (%s, %s)'
-        curser.execute(query, query_params, multi=False) 
+        cursor.execute(query, query_params, multi=False) 
 
-# connection to server details
 
-# my_sql_connector
+# insert data to actors
+def push_actor(cursor, name, id):
+    pass
+
+
+# insert data to movies
+def push_movie(cursor, imdb_id, title):
+    pass
+
+
+'''
+insert data to db
+'''
+def main(cursor):
+    create_tables(cursor)
+    push_csv(cursor)
+
+
+'''
+connection to server details
+'''
 
 ctx = mysql.connector.connect(user=NAME, password=NAME, host=HOST, database=NAME)
 cursor = ctx.cursor()
 
-query = 'CREATE TABLE IF NOT EXISTS movie_names (id INT PRIMARY KEY, name VARCHAR(100) NOT NULL)'
-
-cursor.execute(query)
-push_csv(cursor)
+main(cursor)
 
 cursor.close()
 ctx.close()
 
-# retrieve data from API
+
+'''
+API retrieve
+'''
 
 result = requests.get('https://api.themoviedb.org/3/movie/550?api_key=7e759b2920f15726a47aecff3b17d4fb')
-# check result
 result_dict = result.json()
 print(result_dict['id'])
-
-# definitions on how to insert different data to DB
-
-# insert data to DB\
-
-
-
-
-
