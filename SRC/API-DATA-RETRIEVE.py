@@ -14,7 +14,8 @@ def push_csv(curser):
     df = pd.read_csv('./APPLICATION-SOURCE-CODE/static/data/movies.csv')
     for index, row in df.iterrows():
         query_params = row['imdb_title_id'], row['title']
-        query = 'insert into movie_names (id, name) values (%d, %s)'
+        print('params: ', query_params)
+        query = 'insert into movie_names (id, name) values (%s, %s)'
         curser.execute(query, query_params, multi=False) 
 
 # connection to server details
