@@ -8,7 +8,7 @@ import numpy as np
 NAME = 'DbMysql04'
 HOST = 'mysqlsrv1.cs.tau.ac.il'
 LOCAL = '127.0.0.1'
-
+API_KEY = '7e759b2920f15726a47aecff3b17d4fb'
 '''
 helping methods
 '''
@@ -47,6 +47,12 @@ def create_tables(cursor):
                 genre_name VARCHAR(100) NOT NULL)'''
     cursor.execute(query)
 
+    query = '''CREATE TABLE IF NOT EXISTS movie_genre (
+                movie_id INT NOT NULL,
+                genre_id INT NOT NULL)
+    '''
+    cursor.execute(query)
+
     ctx.commit()
 
 
@@ -75,14 +81,36 @@ def push_csv(cursor):
         cursor.execute(query, query_params)  # // multi=False
     ctx.commit()
 
+
 # insert data to actors
 def push_actor(cursor, name, id):
     pass
 
 
-# insert data to movies
-def push_movie(cursor, imdb_id, title):
-    pass
+# insert data to movies from api
+def push_movie(cursor):
+    df = pd.read_csv('./APPLICATION-SOURCE-CODE/static/data/movies.csv')
+    df = df.replace({np.nan: None})
+    update_query = '''UPDATE movie_names 
+                    SET movie_db_id = %s, lang = %s
+                    WHERE imbd_id = %s'''
+    insert_query = '''INSERT INTO movie_genre (
+                    movie_id, genre_id)
+                     VALUES (%s, %s)'''
+    for index, row in df.iterrows():
+        imdb_id = row['imdb_title_id']
+        response = requests.get("https://api.themoviedb.org/3/find/"+imdb_id +
+                                "?api_key="+API_KEY+"&external_source=imdb_id")
+        if response.status_code == 200:
+            resp_json = response.json()
+            movie_resp = resp_json["movie_results"]
+            query_params = movie_resp['id'], movie_resp['original_language'], imdb_id
+            cursor.execute(update_query, query_params)
+            for gen in movie_resp['genre_ids']:
+                params = imdb_id_to_id(row['imdb_title_id']), gen
+                cursor.execute(insert_query, params)
+
+    ctx.commit()
 
 
 # insert genres into table from api
@@ -106,11 +134,13 @@ insert data to db
 
 def main(cursor):
 
-    #drop_tables(cursor)
-    print("droped all tables")
-    # create_tables(cursor)
+    # drop_tables(cursor)
+    # print("droped all tables")
+    print("creating tables")
+    create_tables(cursor)
     # print("done creating tables")
     # get_genres(cursor)
+    # push_csv(cursor)
     push_csv(cursor)
     print("done_pushing_csv")
 
