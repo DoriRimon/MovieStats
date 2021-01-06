@@ -71,7 +71,7 @@ def push_csv(cursor):
     for index, row in df.iterrows():
         query_params = imdb_id_to_id(row['imdb_title_id']), row['imdb_title_id'], row['title'], row['duration']
         # print("params:")
-        # print(query_params)
+        print(query_params)
         cursor.execute(query, query_params)  # // multi=False
 
 
