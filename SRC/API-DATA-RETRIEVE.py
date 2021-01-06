@@ -27,7 +27,7 @@ def drop_tables(cursor):
 def create_tables(cursor):
     query = '''CREATE TABLE IF NOT EXISTS movie_names (
                 id INT PRIMARY KEY, 
-                imbd_id VARCHAR(9) NOT NULL,
+                imbd_id VARCHAR(10) NOT NULL,
                 movie_db_id INT,
                 f_title VARCHAR(200) NOT NULL, 
                 genre VARCHAR(100),
