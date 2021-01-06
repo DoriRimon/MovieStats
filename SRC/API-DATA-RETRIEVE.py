@@ -8,7 +8,6 @@ NAME = 'DbMysql04'
 HOST = 'mysqlsrv1.cs.tau.ac.il'
 LOCAL = '127.0.0.1'
 
-
 '''
 helping methods
 '''
@@ -44,13 +43,14 @@ definitions on how to insert different data to DB
 # retrieve data form csv and insert
 def push_csv(cursor):
     df = pd.read_csv('./APPLICATION-SOURCE-CODE/static/data/movies.csv')
+    query = '''INSERT INTO movie_names (
+                    id, title, genre, duration, budget, income) 
+                    VALUES (%s, %s, %s, %s, %s, %s)'''
     for index, row in df.iterrows():
         print(row['title'])
-        query_params = imdb_id_to_id(row['imdb_title_id']), row['title'], row['genre'], row['duration'], row['budget'],\
-                       row['worlwide_gross_income']
-        # print('params: ', query_params)
-        query = '''insert into movie_names (
-                    id, title, genre, duration, budget, income) values (%s, %s, %s, %s, %s, %s)'''
+        query_params = imdb_id_to_id(row['imdb_title_id']), row['title'], row['genre'], row['duration'], \
+                       row['budget'], row['worlwide_gross_income']
+        print('params: ', query_params)
         cursor.execute(query, query_params)  # // multi=False
 
 
@@ -86,7 +86,6 @@ main(cursor)
 
 cursor.close()
 ctx.close()
-
 
 '''
 API retrieve
