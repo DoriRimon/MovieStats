@@ -105,13 +105,14 @@ def push_movie(cursor):
                                 "?api_key="+API_KEY+"&external_source=imdb_id")
         if response.status_code == 200:
             resp_json = response.json()
-            movie_resp = resp_json["movie_results"][0]
-            query_params = movie_resp['id'], movie_resp['original_language'], id
-            cursor.execute(update_query, query_params)
-            count = count+1
-            for gen in movie_resp['genre_ids']:
-                params = imdb_id_to_id(row['imdb_title_id']), gen
-                cursor.execute(insert_query, params)
+            if resp_json["movie_results"][0]:
+                movie_resp = resp_json["movie_results"][0]
+                query_params = movie_resp['id'], movie_resp['original_language'], id
+                cursor.execute(update_query, query_params)
+                count = count+1
+                for gen in movie_resp['genre_ids']:
+                    params = imdb_id_to_id(row['imdb_title_id']), gen
+                    cursor.execute(insert_query, params)
     print(count)
     ctx.commit()
 
