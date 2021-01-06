@@ -104,6 +104,7 @@ def push_movie(cursor):
         if response.status_code == 200:
             resp_json = response.json()
             movie_resp = resp_json["movie_results"]
+            print(movie_resp['id'], movie_resp['original_language'], row['imdb_title_id'])
             query_params = movie_resp['id'], movie_resp['original_language'], row['imdb_title_id']
             cursor.execute(update_query, query_params)
             for gen in movie_resp['genre_ids']:
