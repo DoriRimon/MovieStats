@@ -77,7 +77,7 @@ def push_csv(cursor):
     for index, row in df.iterrows():
         query_params = imdb_id_to_id(row['imdb_title_id']), row['imdb_title_id'], row['title'], row['duration']
         # print("params:")
-        #print(query_params)
+        # print(query_params)
         cursor.execute(query, query_params)  # // multi=False
     ctx.commit()
 
@@ -93,12 +93,13 @@ def push_movie(cursor):
     df = df.replace({np.nan: None})
     update_query = '''UPDATE movie_names 
                     SET movie_db_id = %s, lang = %s
-                    WHERE imbd_id = %s'''
+                    WHERE id = %s'''
     insert_query = '''INSERT INTO movie_genre (
                     movie_id, genre_id)
                      VALUES (%s, %s)'''
     for index, row in df.iterrows():
         imdb_id = row['imdb_title_id']
+        id = imdb_id_to_id(imdb_id)
         response = requests.get("https://api.themoviedb.org/3/find/"+imdb_id +
                                 "?api_key="+API_KEY+"&external_source=imdb_id")
         if response.status_code == 200:
@@ -108,8 +109,8 @@ def push_movie(cursor):
             movie_resp = resp_json["movie_results"]
             print("movie response:")
             print(movie_resp)
-            print(movie_resp['id'], movie_resp['original_language'], row['imdb_title_id'])
-            query_params = movie_resp['id'], movie_resp['original_language'], row['imdb_title_id']
+            print(movie_resp['id'], movie_resp['original_language'], id)
+            query_params = movie_resp['id'], movie_resp['original_language'], id
             cursor.execute(update_query, query_params)
             for gen in movie_resp['genre_ids']:
                 params = imdb_id_to_id(row['imdb_title_id']), gen
