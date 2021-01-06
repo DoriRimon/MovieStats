@@ -29,14 +29,14 @@ def create_tables(cursor):
                 f_title VARCHAR(100) NOT NULL, 
                 genre VARCHAR(100),
                 duration INT, 
-                language VARCHAR(100), 
+                lang VARCHAR(100), 
                 budget INT, 
                 income INT, year INT)'''
     cursor.execute(query)
 
     query = '''CREATE TABLE IF NOT EXISTS actors (
                 id INT PRIMARY KEY,
-                name VARCHAR(100) NOT NULL)'''
+                actor_name VARCHAR(100) NOT NULL)'''
     cursor.execute(query)
 
     ctx.commit()
@@ -56,12 +56,12 @@ definitions on how to insert different data to DB
 def push_csv(cursor):
     df = pd.read_csv('./APPLICATION-SOURCE-CODE/static/data/movies.csv')
     query = '''INSERT INTO movie_names (
-                    id, f_title, genre, duration, budget, income) 
-                    VALUES (%s, %s, %s, %s, %s, %s)'''
+                    id, f_title, genre, duration, lang, budget, income) 
+                    VALUES (%s, %s, %s, %s, %s, %s, %s)'''
     for index, row in df.iterrows():
         print(row['title'])
         query_params = row['imdb_title_id'], row['title'], row['genre'], row['duration'], \
-                       row['budget'], row['worlwide_gross_income']
+                       row['language'], row['budget'], row['worlwide_gross_income']
         print('params: ', query_params)
         cursor.execute(query, query_params)  # // multi=False
 
