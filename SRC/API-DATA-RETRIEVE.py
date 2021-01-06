@@ -27,6 +27,8 @@ def drop_tables(cursor):
 def create_tables(cursor):
     query = '''CREATE TABLE IF NOT EXISTS movie_names (
                 id INT PRIMARY KEY, 
+                imbd_id VARCHAR(9) NOT NULL,
+                movie_db_id INT NOT NULL,
                 f_title VARCHAR(200) NOT NULL, 
                 genre VARCHAR(100),
                 duration INT, 
@@ -64,13 +66,12 @@ def push_csv(cursor):
     df = df.replace({np.nan: None})  # remove nans
     # insert budget and income from api
     query = '''INSERT INTO movie_names (
-                    id, f_title, genre, duration, lang) 
-                    VALUES (%s, %s, %s, %s, %s)'''
+                    id, imbd_id, f_title, duration) 
+                    VALUES (%s, %s, %s, %s)'''
     for index, row in df.iterrows():
-        query_params = imdb_id_to_id(row['imdb_title_id']), row['title'], row['genre'], row['duration'], \
-                       row['language']
-        print("params:")
-        print(query_params)
+        query_params = imdb_id_to_id(row['imdb_title_id']), row['imdb_title_id'], row['title'], row['duration']
+        # print("params:")
+        # print(query_params)
         cursor.execute(query, query_params)  # // multi=False
 
 
@@ -84,6 +85,7 @@ def push_movie(cursor, imdb_id, title):
     pass
 
 
+# insert genres into table from api
 def get_genres(cursor):
     genres = requests.get('https://api.themoviedb.org/3/genre/movie/list?api_key=7e759b2920f15726a47aecff3b17d4fb')
     genres_dict = genres.json()
@@ -108,9 +110,9 @@ def main(cursor):
     print("droped all tables")
     create_tables(cursor)
     print("done creating tables")
-    get_genres(cursor)
-    # push_csv(cursor)
-    # print("done_pushing_csv")
+    # get_genres(cursor)
+    push_csv(cursor)
+    print("done_pushing_csv")
 
 
 '''
