@@ -90,7 +90,7 @@ def get_genres(cursor):
     query = '''INSERT INTO genre(
                 id, genre_name) 
                 VALUES (%s, %s)'''
-    for gen in genres_dict:
+    for gen in genres_dict['genres']:
         query_params = gen['id'], gen['name']
         cursor.execute(query, query_params)
         print("params:")
