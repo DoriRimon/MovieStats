@@ -105,7 +105,7 @@ def push_movie(cursor):
                                 "?api_key="+API_KEY+"&external_source=imdb_id")
         if response.status_code == 200:
             resp_json = response.json()
-            if resp_json["movie_results"][0]:
+            if resp_json["movie_results"]:
                 movie_resp = resp_json["movie_results"][0]
                 query_params = movie_resp['id'], movie_resp['original_language'], id
                 cursor.execute(update_query, query_params)
