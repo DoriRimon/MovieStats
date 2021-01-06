@@ -106,7 +106,7 @@ def push_movie(cursor):
             print('status 200')
             resp_json = response.json()
             print('converted to jason')
-            movie_resp = resp_json["movie_results"]
+            movie_resp = resp_json["movie_results"](0)
             print("movie response:")
             print(movie_resp)
             print(movie_resp['adult'])
