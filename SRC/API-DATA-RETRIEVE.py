@@ -41,7 +41,7 @@ def create_tables(cursor):
     cursor.execute(query)
 
     query = '''CREATE TABLE IF NOT EXISTS genre(
-                id UNT PRIMARY KEY,
+                id INT PRIMARY KEY,
                 genre_name VARCHAR(100) NOT NULL 
     '''
     cursor.execute(query)
