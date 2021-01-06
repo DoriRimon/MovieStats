@@ -62,7 +62,7 @@ def push_csv(cursor):
                     VALUES (%s, %s, %s, %s, %s, %s, %s)'''
     for index, row in df.iterrows():
         print(row['title'])
-        query_params = row['imdb_title_id'], row['title'], row['genre'], row['duration'], \
+        query_params = imdb_id_to_id(row['imdb_title_id']), row['title'], row['genre'], row['duration'], \
                        row['language'], row['budget'], row['worlwide_gross_income']
         print('params: ', query_params)
         cursor.execute(query, query_params)  # // multi=False
