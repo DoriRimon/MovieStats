@@ -45,12 +45,13 @@ definitions on how to insert different data to DB
 def push_csv(cursor):
     df = pd.read_csv('./APPLICATION-SOURCE-CODE/static/data/movies.csv')
     for index, row in df.iterrows():
+        print(row['title'])
         query_params = imdb_id_to_id(row['imdb_title_id']), row['title'], row['genre'], row['duration'], row['budget'],\
                        row['worlwide_gross_income']
         # print('params: ', query_params)
         query = '''insert into movie_names (
                     id, title, genre, duration, budget, income) values (%s, %s, %s, %s, %s, %s)'''
-        cursor.execute(query, query_params, multi=False) 
+        cursor.execute(query, query_params)  # // multi=False
 
 
 # insert data to actors
