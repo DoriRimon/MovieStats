@@ -28,7 +28,7 @@ def create_tables(cursor):
     query = '''CREATE TABLE IF NOT EXISTS movie_names (
                 id INT PRIMARY KEY, 
                 imbd_id VARCHAR(9) NOT NULL,
-                movie_db_id INT NOT NULL,
+                movie_db_id INT,
                 f_title VARCHAR(200) NOT NULL, 
                 genre VARCHAR(100),
                 duration INT, 
