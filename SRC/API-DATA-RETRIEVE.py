@@ -107,7 +107,7 @@ def push_movie(cursor):
             print('converted to jason')
             movie_resp = resp_json["movie_results"]
             print("movie response:")
-            prrint(movie_resp)
+            print(movie_resp)
             print(movie_resp['id'], movie_resp['original_language'], row['imdb_title_id'])
             query_params = movie_resp['id'], movie_resp['original_language'], row['imdb_title_id']
             cursor.execute(update_query, query_params)
