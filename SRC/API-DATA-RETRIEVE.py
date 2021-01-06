@@ -109,6 +109,7 @@ def push_movie(cursor):
             movie_resp = resp_json["movie_results"]
             print("movie response:")
             print(movie_resp)
+            print(movie_resp['adult'])
             print(movie_resp['id'], movie_resp['original_language'], id)
             query_params = movie_resp['id'], movie_resp['original_language'], id
             cursor.execute(update_query, query_params)
