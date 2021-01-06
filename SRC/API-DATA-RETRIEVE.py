@@ -40,6 +40,12 @@ def create_tables(cursor):
                 actor_name VARCHAR(100) NOT NULL)'''
     cursor.execute(query)
 
+    query = '''CREATE TABLE IF NOT EXISTS genre(
+                id UNT PRIMARY KEY,
+                genre_name VARCHAR(100) NOT NULL 
+    '''
+    cursor.execute(query)
+
     ctx.commit()
 
 
@@ -79,11 +85,18 @@ def push_movie(cursor, imdb_id, title):
     pass
 
 
-def get_genres():
+def get_genres(cursor):
     genres = requests.get('https://api.themoviedb.org/3/genre/movie/list?api_key=7e759b2920f15726a47aecff3b17d4fb')
     genres_dict = genres.json()
-    print(genres_dict)
-
+    query = '''INSERT INTO genre(
+                id, genre_name) 
+                VALUES (%s, %s)'''
+    for gen in genres_dict:
+        query_params = gen['id'], gen['name']
+        cursor.execute(query, query_params)
+        print("params:")
+        print(query_params)
+    ctx.commit()
 
 '''
 insert data to db
@@ -91,11 +104,12 @@ insert data to db
 
 
 def main(cursor):
-    get_genres()
-    # drop_tables(cursor)
-    # print("droped all tables")
-    # create_tables(cursor)
-    # print("done creating tables")
+
+    drop_tables(cursor)
+    print("droped all tables")
+    create_tables(cursor)
+    print("done creating tables")
+    get_genres(cursor)
     # push_csv(cursor)
     # print("done_pushing_csv")
 
