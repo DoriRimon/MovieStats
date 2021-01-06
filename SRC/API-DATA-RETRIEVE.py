@@ -16,11 +16,18 @@ helping methods
 
 # creating tables
 def create_tables(cursor):
-    query = '''CREATE TABLE IF NOT EXISTS movie_names (id INT PRIMARY KEY, title VARCHAR(100) NOT NULL, genre VARCHAR(100),' \
-            ' duration INT, language VARCHAR(100), budget INT, income INT, year INT)'''
+    query = '''CREATE TABLE IF NOT EXISTS movie_names (
+                id INT PRIMARY KEY, 
+                title VARCHAR(100) NOT NULL, 
+                genre VARCHAR(100), duration INT, 
+                language VARCHAR(100), 
+                budget INT, 
+                income INT, year INT)'''
     cursor.execute(query)
 
-    query = '''CREATE TABLE IF NOT EXISTS actors (id INT PRIMARY KEY, name VARCHAR(100) NOT NULL)'''
+    query = '''CREATE TABLE IF NOT EXISTS actors (
+                id INT PRIMARY KEY,
+                name VARCHAR(100) NOT NULL)'''
     cursor.execute(query)
 
 
@@ -35,7 +42,7 @@ definitions on how to insert different data to DB
 
 
 # retrieve data form csv and insert
-def push_csv(curosr):
+def push_csv(cursor):
     df = pd.read_csv('./APPLICATION-SOURCE-CODE/static/data/movies.csv')
     for index, row in df.iterrows():
         query_params = imdb_id_to_id(row['imdb_title_id']), row['title'], row['genre'], row['duration'], row['budget'],\
@@ -81,6 +88,17 @@ ctx.close()
 '''
 API retrieve
 '''
+
+with open('./APPLICATION-SOURCE-CODE/static/data/person_ids_01_04_2021.json') as json_file:
+    data = json.load(json_file)
+    for item in data:
+        print(item)
+
+source_url = '';
+get_movies = requests.get(source_url)
+if get_movies.status_code == 200:
+    json_movies = get_movies.json()
+
 
 result = requests.get('https://api.themoviedb.org/3/movie/550?api_key=7e759b2920f15726a47aecff3b17d4fb')
 result_dict = result.json()
