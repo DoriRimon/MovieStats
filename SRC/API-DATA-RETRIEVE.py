@@ -56,17 +56,15 @@ definitions on how to insert different data to DB
 # retrieve data form csv and insert
 def push_csv(cursor):
     df = pd.read_csv('./APPLICATION-SOURCE-CODE/static/data/movies.csv')
-    print("data_types_before:")
-    print(df.dtypes)
-    df = df.replace({np.nan: None})
-    print(df.dtypes)
+    df = df.replace({np.nan: None})  # remove nans
+    # insert budget and income from api
     query = '''INSERT INTO movie_names (
-                    id, f_title, genre, duration, lang, budget, income) 
-                    VALUES (%s, %s, %s, %s, %s, %s, %s)'''
+                    id, f_title, genre, duration, lang) 
+                    VALUES (%s, %s, %s, %s, %s)'''
     for index, row in df.iterrows():
         print(row['title'])
         query_params = imdb_id_to_id(row['imdb_title_id']), row['title'], row['genre'], row['duration'], \
-                       row['language'], row['budget'], row['worlwide_gross_income']
+                       row['language']
         print('params: ', query_params)
         cursor.execute(query, query_params)  # // multi=False
 
