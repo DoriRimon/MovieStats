@@ -80,7 +80,7 @@ def push_movie(cursor, imdb_id, title):
 
 
 def get_genres():
-    genres = requests.get('https://api.themoviedb.org/3/movie/550?api_key=7e759b2920f15726a47aecff3b17d4fb')
+    genres = requests.get('https://api.themoviedb.org/3/genre/movie/list?api_key=7e759b2920f15726a47aecff3b17d4fb')
     genres_dict = genres.json()
     print(genres_dict)
 
