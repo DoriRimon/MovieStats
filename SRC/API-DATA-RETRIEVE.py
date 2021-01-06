@@ -27,7 +27,7 @@ def drop_tables(cursor):
 def create_tables(cursor):
     query = '''CREATE TABLE IF NOT EXISTS movie_names (
                 id INT PRIMARY KEY, 
-                f_title VARCHAR(150) NOT NULL, 
+                f_title VARCHAR(200) NOT NULL, 
                 genre VARCHAR(100),
                 duration INT, 
                 lang VARCHAR(100), 
@@ -64,6 +64,8 @@ def push_csv(cursor):
     for index, row in df.iterrows():
         query_params = imdb_id_to_id(row['imdb_title_id']), row['title'], row['genre'], row['duration'], \
                        row['language']
+        print("params:")
+        print(query_params)
         cursor.execute(query, query_params)  # // multi=False
 
 
