@@ -57,6 +57,7 @@ definitions on how to insert different data to DB
 def push_csv(cursor):
     df = pd.read_csv('./APPLICATION-SOURCE-CODE/static/data/movies.csv')
     df = df.replace({np.nan: None})
+    print(df.dtypes)
     query = '''INSERT INTO movie_names (
                     id, f_title, genre, duration, lang, budget, income) 
                     VALUES (%s, %s, %s, %s, %s, %s, %s)'''
