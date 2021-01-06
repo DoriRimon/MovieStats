@@ -16,11 +16,11 @@ helping methods
 
 def drop_tables(cursor):
     query = '''DROP TABLE movie_names'''
-    cursor.execute(query)
+    # cursor.execute(query)
 
-    query = '''DROP TABLE actors'''
-    cursor.execute(query)
-    ctx.commit()
+    # query = '''DROP TABLE actors'''
+    # cursor.execute(query)
+    # ctx.commit()
 # creating tables
 
 
@@ -71,9 +71,9 @@ def push_csv(cursor):
     for index, row in df.iterrows():
         query_params = imdb_id_to_id(row['imdb_title_id']), row['imdb_title_id'], row['title'], row['duration']
         # print("params:")
-        print(query_params)
+        #print(query_params)
         cursor.execute(query, query_params)  # // multi=False
-
+    ctx.commit()
 
 # insert data to actors
 def push_actor(cursor, name, id):
@@ -106,10 +106,10 @@ insert data to db
 
 def main(cursor):
 
-    drop_tables(cursor)
+    #drop_tables(cursor)
     print("droped all tables")
-    create_tables(cursor)
-    print("done creating tables")
+    # create_tables(cursor)
+    # print("done creating tables")
     # get_genres(cursor)
     push_csv(cursor)
     print("done_pushing_csv")
