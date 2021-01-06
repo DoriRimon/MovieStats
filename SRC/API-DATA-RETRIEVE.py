@@ -42,8 +42,7 @@ def create_tables(cursor):
 
     query = '''CREATE TABLE IF NOT EXISTS genre(
                 id INT PRIMARY KEY,
-                genre_name VARCHAR(100) NOT NULL 
-    '''
+                genre_name VARCHAR(100) NOT NULL)'''
     cursor.execute(query)
 
     ctx.commit()
