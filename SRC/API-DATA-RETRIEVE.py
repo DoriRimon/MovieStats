@@ -102,8 +102,12 @@ def push_movie(cursor):
         response = requests.get("https://api.themoviedb.org/3/find/"+imdb_id +
                                 "?api_key="+API_KEY+"&external_source=imdb_id")
         if response.status_code == 200:
+            print('status 200')
             resp_json = response.json()
+            print('converted to jason')
             movie_resp = resp_json["movie_results"]
+            print("movie response:")
+            prrint(movie_resp)
             print(movie_resp['id'], movie_resp['original_language'], row['imdb_title_id'])
             query_params = movie_resp['id'], movie_resp['original_language'], row['imdb_title_id']
             cursor.execute(update_query, query_params)
