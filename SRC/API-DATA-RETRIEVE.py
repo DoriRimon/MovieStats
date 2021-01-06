@@ -48,7 +48,8 @@ def push_csv(cursor):
         query_params = imdb_id_to_id(row['imdb_title_id']), row['title'], row['genre'], row['duration'], row['budget'],\
                        row['worlwide_gross_income']
         # print('params: ', query_params)
-        query = '''insert into movie_names (id, title, genre, duration, budget, income) values (%s, %s, %s, %s, %s, %s)'''
+        query = '''insert into movie_names (
+                    id, title, genre, duration, budget, income) values (%s, %s, %s, %s, %s, %s)'''
         cursor.execute(query, query_params, multi=False) 
 
 
@@ -69,6 +70,7 @@ insert data to db
 
 def main(cursor):
     create_tables(cursor)
+    print("done creating tables")
     push_csv(cursor)
 
 
@@ -89,16 +91,16 @@ ctx.close()
 API retrieve
 '''
 
-with open('./APPLICATION-SOURCE-CODE/static/data/person_ids_01_04_2021.json') as json_file:
-    data = json.load(json_file)
-    for item in data:
-        print(item)
-
-source_url = '';
-get_movies = requests.get(source_url)
-if get_movies.status_code == 200:
-    json_movies = get_movies.json()
-
+# with open('./APPLICATION-SOURCE-CODE/static/data/person_ids_01_04_2021.json') as json_file:
+#     data = json.load(json_file)
+#     for item in data:
+#         print(item)
+#
+# source_url = '';
+# get_movies = requests.get(source_url)
+# if get_movies.status_code == 200:
+#     json_movies = get_movies.json()
+#
 
 result = requests.get('https://api.themoviedb.org/3/movie/550?api_key=7e759b2920f15726a47aecff3b17d4fb')
 result_dict = result.json()
