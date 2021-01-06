@@ -91,6 +91,7 @@ def push_actor(cursor, name, id):
 def push_movie(cursor):
     df = pd.read_csv('./APPLICATION-SOURCE-CODE/static/data/movies.csv')
     df = df.replace({np.nan: None})
+    count = 0
     update_query = '''UPDATE movie_names 
                     SET movie_db_id = %s, lang = %s
                     WHERE id = %s'''
@@ -103,20 +104,15 @@ def push_movie(cursor):
         response = requests.get("https://api.themoviedb.org/3/find/"+imdb_id +
                                 "?api_key="+API_KEY+"&external_source=imdb_id")
         if response.status_code == 200:
-            print('status 200')
             resp_json = response.json()
-            print('converted to jason')
             movie_resp = resp_json["movie_results"][0]
-            print("movie response:")
-            print(movie_resp)
-            print(movie_resp['adult'])
-            print(movie_resp['id'], movie_resp['original_language'], id)
             query_params = movie_resp['id'], movie_resp['original_language'], id
             cursor.execute(update_query, query_params)
+            count = count+1
             for gen in movie_resp['genre_ids']:
                 params = imdb_id_to_id(row['imdb_title_id']), gen
                 cursor.execute(insert_query, params)
-
+    print(count)
     ctx.commit()
 
 
