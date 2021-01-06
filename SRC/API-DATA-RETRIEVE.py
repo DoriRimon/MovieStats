@@ -3,6 +3,7 @@ import pandas as pd
 import requests
 import json
 import mysql.connector
+import numpy as np
 
 NAME = 'DbMysql04'
 HOST = 'mysqlsrv1.cs.tau.ac.il'
