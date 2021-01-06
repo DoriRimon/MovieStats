@@ -13,12 +13,22 @@ helping methods
 '''
 
 
+def drop_tables(cursor):
+    query = '''DROP TABLE movie_names'''
+    cursor.execute(query)
+
+    query = '''DROP TABLE actors'''
+    cursor.execute(query)
+    ctx.commit()
 # creating tables
+
+
 def create_tables(cursor):
     query = '''CREATE TABLE IF NOT EXISTS movie_names (
                 id INT PRIMARY KEY, 
-                title VARCHAR(100) NOT NULL, 
-                genre VARCHAR(100), duration INT, 
+                f_title VARCHAR(100) NOT NULL, 
+                genre VARCHAR(100),
+                duration INT, 
                 language VARCHAR(100), 
                 budget INT, 
                 income INT, year INT)'''
@@ -28,6 +38,8 @@ def create_tables(cursor):
                 id INT PRIMARY KEY,
                 name VARCHAR(100) NOT NULL)'''
     cursor.execute(query)
+
+    ctx.commit()
 
 
 # convert ids
@@ -44,11 +56,11 @@ definitions on how to insert different data to DB
 def push_csv(cursor):
     df = pd.read_csv('./APPLICATION-SOURCE-CODE/static/data/movies.csv')
     query = '''INSERT INTO movie_names (
-                    id, title, genre, duration, budget, income) 
+                    id, f_title, genre, duration, budget, income) 
                     VALUES (%s, %s, %s, %s, %s, %s)'''
     for index, row in df.iterrows():
         print(row['title'])
-        query_params = imdb_id_to_id(row['imdb_title_id']), row['title'], row['genre'], row['duration'], \
+        query_params = row['imdb_title_id'], row['title'], row['genre'], row['duration'], \
                        row['budget'], row['worlwide_gross_income']
         print('params: ', query_params)
         cursor.execute(query, query_params)  # // multi=False
@@ -70,6 +82,8 @@ insert data to db
 
 
 def main(cursor):
+    drop_tables(cursor)
+    print("droped all tables")
     create_tables(cursor)
     print("done creating tables")
     push_csv(cursor)
@@ -78,7 +92,7 @@ def main(cursor):
 '''
 connection to server details
 '''
-
+print("connecting to mysql")
 ctx = mysql.connector.connect(user=NAME, password=NAME, host=HOST, database=NAME)
 cursor = ctx.cursor()
 
