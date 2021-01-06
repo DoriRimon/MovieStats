@@ -79,18 +79,25 @@ def push_movie(cursor, imdb_id, title):
     pass
 
 
+def get_genres():
+    genres = requests.get('https://api.themoviedb.org/3/movie/550?api_key=7e759b2920f15726a47aecff3b17d4fb')
+    genres_dict = genres.json()
+    print(genres_dict)
+
+
 '''
 insert data to db
 '''
 
 
 def main(cursor):
-    drop_tables(cursor)
-    print("droped all tables")
-    create_tables(cursor)
-    print("done creating tables")
-    push_csv(cursor)
-    print("done_pushing_csv")
+    get_genres()
+    # drop_tables(cursor)
+    # print("droped all tables")
+    # create_tables(cursor)
+    # print("done creating tables")
+    # push_csv(cursor)
+    # print("done_pushing_csv")
 
 
 '''
