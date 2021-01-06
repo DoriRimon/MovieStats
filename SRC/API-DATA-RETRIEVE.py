@@ -141,8 +141,8 @@ def main(cursor):
     # print("done creating tables")
     # get_genres(cursor)
     # push_csv(cursor)
-    push_csv(cursor)
-    print("done_pushing_csv")
+    push_movie(cursor)
+    print("done_pushing_movie")
 
 
 '''
