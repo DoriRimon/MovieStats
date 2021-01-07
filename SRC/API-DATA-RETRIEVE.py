@@ -114,7 +114,6 @@ def push_movie(cursor):
                 count = count+1
                 for gen in movie_resp['genre_ids']:
                     params = id, gen
-                    print(params)
                     cursor.execute(insert_query, params)
     print(count)
     ctx.commit()
