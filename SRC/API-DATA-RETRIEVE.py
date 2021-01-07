@@ -98,23 +98,24 @@ def push_movie(cursor):
     insert_query = '''INSERT INTO movie_genre (
                     movie_id, genre_id)
                      VALUES (%s, %s)'''
-    for i in range(10):
-        for index, row in df.iterrows():
-            imdb_id = row['imdb_title_id']
-            id = imdb_id_to_id(imdb_id)
-            response = requests.get("https://api.themoviedb.org/3/find/"+imdb_id +
-                                    "?api_key="+API_KEY+"&external_source=imdb_id")
-            if response.status_code == 200:
-                resp_json = response.json()
-                if resp_json["movie_results"]:
-                    movie_resp = resp_json["movie_results"][0]
-                    query_params = movie_resp['id'], movie_resp['original_language'], id
-                    print(query_params)
-                    cursor.execute(update_query, query_params)
-                    count = count+1
-                    for gen in movie_resp['genre_ids']:
-                        params = imdb_id_to_id(row['imdb_title_id']), gen
-                        cursor.execute(insert_query, params)
+
+    for index, row in df.iterrows():
+        imdb_id = row['imdb_title_id']
+        id = imdb_id_to_id(imdb_id)
+        response = requests.get("https://api.themoviedb.org/3/find/"+imdb_id +
+                               "?api_key="+API_KEY+"&external_source=imdb_id")
+        if response.status_code == 200:
+            resp_json = response.json()
+            if resp_json["movie_results"]:
+                movie_resp = resp_json["movie_results"][0]
+                query_params = movie_resp['id'], movie_resp['original_language'], id
+                print(query_params)
+                cursor.execute(update_query, query_params)
+                count = count+1
+                for gen in movie_resp['genre_ids']:
+                    params = id, gen
+                    print(params)
+                    cursor.execute(insert_query, params)
     print(count)
     ctx.commit()
 
