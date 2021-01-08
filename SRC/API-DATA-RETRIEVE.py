@@ -105,6 +105,7 @@ def push_actor(cursor):
     insert_actors = '''INSERT INTO actors (
                     id, actor_name, popularity)
                      VALUES (%s, %s, %s)'''
+    actors['id'] = actors['id'].astype(str)
     for index, row in actors.iterrows():
         person_id = row['id']
         print("person_id")
