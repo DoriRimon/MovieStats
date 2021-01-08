@@ -115,7 +115,7 @@ def push_actor(cursor):
             resp_json = response.json()
             if resp_json["cast"]:
                 print("resp_json:")
-                print(resp_json[cast])
+                print(resp_json["cast"])
                 query_params = person_id, row['name'], row['popularity']
                 print(query_params)
                 cursor.execute(insert_actors, query_params)
