@@ -120,6 +120,7 @@ def push_actor(cursor):
                 cast_response = resp_json["cast"][0]
                 print(cast_response)
                 for movie in cast_response:
+                    print(movie)
                     params = movie['id'], person_id
                     print(params)
                     cursor.execute(insert_actor_movie, params)
