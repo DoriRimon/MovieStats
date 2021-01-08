@@ -91,27 +91,30 @@ def push_csv(cursor):
 
 
 # insert data to actors
+# popularity may be added later
 def push_actor(cursor):
-    # open persons json
+    # actors = pd.read_csv('./APPLICATION-SOURCE-CODE/static/data/persons_ids_1.csv')
+    # first check if it's cast after
+    # hhh
     actors_json = open('./APPLICATION-SOURCE-CODE/static/data/person_ids_01_04_2021.json')
     actors = json_load(actors_json)
     insert_actor_movie = '''INSERT INTO movie_actor (
                     movie_id, actor_id)
                      VALUES (%s, %s)'''
     insert_actors = '''INSERT INTO actors (
-                    id, actor_name, popularity)
+                    id, actor_name)
                      VALUES (%s, %s)'''
     for actor in actors:
-        person_id = actor['id']
-        query_params = person_id, actor['name'], actor['popularity']
-        print(query_params)
-        cursor.execute(insert_actors, query_params)
         # insert into movie_actor table
+        person_id = actor['id']
         response = requests.get("https://api.themoviedb.org/3/person/" + person_id +
                                 "/movie_credits?api_key=" + API_KEY + "&language=en-US")
         if response.status_code == 200:
             resp_json = response.json()
             if resp_json["cast"]:
+                query_params = person_id, actor['name']
+                print(query_params)
+                cursor.execute(insert_actors, query_params)
                 cast_response = resp_json["cast"][0]
                 for movie in cast_response:
                     params = movie['id'], person_id
