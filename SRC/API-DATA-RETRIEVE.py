@@ -175,7 +175,7 @@ insert data to db
 
 def main(cursor):
 
-    drop_tables(cursor)
+   # drop_tables(cursor)
     print("droped all tables")
     print("creating tables")
     create_tables(cursor)
