@@ -107,8 +107,8 @@ def push_actor(cursor):
                      VALUES (%s, %s, %s)'''
     for index, row in actors.iterrows():
         person_id = row['id']
-        response = requests.get("https://api.themoviedb.org/3/person/" + person_id +
-                                "/movie_credits?api_key=" + API_KEY + "&language=en-US")
+        response = requests.get("https://api.themoviedb.org/3/person/"+"person_id" +
+                                "/movie_credits?api_key="+API_KEY+"&language=en-US")
         if response.status_code == 200:
             resp_json = response.json()
             if resp_json["cast"]:
