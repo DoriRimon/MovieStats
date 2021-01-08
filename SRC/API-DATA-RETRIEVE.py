@@ -106,6 +106,7 @@ def push_actor(cursor):
                     id, actor_name, popularity)
                      VALUES (%s, %s, %s)'''
     actors['id'] = actors['id'].astype(str)
+    count = 0
     for index, row in actors.iterrows():
         person_id = row['id']
         response = requests.get("https://api.themoviedb.org/3/person/"+person_id +
@@ -116,8 +117,9 @@ def push_actor(cursor):
                 # print("resp_json:")
                 # print(resp_json["cast"][0])
                 query_params = person_id, row['name'], row['popularity']
-                print(query_params)
                 cursor.execute(insert_actors, query_params)
+                count = count + 1
+                print(count)
                 cast_response = resp_json["cast"]
                 # print("cast_response:")
                 # print(cast_response)
