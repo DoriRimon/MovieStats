@@ -15,8 +15,8 @@ helping methods
 
 
 def drop_tables(cursor):
-    query = '''DROP TABLE movie_names'''
-    # cursor.execute(query)
+    query = '''DROP TABLE actors'''
+    cursor.execute(query)
 
     # query = '''DROP TABLE actors'''
     # cursor.execute(query)
@@ -39,7 +39,9 @@ def create_tables(cursor):
 
     query = '''CREATE TABLE IF NOT EXISTS actors (
                 id INT PRIMARY KEY,
-                actor_name VARCHAR(100) NOT NULL)'''
+                actor_name VARCHAR(100) NOT NULL)
+                popularity FLOAT(5, 3)
+                '''
     cursor.execute(query)
 
     query = '''CREATE TABLE IF NOT EXISTS genre(
@@ -51,6 +53,14 @@ def create_tables(cursor):
                 movie_id INT NOT NULL,
                 genre_id INT NOT NULL)
     '''
+    cursor.execute(query)
+
+    query = '''CREATE TABLE IF NOT EXISTS movie_actor(
+                movie_id INT NOT NULL 
+                actor_id INT NOT NULL
+    )
+    '''
+
     cursor.execute(query)
 
     ctx.commit()
@@ -83,8 +93,33 @@ def push_csv(cursor):
 
 
 # insert data to actors
-def push_actor(cursor, name, id):
-    pass
+def push_actor(cursor):
+    # open persons json
+    actors_json = open('./APPLICATION-SOURCE-CODE/static/data/person_ids_01_04_2021.json')
+    actors = json_load(actors_json)
+    insert_actor_movie = '''INSERT INTO movie_actor (
+                    movie_id, actor_id)
+                     VALUES (%s, %s)'''
+    insert_actors = '''INSERT INTO actors (
+                    id, actor_name, popularity)
+                     VALUES (%s, %s)'''
+    for actor in actors:
+        person_id = actor['id']
+        query_params = person_id, actor['name'], actor['popularity']
+        print(query_params)
+        cursor.execute(insert_actors, query_params)
+        # insert into movie_actor table
+        response = requests.get("https://api.themoviedb.org/3/person/" + person_id +
+                                "/movie_credits?api_key=" + API_KEY + "&language=en-US")
+        if response.status_code == 200:
+            resp_json = response.json()
+            if resp_json["cast"]:
+                cast_response = resp_json["cast"][0]
+                for movie in cast_response:
+                    params = movie['id'], person_id
+                    print(params)
+                    cursor.execute(insert_actor_movie, params)
+    ctx.commit()
 
 
 # insert data to movies from api
@@ -140,15 +175,15 @@ insert data to db
 
 def main(cursor):
 
-    # drop_tables(cursor)
-    # print("droped all tables")
+    drop_tables(cursor)
+    print("droped all tables")
     print("creating tables")
     create_tables(cursor)
     # print("done creating tables")
     # get_genres(cursor)
     # push_csv(cursor)
-    push_movie(cursor)
-    print("done_pushing_movie")
+    push_actor(cursor)
+    print("done_pushing_actors")
 
 
 '''
