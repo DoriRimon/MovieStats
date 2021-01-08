@@ -17,10 +17,11 @@ helping methods
 def drop_tables(cursor):
     query = '''DROP TABLE actors'''
     cursor.execute(query)
-
+    query = '''DROP TABLE movie_actor'''
+    cursor.execute(query)
     # query = '''DROP TABLE actors'''
     # cursor.execute(query)
-    # ctx.commit()
+    ctx.commit()
 # creating tables
 
 
@@ -123,7 +124,7 @@ def push_actor(cursor):
                 # print("cast_response:")
                 # print(cast_response)
                 for movie in cast_response:
-                    print(movie)
+                    # print(movie)
                     params = movie['id'], person_id
                     print(params)
                     cursor.execute(insert_actor_movie, params)
@@ -183,8 +184,8 @@ insert data to db
 
 def main(cursor):
 
-    # drop_tables(cursor)
-    # print("droped all tables")
+    drop_tables(cursor)
+    print("droped tables")
     print("creating tables")
     create_tables(cursor)
     # print("done creating tables")
