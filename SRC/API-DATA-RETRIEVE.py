@@ -55,9 +55,8 @@ def create_tables(cursor):
     cursor.execute(query)
 
     query = '''CREATE TABLE IF NOT EXISTS movie_actor(
-                movie_id INT NOT NULL 
-                actor_id INT NOT NULL
-    )
+                movie_id INT NOT NULL,
+                actor_id INT NOT NULL)
     '''
 
     cursor.execute(query)
