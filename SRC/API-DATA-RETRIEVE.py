@@ -98,6 +98,7 @@ def push_actor(cursor):
    #      actors = json.load(actors_json)
     # actors = pd.read_json(actors_json)
     actors = pd.read_json('../person_ids_01_07_2021.json', lines=True)
+    print(actors.head())
     insert_actor_movie = '''INSERT INTO movie_actor (
                     movie_id, actor_id)
                      VALUES (%s, %s)'''
