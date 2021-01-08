@@ -99,7 +99,6 @@ def push_actor(cursor):
     #      actors = json.load(actors_json)
     # actors = pd.read_json(actors_json)
     actors = pd.read_json('../person_ids_01_07_2021.json', lines=True)
-    print(actors.head())
     insert_actor_movie = '''INSERT INTO movie_actor (
                     movie_id, actor_id)
                      VALUES (%s, %s)'''
@@ -112,7 +111,6 @@ def push_actor(cursor):
         response = requests.get("https://api.themoviedb.org/3/person/"+person_id +
                                 "/movie_credits?api_key="+API_KEY+"&language=en-US")
         if response.status_code == 200:
-            print(response.status_code)
             resp_json = response.json()
             if resp_json["cast"]:
                 # print("resp_json:")
@@ -126,7 +124,6 @@ def push_actor(cursor):
                 for movie in cast_response:
                     # print(movie)
                     params = movie['id'], person_id
-                    print(params)
                     cursor.execute(insert_actor_movie, params)
     ctx.commit()
 
