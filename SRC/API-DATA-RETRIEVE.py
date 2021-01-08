@@ -92,7 +92,6 @@ def push_csv(cursor):
 
 # insert data to actors
 def push_actor(cursor):
-    # open persons json
     # actors = pd.read_csv('./APPLICATION-SOURCE-CODE/static/data/persons_ids_1.csv')
     actors_json = open('./APPLICATION-SOURCE-CODE/static/data/person_ids_01_04_2021.json')
     actors = json_load(actors_json)
