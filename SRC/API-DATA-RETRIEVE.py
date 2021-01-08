@@ -106,6 +106,7 @@ def push_actor(cursor):
                      VALUES (%s, %s, %s)'''
     for actor in actors:
         # insert into movie_actor table
+        print(actor)
         person_id = actor['id']
         response = requests.get("https://api.themoviedb.org/3/person/" + person_id +
                                 "/movie_credits?api_key=" + API_KEY + "&language=en-US")
