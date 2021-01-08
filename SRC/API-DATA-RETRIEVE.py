@@ -113,11 +113,14 @@ def push_actor(cursor):
         if response.status_code == 200:
             print(response.status_code)
             resp_json = response.json()
+            print("resp_json:")
+            print(resp_json)
             if resp_json["cast"]:
                 query_params = person_id, row['name'], row['popularity']
                 print(query_params)
                 cursor.execute(insert_actors, query_params)
                 cast_response = resp_json["cast"][0]
+                print("cast_response:")
                 print(cast_response)
                 for movie in cast_response:
                     print(movie)
