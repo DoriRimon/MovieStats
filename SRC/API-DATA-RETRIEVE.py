@@ -93,7 +93,7 @@ def push_csv(cursor):
 
 # insert data to actors
 def push_actor(cursor):
-    # first 10000
+    # first 20000
     # actors = pd.read_csv('./APPLICATION-SOURCE-CODE/static/data/persons_ids_1.csv')
     # actors_json = open('../person_ids_01_07_2021.json')
     #  with open('../person_ids_01_07_2021.json') as actors_json:
@@ -108,6 +108,8 @@ def push_actor(cursor):
                      VALUES (%s, %s, %s)'''
     actors['id'] = actors['id'].astype(str)
     actors = actors.sort_values(by=['id'], ascending=True)
+    # delete first i*10000 rows
+    actors = actors.iloc[10000:]
     count = 0
     for index, row in actors.iterrows():
         if count < 10000:
@@ -188,10 +190,10 @@ insert data to db
 
 def main(cursor):
 
-    drop_tables(cursor)
-    print("droped tables")
-    print("creating tables")
-    create_tables(cursor)
+    # drop_tables(cursor)
+    # print("droped tables")
+    # print("creating tables")
+    # create_tables(cursor)
     # print("done creating tables")
     # get_genres(cursor)
     # push_csv(cursor)
