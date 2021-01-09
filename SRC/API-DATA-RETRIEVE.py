@@ -110,6 +110,7 @@ def push_actor(cursor):
     actors = actors.sort_values(by=['id'], ascending=True)
     # delete first i*10000 rows
     actors = actors.iloc[10000:]
+    print(actors.head())
     count = 0
     for index, row in actors.iterrows():
         if count < 10000:
