@@ -108,7 +108,6 @@ def push_actor(cursor):
                      VALUES (%s, %s, %s)'''
     actors['id'] = actors['id'].astype(str)
     actors = actors.sort_values(by=['id'], ascending=True)
-    print(actors.head())
     count = 0
     for index, row in actors.iterrows():
         if count < 10000:
