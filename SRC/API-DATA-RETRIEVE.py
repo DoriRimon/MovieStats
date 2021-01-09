@@ -109,8 +109,8 @@ def push_actor(cursor):
     actors['id'] = actors['id'].astype(str)
     actors = actors.sort_values(by=['id'], ascending=True)
     # delete first i*10000 rows
-    # actors = actors.iloc[101022:]
-    actors.drop(actors.index[:100123], inplace=True)
+    actors = actors.iloc[100022:]
+    #actors.drop(actors.index[:100123], inplace=True)
     print(actors.head())
     count = 0
     count_ids = 0
