@@ -117,7 +117,7 @@ def push_actor(cursor):
     for index, row in actors.iterrows():
         if count < 10000:
             person_id = row['id']
-            response = requests.get("https://api.themoviedb.org/3/person/"+person_id.astype(str) +
+            response = requests.get("https://api.themoviedb.org/3/person/"+str(person_id) +
                                     "/movie_credits?api_key="+API_KEY+"&language=en-US")
             count_ids = count_ids+1
             print(count_ids)
