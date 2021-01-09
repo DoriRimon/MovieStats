@@ -99,17 +99,17 @@ def push_actor(cursor):
     #  with open('../person_ids_01_07_2021.json') as actors_json:
     #      actors = json.load(actors_json)
     # actors = pd.read_json(actors_json)
-    actors = pd.read_json('../person_ids_01_07_2021.json', lines=True)
+    actors_ = pd.read_json('../person_ids_01_07_2021.json', lines=True)
     insert_actor_movie = '''INSERT INTO movie_actor (
                     movie_id, actor_id)
                      VALUES (%s, %s)'''
     insert_actors = '''INSERT INTO actors (
                     id, actor_name, popularity)
                      VALUES (%s, %s, %s)'''
-    actors['id'] = actors['id'].astype(str)
-    actors = actors.sort_values(by=['id'], ascending=True)
+    actors_['id'] = actors_['id'].astype(str)
+    actors_ = actors_.sort_values(by=['id'], ascending=True)
     # delete first i*10000 rows
-    actors = actors.iloc[84595:]
+    actors = actors_.iloc[84595:]
     #actors.drop(actors.index[:84595], inplace=True)
     print(actors.head())
     count = 0
