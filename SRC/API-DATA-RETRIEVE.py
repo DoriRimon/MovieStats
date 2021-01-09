@@ -93,6 +93,7 @@ def push_csv(cursor):
 
 # insert data to actors
 def push_actor(cursor):
+    # first 10000
     # actors = pd.read_csv('./APPLICATION-SOURCE-CODE/static/data/persons_ids_1.csv')
     # actors_json = open('../person_ids_01_07_2021.json')
     #  with open('../person_ids_01_07_2021.json') as actors_json:
@@ -110,25 +111,28 @@ def push_actor(cursor):
     print(actors.head())
     count = 0
     for index, row in actors.iterrows():
-        person_id = row['id']
-        response = requests.get("https://api.themoviedb.org/3/person/"+person_id +
-                                "/movie_credits?api_key="+API_KEY+"&language=en-US")
-        if response.status_code == 200:
-            resp_json = response.json()
-            if resp_json["cast"]:
-                # print("resp_json:")
-                # print(resp_json["cast"][0])
-                query_params = person_id, row['name'], row['popularity']
-                cursor.execute(insert_actors, query_params)
-                count = count + 1
-                print(count)
-                cast_response = resp_json["cast"]
-                # print("cast_response:")
-                # print(cast_response)
-                for movie in cast_response:
-                    # print(movie)
-                    params = movie['id'], person_id
-                    cursor.execute(insert_actor_movie, params)
+        if count < 10000:
+            person_id = row['id']
+            response = requests.get("https://api.themoviedb.org/3/person/"+person_id +
+                                    "/movie_credits?api_key="+API_KEY+"&language=en-US")
+            if response.status_code == 200:
+                resp_json = response.json()
+                if resp_json["cast"]:
+                    # print("resp_json:")
+                    # print(resp_json["cast"][0])
+                    query_params = person_id, row['name'], row['popularity']
+                    cursor.execute(insert_actors, query_params)
+                    count = count + 1
+                    print(count)
+                    cast_response = resp_json["cast"]
+                    # print("cast_response:")
+                    # print(cast_response)
+                    for movie in cast_response:
+                        # print(movie)
+                        params = movie['id'], person_id
+                        cursor.execute(insert_actor_movie, params)
+        else:
+            break
     ctx.commit()
 
 
