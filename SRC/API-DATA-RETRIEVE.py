@@ -106,18 +106,18 @@ def push_actor(cursor):
     insert_actors = '''INSERT INTO actors (
                     id, actor_name, popularity)
                      VALUES (%s, %s, %s)'''
-    actors_['id'] = actors_['id'].astype(str)
+    # actors_['id'] = actors_['id'].astype(str)
     actors_ = actors_.sort_values(by=['id'], ascending=True)
     # delete first i*10000 rows
     actors = actors_.iloc[84595:]
-    #actors.drop(actors.index[:84595], inplace=True)
+    # actors.drop(actors.index[:84595], inplace=True)
     print(actors.head())
     count = 0
     count_ids = 0
     for index, row in actors.iterrows():
         if count < 10000:
             person_id = row['id']
-            response = requests.get("https://api.themoviedb.org/3/person/"+person_id +
+            response = requests.get("https://api.themoviedb.org/3/person/"+person_id.astype(str) +
                                     "/movie_credits?api_key="+API_KEY+"&language=en-US")
             count_ids = count_ids+1
             print(count_ids)
