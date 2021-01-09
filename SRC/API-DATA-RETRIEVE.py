@@ -106,6 +106,8 @@ def push_actor(cursor):
                     id, actor_name, popularity)
                      VALUES (%s, %s, %s)'''
     actors['id'] = actors['id'].astype(str)
+    actors = actors.sort_values(by=['id'], ascending=True)
+    print(actors.head())
     count = 0
     for index, row in actors.iterrows():
         person_id = row['id']
