@@ -93,7 +93,7 @@ def push_csv(cursor):
 
 # insert data to actors
 def push_actor(cursor):
-    # first 20000
+    # first 10000
     # actors = pd.read_csv('./APPLICATION-SOURCE-CODE/static/data/persons_ids_1.csv')
     # actors_json = open('../person_ids_01_07_2021.json')
     #  with open('../person_ids_01_07_2021.json') as actors_json:
@@ -106,10 +106,9 @@ def push_actor(cursor):
     insert_actors = '''INSERT INTO actors (
                     id, actor_name, popularity)
                      VALUES (%s, %s, %s)'''
-    # actors_['id'] = actors_['id'].astype(str)
     actors_ = actors_.sort_values(by=['id'], ascending=True)
     # delete first i*10000 rows
-    actors = actors_.iloc[84595:]
+    # actors = actors_.iloc[84595:]
     # actors.drop(actors.index[:84595], inplace=True)
     print(actors.head())
     count = 0
@@ -120,7 +119,6 @@ def push_actor(cursor):
             response = requests.get("https://api.themoviedb.org/3/person/"+str(person_id) +
                                     "/movie_credits?api_key="+API_KEY+"&language=en-US")
             count_ids = count_ids+1
-            print(count_ids)
             if response.status_code == 200:
                 resp_json = response.json()
                 if resp_json["cast"]:
@@ -139,6 +137,7 @@ def push_actor(cursor):
                         cursor.execute(insert_actor_movie, params)
         else:
             break
+    print(count_ids)
     ctx.commit()
 
 
@@ -194,11 +193,10 @@ insert data to db
 
 
 def main(cursor):
-
-    # drop_tables(cursor)
-    # print("droped tables")
-    # print("creating tables")
-    # create_tables(cursor)
+    drop_tables(cursor)
+    print("droped tables")
+    print("creating tables")
+    create_tables(cursor)
     # print("done creating tables")
     # get_genres(cursor)
     # push_csv(cursor)
