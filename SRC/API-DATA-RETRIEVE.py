@@ -109,7 +109,8 @@ def push_actor(cursor):
     actors['id'] = actors['id'].astype(str)
     actors = actors.sort_values(by=['id'], ascending=True)
     # delete first i*10000 rows
-    actors = actors.iloc[101022:]
+    # actors = actors.iloc[101022:]
+    actors.drop(df.index[:101023], inplace=True)
     print(actors.head())
     count = 0
     count_ids = 0
