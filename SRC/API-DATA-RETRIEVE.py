@@ -41,7 +41,7 @@ def create_tables(cursor):
     query = '''CREATE TABLE IF NOT EXISTS actors (
                 id INT PRIMARY KEY,
                 actor_name VARCHAR(100) NOT NULL,
-                popularity DECIMAL (5,3))
+                popularity DECIMAL (5,3)),
                 known_for_department VARCHAR(100)'''
     cursor.execute(query)
 
