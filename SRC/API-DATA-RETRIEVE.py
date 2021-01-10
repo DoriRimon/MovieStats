@@ -104,6 +104,7 @@ def push_actors_from_csv(cursor):
                          VALUES (%s, %s, %s)'''
     for index, row in df.iterrows():
         imdb_name_id = row['imdb_name_id']
+        print(imdb_name_id)
         count_rows = count_rows+1
         response = requests.get("https://api.themoviedb.org/3/find/" + str(imdb_name_id) +
                                 "?api_key=" + API_KEY + "&external_source=imdb_id")
