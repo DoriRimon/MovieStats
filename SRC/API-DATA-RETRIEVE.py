@@ -108,6 +108,7 @@ def push_actors_from_csv(cursor):
         if response.status_code == 200:
             resp_json = response.json()
             if resp_json["person_results"]:
+                actor_resp = resp_json["person_results"][0]
                 actor_params = actor_resp['id'], actor_resp['name'], actor_resp['popularity']
                 print(actor_params)
                 cursor.execute(insert_actors, actor_params)
