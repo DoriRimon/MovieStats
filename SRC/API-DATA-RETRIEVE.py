@@ -127,7 +127,7 @@ def push_actors_from_csv(cursor):
                         cast_response = resp_json["cast"]
                         for movie in cast_response:
                             # print(movie)
-                            params = movie['id'], person_id
+                            params = movie['id'], actor_id
                             print(params)
                             cursor.execute(insert_actor_movie, params)
 
