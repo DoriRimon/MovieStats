@@ -115,7 +115,6 @@ def push_actors_from_csv(cursor):
                 actor_id = actor_resp['id']
                 actor_params = actor_id, actor_resp['name'], actor_resp['popularity'], \
                                actor_resp['known_for_department']
-                print(actor_params)
                 cursor.execute(insert_actors, actor_params)
                 count = count+1
                 print(count)
