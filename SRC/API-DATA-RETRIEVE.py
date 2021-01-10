@@ -113,8 +113,8 @@ def push_actors_from_csv(cursor):
                 print(actor_params)
                 cursor.execute(insert_actors, actor_params)
                 count = count+1
-                print("knowm_for")
-                print(actor_resp['known_for'])
+                # print("knowm_for")
+                # print(actor_resp['known_for'])
                 for movie in actor_resp['known_for']:
                     print(movie)
     print(count)
