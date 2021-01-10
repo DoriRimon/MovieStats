@@ -107,8 +107,8 @@ def push_actors_from_csv(cursor):
                                 "?api_key=" + API_KEY + "&external_source=imdb_id")
         if response.status_code == 200:
             resp_json = response.json()
+            print(resp_json)
             if resp_json["person_results"]:
-                print(resp_json["person_results"])
                 actor_resp = resp_json["person_results"][0]
                 actor_params = actor_resp['id'], actor_resp['name'], actor_resp['popularity']
                 print(actor_params)
