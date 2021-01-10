@@ -109,12 +109,12 @@ def push_actor(cursor):
     actors = actors.sort_values(by=['id'], ascending=True)
     # delete first i*10000 rows
     # actors = actors_.iloc[14536:]
-    actors.drop(actors.index[:29939], inplace=True)
+    actors.drop(actors.index[:29940], inplace=True)
     print(actors.head())
     count = 0
-    count_ids = 0
+    count_ids = 29940
     for index, row in actors.iterrows():
-        if count < 10000:
+        if count < 20000:
             person_id = row['id']
             response = requests.get("https://api.themoviedb.org/3/person/"+str(person_id) +
                                     "/movie_credits?api_key="+API_KEY+"&language=en-US")
