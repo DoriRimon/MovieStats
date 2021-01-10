@@ -104,7 +104,6 @@ def push_actors_from_csv(cursor):
                          VALUES (%s, %s, %s)'''
     for index, row in df.iterrows():
         imdb_name_id = row['imdb_name_id']
-        print(imdb_name_id)
         count_rows = count_rows+1
         response = requests.get("https://api.themoviedb.org/3/find/" + str(imdb_name_id) +
                                 "?api_key=" + API_KEY + "&external_source=imdb_id")
@@ -113,7 +112,11 @@ def push_actors_from_csv(cursor):
             if resp_json["person_results"]:
                 actor_resp = resp_json["person_results"][0]
                 actor_id = actor_resp['id']
-                actor_params = actor_id, actor_resp['name'], actor_resp['popularity']
+                if 'popularity' in actor_resp:
+                    pop = actor_resp['popularity']
+                else:
+                    pop = None
+                actor_params = actor_id, actor_resp['name'], pop
                 cursor.execute(insert_actors, actor_params)
                 count = count+1
                 print(count)
