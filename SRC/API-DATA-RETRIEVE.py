@@ -41,8 +41,7 @@ def create_tables(cursor):
     query = '''CREATE TABLE IF NOT EXISTS actors (
                 id INT PRIMARY KEY,
                 actor_name VARCHAR(100) NOT NULL,
-                popularity DECIMAL (5,3),
-                known_for_department VARCHAR(100))'''
+                popularity DECIMAL (5,3))'''
     cursor.execute(query)
 
     query = '''CREATE TABLE IF NOT EXISTS genre(
@@ -101,8 +100,8 @@ def push_actors_from_csv(cursor):
                         movie_id, actor_id)
                          VALUES (%s, %s)'''
     insert_actors = '''INSERT INTO actors (
-                        id, actor_name, popularity, known_for_department)
-                         VALUES (%s, %s, %s, %s)'''
+                        id, actor_name, popularity)
+                         VALUES (%s, %s, %s)'''
     for index, row in df.iterrows():
         imdb_name_id = row['imdb_name_id']
         count_rows = count_rows+1
@@ -113,8 +112,7 @@ def push_actors_from_csv(cursor):
             if resp_json["person_results"]:
                 actor_resp = resp_json["person_results"][0]
                 actor_id = actor_resp['id']
-                actor_params = actor_id, actor_resp['name'], actor_resp['popularity'], \
-                               actor_resp['known_for_department']
+                actor_params = actor_id, actor_resp['name'], actor_resp['popularity']
                 cursor.execute(insert_actors, actor_params)
                 count = count+1
                 print(count)
