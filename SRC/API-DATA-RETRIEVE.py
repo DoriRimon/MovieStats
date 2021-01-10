@@ -91,6 +91,37 @@ def push_csv(cursor):
     ctx.commit()
 
 
+def push_actors_from_csv(cursor):
+    df = pd.read_csv('.../names.csv')
+    df = df.replace({np.nan: None})
+    count = 0
+    insert_actor_movie = '''INSERT INTO movie_actor (
+                        movie_id, actor_id)
+                         VALUES (%s, %s)'''
+    insert_actors = '''INSERT INTO actors (
+                        id, actor_name, popularity)
+                         VALUES (%s, %s, %s)'''
+    for index, row in df.iterrows():
+        imdb_name_id = row['imdb_name_id']
+        response = requests.get("https://api.themoviedb.org/3/find/" + imdb_name_id +
+                                "?api_key=" + API_KEY + "&external_source=imdb_id")
+        if response.status_code == 200:
+            resp_json = response.json()
+            if resp_json["person_results"]:
+                print(resp_json["person_results"])
+                actor_resp = resp_json["person_results"][0]
+                actor_params = actor_resp['id'], actor_resp['name'], actor_resp['popularity']
+                print(actor_params)
+                cursor.execute(insert_actors, actor_params)
+                count = count+1
+                print("knowm_for")
+                print(actor_resp['known_for'])
+                for movie in actor_resp['known_for']:
+                    print(movie)
+    print(count)
+    ctx.commit()
+
+
 # insert data to actors
 def push_actor(cursor):
     # first 30000
@@ -193,14 +224,15 @@ insert data to db
 
 
 def main(cursor):
-    # drop_tables(cursor)
-    # print("droped tables")
-    # print("creating tables")
-    # create_tables(cursor)
+    drop_tables(cursor)
+    print("droped tables")
+    print("creating tables")
+    create_tables(cursor)
     # print("done creating tables")
     # get_genres(cursor)
     # push_csv(cursor)
-    push_actor(cursor)
+    # push_actor(cursor)
+    push_actors_from_csv(cursor)
     print("done_pushing_actors")
 
 
