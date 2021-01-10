@@ -92,7 +92,7 @@ def push_csv(cursor):
 
 
 def push_actors_from_csv(cursor):
-    df = pd.read_csv('.../names.csv')
+    df = pd.read_csv('../names.csv')
     df = df.replace({np.nan: None})
     count = 0
     insert_actor_movie = '''INSERT INTO movie_actor (
