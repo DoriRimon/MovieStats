@@ -41,7 +41,8 @@ def create_tables(cursor):
     query = '''CREATE TABLE IF NOT EXISTS actors (
                 id INT PRIMARY KEY,
                 actor_name VARCHAR(100) NOT NULL,
-                popularity DECIMAL (5,3))'''
+                popularity DECIMAL (5,3))
+                known_for_department VARCHAR(100)'''
     cursor.execute(query)
 
     query = '''CREATE TABLE IF NOT EXISTS genre(
@@ -95,29 +96,42 @@ def push_actors_from_csv(cursor):
     df = pd.read_csv('../names.csv')
     df = df.replace({np.nan: None})
     count = 0
+    count_rows = 0
     insert_actor_movie = '''INSERT INTO movie_actor (
                         movie_id, actor_id)
                          VALUES (%s, %s)'''
     insert_actors = '''INSERT INTO actors (
-                        id, actor_name, popularity)
-                         VALUES (%s, %s, %s)'''
+                        id, actor_name, popularity, known_for_department)
+                         VALUES (%s, %s, %s, %s)'''
     for index, row in df.iterrows():
         imdb_name_id = row['imdb_name_id']
-        response = requests.get("https://api.themoviedb.org/3/find/" + imdb_name_id +
+        count_rows = count_rows+1
+        response = requests.get("https://api.themoviedb.org/3/find/" + str(imdb_name_id) +
                                 "?api_key=" + API_KEY + "&external_source=imdb_id")
         if response.status_code == 200:
             resp_json = response.json()
             if resp_json["person_results"]:
                 actor_resp = resp_json["person_results"][0]
-                actor_params = actor_resp['id'], actor_resp['name'], actor_resp['popularity']
+                actor_id = actor_resp['id']
+                actor_params = actor_id, actor_resp['name'], actor_resp['popularity'], \
+                               actor_resp['known_for_department']
                 print(actor_params)
                 cursor.execute(insert_actors, actor_params)
                 count = count+1
-                # print("knowm_for")
-                # print(actor_resp['known_for'])
-                for movie in actor_resp['known_for']:
-                    print(movie)
-    print(count)
+                print(count)
+                response_movies = requests.get("https://api.themoviedb.org/3/person/" + str(actor_id)+
+                                               "/movie_credits?api_key=" + API_KEY + "&language=en-US")
+                if response_movies.status_code == 200:
+                    resp_json = response_movies.json()
+                    if resp_json["cast"]:
+                        cast_response = resp_json["cast"]
+                        for movie in cast_response:
+                            # print(movie)
+                            params = movie['id'], person_id
+                            print(params)
+                            cursor.execute(insert_actor_movie, params)
+
+    print(count_rows)
     ctx.commit()
 
 
