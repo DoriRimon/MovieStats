@@ -128,7 +128,6 @@ def push_actors_from_csv(cursor):
                         for movie in cast_response:
                             # print(movie)
                             params = movie['id'], actor_id
-                            print(params)
                             cursor.execute(insert_actor_movie, params)
 
     print(count_rows)
