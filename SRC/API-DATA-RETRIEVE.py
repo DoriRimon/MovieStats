@@ -103,34 +103,36 @@ def push_actors_from_csv(cursor):
                         id, actor_name, popularity)
                          VALUES (%s, %s, %s)'''
     for index, row in df.iterrows():
-        imdb_name_id = row['imdb_name_id']
-        count_rows = count_rows+1
-        response = requests.get("https://api.themoviedb.org/3/find/" + str(imdb_name_id) +
-                                "?api_key=" + API_KEY + "&external_source=imdb_id")
-        if response.status_code == 200:
-            resp_json = response.json()
-            if resp_json["person_results"]:
-                actor_resp = resp_json["person_results"][0]
-                actor_id = actor_resp['id']
-                if 'popularity' in actor_resp:
-                    pop = actor_resp['popularity']
-                else:
-                    pop = None
-                actor_params = actor_id, actor_resp['name'], pop
-                cursor.execute(insert_actors, actor_params)
-                count = count+1
-                print(count)
-                response_movies = requests.get("https://api.themoviedb.org/3/person/" + str(actor_id)+
-                                               "/movie_credits?api_key=" + API_KEY + "&language=en-US")
-                if response_movies.status_code == 200:
-                    resp_json = response_movies.json()
-                    if resp_json["cast"]:
-                        cast_response = resp_json["cast"]
-                        for movie in cast_response:
-                            # print(movie)
-                            params = movie['id'], actor_id
-                            cursor.execute(insert_actor_movie, params)
-
+        if count < 50000:
+            imdb_name_id = row['imdb_name_id']
+            count_rows = count_rows+1
+            response = requests.get("https://api.themoviedb.org/3/find/" + str(imdb_name_id) +
+                                    "?api_key=" + API_KEY + "&external_source=imdb_id")
+            if response.status_code == 200:
+                resp_json = response.json()
+                if resp_json["person_results"]:
+                    actor_resp = resp_json["person_results"][0]
+                    actor_id = actor_resp['id']
+                    if 'popularity' in actor_resp:
+                        pop = actor_resp['popularity']
+                    else:
+                        pop = None
+                    actor_params = actor_id, actor_resp['name'], pop
+                    cursor.execute(insert_actors, actor_params)
+                    count = count+1
+                    print(count)
+                    response_movies = requests.get("https://api.themoviedb.org/3/person/" + str(actor_id)+
+                                                   "/movie_credits?api_key=" + API_KEY + "&language=en-US")
+                    if response_movies.status_code == 200:
+                        resp_json = response_movies.json()
+                        if resp_json["cast"]:
+                            cast_response = resp_json["cast"]
+                            for movie in cast_response:
+                                # print(movie)
+                                params = movie['id'], actor_id
+                                cursor.execute(insert_actor_movie, params)
+        else:
+            break
     print(count_rows)
     ctx.commit()
 
