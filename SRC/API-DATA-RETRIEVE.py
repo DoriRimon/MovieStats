@@ -17,12 +17,13 @@ helping methods
 
 
 def drop_tables(cursor):
-    query = '''DROP TABLE movie_names'''
-    # cursor.execute(query)
-
+    query = '''DROP TABLE actors'''
+    cursor.execute(query)
+    query = '''DROP TABLE movie_actor'''
+    cursor.execute(query)
     # query = '''DROP TABLE actors'''
     # cursor.execute(query)
-    # ctx.commit()
+    ctx.commit()
 # creating tables
 
 
@@ -41,7 +42,8 @@ def create_tables(cursor):
 
     query = '''CREATE TABLE IF NOT EXISTS actors (
                 id INT PRIMARY KEY,
-                actor_name VARCHAR(100) NOT NULL)'''
+                actor_name VARCHAR(100) NOT NULL,
+                popularity DECIMAL (5,3))'''
     cursor.execute(query)
 
     query = '''CREATE TABLE IF NOT EXISTS genre(
@@ -53,6 +55,13 @@ def create_tables(cursor):
                 movie_id INT NOT NULL,
                 genre_id INT NOT NULL)
     '''
+    cursor.execute(query)
+
+    query = '''CREATE TABLE IF NOT EXISTS movie_actor(
+                movie_id INT NOT NULL,
+                actor_id INT NOT NULL)
+    '''
+
     cursor.execute(query)
 
     ctx.commit()
@@ -84,9 +93,101 @@ def push_csv(cursor):
     ctx.commit()
 
 
+def push_actors_from_csv(cursor):
+    df = pd.read_csv('../names.csv')
+    df = df.replace({np.nan: None})
+    count = 0
+    count_rows = 123238
+    df.drop(df.index[:123238], inplace=True)
+    insert_actor_movie = '''INSERT INTO movie_actor (
+                        movie_id, actor_id)
+                         VALUES (%s, %s)'''
+    insert_actors = '''INSERT INTO actors (
+                        id, actor_name, popularity)
+                         VALUES (%s, %s, %s)'''
+    for index, row in df.iterrows():
+        if count < 50000:
+            imdb_name_id = row['imdb_name_id']
+            count_rows = count_rows+1
+            response = requests.get("https://api.themoviedb.org/3/find/" + str(imdb_name_id) +
+                                    "?api_key=" + API_KEY + "&external_source=imdb_id")
+            if response.status_code == 200:
+                resp_json = response.json()
+                if resp_json["person_results"]:
+                    actor_resp = resp_json["person_results"][0]
+                    actor_id = actor_resp['id']
+                    if 'popularity' in actor_resp:
+                        pop = actor_resp['popularity']
+                    else:
+                        pop = None
+                    actor_params = actor_id, actor_resp['name'], pop
+                    cursor.execute(insert_actors, actor_params)
+                    count = count+1
+                    print(count)
+                    response_movies = requests.get("https://api.themoviedb.org/3/person/" + str(actor_id)+
+                                                   "/movie_credits?api_key=" + API_KEY + "&language=en-US")
+                    if response_movies.status_code == 200:
+                        resp_json = response_movies.json()
+                        if resp_json["cast"]:
+                            cast_response = resp_json["cast"]
+                            for movie in cast_response:
+                                # print(movie)
+                                params = movie['id'], actor_id
+                                cursor.execute(insert_actor_movie, params)
+        else:
+            break
+    print(count_rows)
+    ctx.commit()
+
+
 # insert data to actors
-def push_actor(cursor, name, id):
-    pass
+def push_actor(cursor):
+    # first 30000
+    # actors = pd.read_csv('./APPLICATION-SOURCE-CODE/static/data/persons_ids_1.csv')
+    # actors_json = open('../person_ids_01_07_2021.json')
+    #  with open('../person_ids_01_07_2021.json') as actors_json:
+    #      actors = json.load(actors_json)
+    # actors = pd.read_json(actors_json)
+    actors = pd.read_json('../person_ids_01_07_2021.json', lines=True)
+    insert_actor_movie = '''INSERT INTO movie_actor (
+                    movie_id, actor_id)
+                     VALUES (%s, %s)'''
+    insert_actors = '''INSERT INTO actors (
+                    id, actor_name, popularity)
+                     VALUES (%s, %s, %s)'''
+    actors = actors.sort_values(by=['id'], ascending=True)
+    # delete first i*10000 rows
+    # actors = actors_.iloc[14536:]
+    actors.drop(actors.index[:88607], inplace=True)
+    print(actors.head())
+    count = 0
+    count_ids = 88607
+    for index, row in actors.iterrows():
+        if count < 20000:
+            person_id = row['id']
+            response = requests.get("https://api.themoviedb.org/3/person/"+str(person_id) +
+                                    "/movie_credits?api_key="+API_KEY+"&language=en-US")
+            count_ids = count_ids+1
+            if response.status_code == 200:
+                resp_json = response.json()
+                if resp_json["cast"]:
+                    # print("resp_json:")
+                    # print(resp_json["cast"][0])
+                    query_params = person_id, row['name'], row['popularity']
+                    cursor.execute(insert_actors, query_params)
+                    count = count + 1
+                    print(count)
+                    cast_response = resp_json["cast"]
+                    # print("cast_response:")
+                    # print(cast_response)
+                    for movie in cast_response:
+                        # print(movie)
+                        params = movie['id'], person_id
+                        cursor.execute(insert_actor_movie, params)
+        else:
+            break
+    print(count_ids)
+    ctx.commit()
 
 
 # insert data to movies from api
@@ -141,16 +242,16 @@ insert data to db
 
 
 def main(cursor):
-
     # drop_tables(cursor)
-    # print("droped all tables")
-    print("creating tables")
-    create_tables(cursor)
+    # print("droped tables")
+    # print("creating tables")
+    # create_tables(cursor)
     # print("done creating tables")
     # get_genres(cursor)
     # push_csv(cursor)
-    push_movie(cursor)
-    print("done_pushing_movie")
+    # push_actor(cursor)
+    push_actors_from_csv(cursor)
+    print("done_pushing_actors")
 
 
 '''
