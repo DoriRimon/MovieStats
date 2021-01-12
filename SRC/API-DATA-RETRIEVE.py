@@ -292,6 +292,10 @@ db.create_movie_table()
 insert_csv(db)
 movies = db.search_movie('Fi')
 print(movies)
+query = query = ''' select  title
+                    from    movie
+                    where   match(title) against('Fi' in natural language mode); '''
+print(db.execute_query(query))
 
 db.disconnect()
 
