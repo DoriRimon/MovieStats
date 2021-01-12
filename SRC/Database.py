@@ -34,10 +34,10 @@ class Database:
         # year int,
         query = ''' create table if not exists movie (
                     id char(9) not null,
-                    title varchar(200) not null
-                    primary key (id)
-                    FULLTEXT idx (title)
-                    ) ENGINE=InnoDB; '''
+                    title varchar(200) not null,
+                    primary key (id),
+                    fulltext idx (title)
+                    ) engine=InnoDB; '''
         self.execute_query(query)
 
     def insert_movie(self, tuple):
