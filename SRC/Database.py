@@ -49,11 +49,16 @@ class Database:
         self.execute_query(query, tuple, commit=True)
 
     def search_movie(self, text):
+        words = text.split()
+        s = ['+{} ' for i in range(len(words) - 1)]
+        s += ['{}*']
+        t = ''.join(s)
+
         query = ''' select  title
                     from    movie
-                    where   match(title) against('{}*' in boolean mode); '''.format(text)
+                    where   match(title) against('{}' in boolean mode); '''.format(t)
         
         movies = self.execute_query(query)
-        return movies
+        return [v[0] for v in movies]
 
     

@@ -20,9 +20,8 @@ def search():
     print('term: ', term)
     
     arr = db.search_movie(term)
-    filt = [v[0] for v in arr]
 
-    resp = jsonify(filt)
+    resp = jsonify(arr)
     print(resp)
     resp.status_code = 200
     resp.headers.add('Access-Control-Allow-Origin', '*')
