@@ -288,9 +288,9 @@ def insert_csv(db):
 db = Database()
 db.connect()
 
-db.drop_movie_table()
-db.create_movie_table()
-insert_csv(db)
+# db.drop_movie_table()
+# db.create_movie_table()
+# insert_csv(db)
 movies = db.search_movie('Fi')
 print(movies)
 query = ''' select  title
