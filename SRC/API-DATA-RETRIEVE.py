@@ -107,7 +107,7 @@ def push_actors_from_csv(cursor):
                         id, actor_name, popularity)
                          VALUES (%s, %s, %s)'''
     for index, row in df.iterrows():
-        if count < 50000:
+        if count < 100000:
             imdb_name_id = row['imdb_name_id']
             count_rows = count_rows+1
             response = requests.get("https://api.themoviedb.org/3/find/" + str(imdb_name_id) +
@@ -135,6 +135,9 @@ def push_actors_from_csv(cursor):
                                 # print(movie)
                                 params = movie['id'], actor_id
                                 cursor.execute(insert_actor_movie, params)
+            if count == 50000:
+                print(count_rows)
+                ctx.commit()
         else:
             break
     print(count_rows)
