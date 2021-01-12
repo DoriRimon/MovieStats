@@ -4,6 +4,7 @@ import requests
 import json
 import mysql.connector
 import numpy as np
+from Database import Database
 
 NAME = 'DbMysql04'
 HOST = 'mysqlsrv1.cs.tau.ac.il'
@@ -257,14 +258,35 @@ def main(cursor):
 '''
 connection to server details
 '''
-print("connecting to mysql")
-ctx = mysql.connector.connect(user=NAME, password=NAME, host=HOST, database=NAME)
-cursor = ctx.cursor()
 
-main(cursor)
+# print("connecting to mysql")
+# ctx = mysql.connector.connect(user=NAME, password=NAME, host=HOST, database=NAME)
+# cursor = ctx.cursor()
 
-cursor.close()
-ctx.close()
+# main(cursor)
+
+# cursor.close()
+# ctx.close()
+
+def insert_csv(db):
+    df = pd.read_csv('./SRC/APPLICATION-SOURCE-CODE/static/data/movies.csv')
+    df = df[['imdb_title_id', 'title']]
+
+    for index, row in enumerate(df.to_numpy()):
+        if index < 50_000:
+            db.insert_movie(list(map(str, tuple(row))))
+        else:
+            break
+
+db = Database()
+db.connect()
+
+db.create_movie_table()
+insert_csv(db)
+movies = db.search_movie('Fight Club: Members Only')
+print(movies)
+
+db.disconnect()
 
 '''
 API retrieve
