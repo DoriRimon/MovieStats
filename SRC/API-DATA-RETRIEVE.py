@@ -240,6 +240,7 @@ def get_genres(cursor):
         print(query_params)
     ctx.commit()
 
+
 '''
 insert data to db
 '''
