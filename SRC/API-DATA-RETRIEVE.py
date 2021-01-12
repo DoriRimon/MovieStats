@@ -277,7 +277,7 @@ def insert_csv(db):
     print(df.head())
 
     for index, row in enumerate(df.to_numpy()):
-        if index < 50_000:
+        if index < 5_000:
             db.insert_movie(tuple(map(str, tuple(row))))
         else:
             break
