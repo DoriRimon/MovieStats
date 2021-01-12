@@ -1,5 +1,6 @@
 import os, json
 from flask import Flask, jsonify, request, redirect, render_template
+from globe import *
 
 app = Flask(__name__)
 
@@ -23,4 +24,5 @@ def search():
     return resp
 
 if __name__ == "__main__":
-    app.run()
+    app.run(host=HOST, port=str(PORT), debug=True)
+    print('server running at port ', PORT)
