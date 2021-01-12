@@ -40,6 +40,10 @@ class Database:
                     ) engine=InnoDB; '''
         self.execute_query(query)
 
+    def drop_movie_table(self):
+        query = ''' drop table movie; '''
+        self.execute_query(query)
+
     def insert_movie(self, tuple):
         query = ''' insert into movie (id, title)
                     values(%s, %s); '''
