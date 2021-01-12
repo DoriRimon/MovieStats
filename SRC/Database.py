@@ -20,7 +20,7 @@ class Database:
         self.cursor.close()
         self.ctx.close()
 
-    def execute_query(self, query, params):
+    def execute_query(self, query, params=()):
         res = self.cursor.execute(query, params)
         self.ctx.commit()
         return res
@@ -37,6 +37,7 @@ class Database:
                     title varchar(200) not null
                     primary key (id)
                     fulltext idx (title)) engine = InnoDB; '''
+        self.execute_query(query)
 
     def insert_movie(self, tuple):
         query = ''' insert into movie (id, title)
