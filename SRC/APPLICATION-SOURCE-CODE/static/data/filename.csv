@@ -13,7 +13,7 @@ year,industry_code_ANZSIC,industry_name_ANZSIC,rme_size_grp,variable,value,unit
 2011,A,"Agriculture, Forestry and Fishing",b_1-5,Salaries and wages paid,1435,DOLLARS(millions)
 2011,A,"Agriculture, Forestry and Fishing",b_1-5,"Sales, government funding, grants and subsidies",13359,DOLLARS(millions)
 2011,A,"Agriculture, Forestry and Fishing",b_1-5,Total income,13771,DOLLARS(millions)
-2011,A,"Agriculture, Forestry and Fishing",b_1-5,Total expenditure,12316,DOLLARS(millions)
+2011,A,"Agriculture, Forestry and Fishincg",b_1-5,Total expenditure,12316,DOLLARS(millions)
 2011,A,"Agriculture, Forestry and Fishing",b_1-5,Operating profit before tax,1247,DOLLARS(millions)
 2011,A,"Agriculture, Forestry and Fishing",b_1-5,Total assets,52666,DOLLARS(millions)
 2011,A,"Agriculture, Forestry and Fishing",b_1-5,Fixed tangible assets,31235,DOLLARS(millions)

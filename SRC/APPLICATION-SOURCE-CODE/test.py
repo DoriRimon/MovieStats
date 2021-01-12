@@ -1,7 +1,7 @@
 import os, json
 from flask import Flask, jsonify, request, redirect, render_template
 import sys
-sys.path.append('../../')
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from Database import Database
 from globe import *
 
