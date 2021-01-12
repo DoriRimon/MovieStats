@@ -23,7 +23,7 @@ class Database:
 
     def execute_query(self, query, params=()):
         res = self.cursor.execute(query, params)
-        self.ctx.commit()
+        # self.ctx.commit()
         self.cursor.close()
         self.cursor = self.ctx.cursor()
         return res
