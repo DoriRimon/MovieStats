@@ -39,9 +39,8 @@ class Database:
                     fulltext idx (title)) engine = InnoDB; '''
 
     def insert_movie(self, tuple):
-        query = ''' insert into movie (
-                        values(%s, %s)
-                    ); '''
+        query = ''' insert into movie (id, title)
+                    values(%s, %s); '''
         self.execute_query(query, tuple)
 
     def search_movie(self, text):
