@@ -15,7 +15,7 @@ class Database:
         print("connecting to mysql")
         self.ctx = mysql.connector.connect(user=NAME, password=NAME, host=HOST, database=NAME)
         self.cursor = self.ctx.cursor()
-        self.cursor.connection.autocommit(True)
+        # self.cursor.connection.autocommit(True)
 
     def disconnect(self):
         self.cursor.close()
@@ -24,6 +24,8 @@ class Database:
     def execute_query(self, query, params=()):
         res = self.cursor.execute(query, params)
         self.ctx.commit()
+        self.cursor.close()
+        self.cursor = self.ctx.cursor()
         return res
 
     def create_movie_table(self):
