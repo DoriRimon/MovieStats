@@ -273,7 +273,7 @@ connection to server details
 # ctx.close()
 
 def insert_csv(db):
-    df = pd.read_csv('./APPLICATION-SOURCE-CODE/static/data/movies.csv', usercols=['imdb_title_id', 'title'])
+    df = pd.read_csv('./APPLICATION-SOURCE-CODE/static/data/movies.csv', usecols=['imdb_title_id', 'title'])
     print(df.head())
 
     for index, row in enumerate(df.to_numpy()):
