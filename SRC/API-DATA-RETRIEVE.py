@@ -293,10 +293,10 @@ db.create_movie_table()
 insert_csv(db)
 movies = db.search_movie('Fi')
 print(movies)
-query = query = ''' select  title
-                    from    movie '''
+query = ''' select  title
+            from    movie '''
 print(db.execute_query(query))
-print(db.cursor.execute(query))
+# print(db.cursor.execute(query))
 
 db.disconnect()
 

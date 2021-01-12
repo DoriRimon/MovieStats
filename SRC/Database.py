@@ -21,11 +21,11 @@ class Database:
         self.cursor.close()
         self.ctx.close()
 
-    def execute_query(self, query, params=()):
+    def execute_query(self, query, params=(), commit=True):
         res = self.cursor.execute(query, params)
-        # self.ctx.commit()
-        self.cursor.close()
-        self.cursor = self.ctx.cursor(buffered=True)
+        self.ctx.commit()
+        # self.cursor.close()
+        # self.cursor = self.ctx.cursor(buffered=True)
         return res
 
     def create_movie_table(self):
