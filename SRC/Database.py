@@ -36,20 +36,18 @@ class Database:
                     id char(9) not null,
                     title varchar(200) not null
                     primary key (id)
-                    fulltext idx (title)) engine = InnoDB'''
+                    fulltext idx (title)) engine = InnoDB; '''
 
     def insert_movie(self, tuple):
         query = ''' insert into movie (
                         values(%s, %s)
-                    )
-                '''
+                    ); '''
         self.execute_query(query, tuple)
 
     def search_movie(self, text):
         query = ''' select  title
                     from    movie
-                    where   match(title) against(%s in natural language mode)
-                '''
+                    where   match(title) against(%s in natural language mode); '''
         movies = self.query(query, [text])
         return movies
 
