@@ -1,9 +1,9 @@
 import os.path
+import numpy as np
 import pandas as pd
 import requests
 import json
 import mysql.connector
-import numpy as np
 from Database import Database
 
 NAME = 'DbMysql04'

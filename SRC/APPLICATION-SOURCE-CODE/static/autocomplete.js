@@ -46,17 +46,17 @@ function autocomplete(inp) {
   {
       var x = document.getElementById(this.id + "autocomplete-list");
       if (x) x = x.getElementsByTagName("div");
-      if (e.keyCode == 40) // down key
+      if (e.key == 'ArrowDown') // down key
       { 
         currentFocus++;
         addActive(x);
       } 
-      else if (e.keyCode == 38) // up key
+      else if (e.key == 'ArrowUp') // up key
       { 
         currentFocus--;
         addActive(x);
       } 
-      else if (e.keyCode == 13) // enter key
+      else if (e.key == 'Enter') // enter key
       { 
         e.preventDefault();
         if (currentFocus > -1) 
