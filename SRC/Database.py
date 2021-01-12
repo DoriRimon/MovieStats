@@ -53,7 +53,7 @@ class Database:
             return []
         
         words = text.split()
-        bf = ['+' + word for word in words] # creating boolean format
+        bf = ['+' + word if len(word) > 2 else word for word in words] # creating boolean format
         bf[-1] += '*'
         t = ' '.join(bf)
 
