@@ -51,7 +51,9 @@ class Database:
     def search_movie(self, text):
         query = ''' select  title
                     from    movie
-                    where   match(title) against({}* in boolean mode); '''.format(text)
+                    where   match(title) against('{}*' in boolean mode); '''.format(text)
+        
+        # query = ''' select  title  from    movie  where   match(title) against('+Fi* +O*' in boolean mode); '''
         movies = self.execute_query(query)
         return movies
 
