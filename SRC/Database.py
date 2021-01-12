@@ -21,8 +21,8 @@ class Database:
         self.ctx.close()
 
     def execute_query(self, query, params):
-        res = cursor.execute(query, params)
-        ctx.commit()
+        res = self.cursor.execute(query, params)
+        self.ctx.commit()
         return res
 
     def create_movie_table(self):
