@@ -36,7 +36,8 @@ class Database:
                     id char(9) not null,
                     title varchar(200) not null
                     primary key (id)
-                    fulltext idx (title)) engine = InnoDB; '''
+                    fulltext (title)
+                    ) engine=InnoDB; '''
         self.execute_query(query)
 
     def insert_movie(self, tuple):
