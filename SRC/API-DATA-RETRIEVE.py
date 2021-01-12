@@ -280,6 +280,7 @@ def insert_csv(db):
         if index < 5_000:
             if index % 1_000 == 0:
                 print('done ', index)
+                print(tuple(row))
             db.insert_movie(tuple(row))
         else:
             break
