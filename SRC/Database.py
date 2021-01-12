@@ -57,6 +57,8 @@ class Database:
         query = ''' select  title
                     from    movie
                     where   match(title) against('{}' in boolean mode); '''.format(t)
+
+        print(query)
         
         movies = self.execute_query(query)
         return [v[0] for v in movies]
