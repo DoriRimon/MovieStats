@@ -273,12 +273,12 @@ connection to server details
 # ctx.close()
 
 def insert_csv(db):
-    df = pd.read_csv('./APPLICATION-SOURCE-CODE/static/data/movies.csv')
-    df = df[['imdb_title_id', 'title']]
+    df = pd.read_csv('./APPLICATION-SOURCE-CODE/static/data/movies.csv', usercols=['imdb_title_id', 'title'])
+    print(df.head())
 
     for index, row in enumerate(df.to_numpy()):
         if index < 50_000:
-            db.insert_movie(list(map(str, tuple(row))))
+            db.insert_movie(tuple(map(str, tuple(row))))
         else:
             break
 
