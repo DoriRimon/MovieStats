@@ -2,13 +2,21 @@
 <html>
   <head>
     <title>MovieStats</title>
-    <link type='text/css' rel='stylesheet' href='../static/style.css'>
+    <link type='text/css' rel='stylesheet' href="{{ url_for('static', filename='style.css') }}">
+    <link type='text/css' rel='stylesheet' href="{{ url_for('static', filename='c.css') }}">
   </head>
   <body class='homepage'>
     <div class='top-section'>
       <div class='top-inner'>
         <h1>MovieStats</h1>
         <h3>Get statistics over millions of movies</h3>
+        <form autocomplete="off" action="/action_page.php">
+          <div class="autocomplete" style="width:300px;">
+              <input id="myInput" type="text" name="myCountry" placeholder="Country">
+          </div>
+          <input type="submit">
+        </form>
+        <script type="text/javascript" src="{{ url_for('static', filename='jsTest.js') }}"></script>
       </div>
     </div>
     <nav class='homepage-nav'>

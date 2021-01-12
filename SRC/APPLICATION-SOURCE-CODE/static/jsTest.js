@@ -38,7 +38,7 @@ function autocomplete(inp) {
               }
           }
       }
-      xhr.send('q=' + this.value);
+      xhr.send('q=' + inp.value);
 
   });
 
@@ -46,22 +46,27 @@ function autocomplete(inp) {
   {
       var x = document.getElementById(this.id + "autocomplete-list");
       if (x) x = x.getElementsByTagName("div");
-      if (e.keyCode == 40) { // down key
+      if (e.keyCode == 40) // down key
+      { 
         currentFocus++;
         addActive(x);
       } 
-      else if (e.keyCode == 38) 
-      { // up key
+      else if (e.keyCode == 38) // up key
+      { 
         currentFocus--;
         addActive(x);
       } 
-      else if (e.keyCode == 13) 
-      { // enter key
+      else if (e.keyCode == 13) // enter key
+      { 
         e.preventDefault();
         if (currentFocus > -1) 
         {
           if (x) x[currentFocus].click();
         }
+      }
+      else if (e.key === "Escape") // esc key
+      {
+        closeAllLists(null);
       }
   });
 
