@@ -56,7 +56,7 @@ class Database:
         query = ''' select  title
                     from    movie
                     where   match(title) against(%s in natural language mode); '''
-        movies = self.execute_query(query, (text))
+        movies = self.execute_query(query, [text])
         return movies
 
     

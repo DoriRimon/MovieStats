@@ -310,6 +310,6 @@ API retrieve
 #     json_movies = get_movies.json()
 #
 
-result = requests.get('https://api.themoviedb.org/3/movie/550?api_key=7e759b2920f15726a47aecff3b17d4fb')
-result_dict = result.json()
-print(result_dict['id'])
+# result = requests.get('https://api.themoviedb.org/3/movie/550?api_key=7e759b2920f15726a47aecff3b17d4fb')
+# result_dict = result.json()
+# print(result_dict['id'])
