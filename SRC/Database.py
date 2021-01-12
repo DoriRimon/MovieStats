@@ -15,46 +15,38 @@ class Database:
         print("connecting to mysql")
         self.ctx = mysql.connector.connect(user=NAME, password=NAME, host=HOST, database=NAME)
         self.cursor = self.ctx.cursor(buffered=True)
-        # self.cursor.connection.autocommit(True)
 
     def disconnect(self):
         self.cursor.close()
         self.ctx.close()
 
-    def execute_query(self, query, params=(), commit=True):
-        res = []
-        if (params != ()):
-            res = self.cursor.execute(query, params)
-        else:
-            res = self.cursor.execute(query)
-        self.ctx.commit()
-        # self.cursor.close()
-        # self.cursor = self.ctx.cursor(buffered=True)
+    def execute_query(self, query, params=(), commit=False):
+        self.cursor.execute(query, params)
+
+        if commit:
+            self.ctx.commit()
+
+        res = self.cursor.fetchall()
+
         return res
 
     def create_movie_table(self):
-        # genre varchar(100),
-        # duration int, 
-        # lang varchar(100), 
-        # budget int, 
-        # income int, 
-        # year int,
         query = ''' create table if not exists movie (
                     id char(9) not null,
                     title varchar(200) not null,
                     primary key (id),
                     fulltext idx (title)
                     ) engine=InnoDB; '''
-        self.execute_query(query)
+        self.execute_query(query, commit=True)
 
     def drop_movie_table(self):
         query = ''' drop table movie; '''
-        self.execute_query(query)
+        self.execute_query(query, commit=True)
 
     def insert_movie(self, tuple):
         query = ''' insert into movie (id, title)
                     values(%s, %s); '''
-        self.execute_query(query, tuple)
+        self.execute_query(query, tuple, commit=True)
 
     def search_movie(self, text):
         query = ''' select  title

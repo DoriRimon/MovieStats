@@ -297,7 +297,6 @@ query = ''' select  title
             from    movie 
             limit   15     '''
 print(db.execute_query(query))
-# print(db.cursor.execute(query))
 
 db.disconnect()
 
