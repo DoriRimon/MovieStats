@@ -290,7 +290,7 @@ db.connect()
 db.drop_movie_table()
 db.create_movie_table()
 insert_csv(db)
-movies = db.search_movie('Fight Club: Members Only')
+movies = db.search_movie('Fi')
 print(movies)
 
 db.disconnect()
