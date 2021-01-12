@@ -50,11 +50,9 @@ class Database:
 
     def search_movie(self, text):
         words = text.split()
-        s = ['+' + words[i] for i in range(len(words) - 1)]
-        s.append(words[-1] + '*')
-        if (text[-1] == ' '):
-            s[-1] = '+' + s[-1]
-        t = ' '.join(s)
+        bf = ['+' + word for word in words] # creating boolean format
+        bf[-1] += '*'
+        t = ' '.join(bf)
 
         query = ''' select  title
                     from    movie
