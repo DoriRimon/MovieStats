@@ -15,6 +15,7 @@ class Database:
         print("connecting to mysql")
         self.ctx = mysql.connector.connect(user=NAME, password=NAME, host=HOST, database=NAME)
         self.cursor = self.ctx.cursor()
+        self.cursor.connection.autocommit(True)
 
     def disconnect(self):
         self.cursor.close()
@@ -53,7 +54,7 @@ class Database:
         query = ''' select  title
                     from    movie
                     where   match(title) against(%s in natural language mode); '''
-        movies = self.execute_query(query, [text])
+        movies = self.execute_query(query, (text))
         return movies
 
     
