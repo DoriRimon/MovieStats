@@ -296,6 +296,7 @@ print(movies)
 query = query = ''' select  title
                     from    movie '''
 print(db.execute_query(query))
+print(db.cursor.execute(query))
 
 db.disconnect()
 
