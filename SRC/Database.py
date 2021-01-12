@@ -22,7 +22,11 @@ class Database:
         self.ctx.close()
 
     def execute_query(self, query, params=(), commit=True):
-        res = self.cursor.execute(query, params)
+        res = []
+        if (params != ()):
+            res = self.cursor.execute(query, params)
+        else:
+            res = self.cursor.execute(query)
         self.ctx.commit()
         # self.cursor.close()
         # self.cursor = self.ctx.cursor(buffered=True)
@@ -55,7 +59,7 @@ class Database:
     def search_movie(self, text):
         query = ''' select  title
                     from    movie
-                    where   match(title) against(%s in natural language mode); '''
+                    where   match(title) against('%s' in natural language mode); '''
         movies = self.execute_query(query, (text,))
         return movies
 

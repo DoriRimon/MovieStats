@@ -294,7 +294,8 @@ insert_csv(db)
 movies = db.search_movie('Fi')
 print(movies)
 query = ''' select  title
-            from    movie '''
+            from    movie 
+            limit   15     '''
 print(db.execute_query(query))
 # print(db.cursor.execute(query))
 
