@@ -49,6 +49,9 @@ class Database:
         self.execute_query(query, tuple, commit=True)
 
     def search_movie(self, text):
+        if not text:
+            return []
+        
         words = text.split()
         bf = ['+' + word for word in words] # creating boolean format
         bf[-1] += '*'
