@@ -17,6 +17,7 @@ def search():
     text = request.form['q']
     print('text: ', text)
     table = request.form['table']
+    print('table: ', table)
     
     arr = db.ft_search(table, text)
     # arr = db.search_movie(text)

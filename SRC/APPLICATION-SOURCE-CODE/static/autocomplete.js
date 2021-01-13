@@ -5,7 +5,7 @@ function autocomplete(inp) {
 
       var xhr = new XMLHttpRequest();
       xhr.open("POST", '/search', true);
-      xhr.setRequestHeader('content-type', 'application/x-www-form-urlencoded;charset=UTF-8');
+      xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
       xhr.onreadystatechange = function() 
       {
@@ -40,7 +40,8 @@ function autocomplete(inp) {
       }
       let select = document.getElementById('menu');
       let table = select.value;
-      xhr.send(`q=${inp.value}$table=movie`);
+      // xhr.send(`q=${inp.value}$table=movie`);
+      xhr.send("q=hi&table=hello");
 
   });
 
