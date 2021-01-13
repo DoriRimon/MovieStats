@@ -14,11 +14,12 @@ def upload_form():
 
 @app.route('/search', methods=['POST'])
 def search():
-    text = request.form["a"]
-    table = request.form["b"]
+    text = request.form['q']
+    # table = request.form["b"]
     print('text: ', text)
     
-    arr = db.ft_search(table, text)
+    # arr = db.ft_search(table, text)
+    arr = db.search_movie(text)
 
     resp = jsonify(arr)
     print(resp)
