@@ -52,7 +52,6 @@ class Database:
                     name varchar(100) not null,
                     profilePath varchar(100),
                     biography text,
-                    primary key (id),
                     fulltext idx (name)
                     ) engine=InnoDB; '''
         self.execute_query(query, commit=True)
