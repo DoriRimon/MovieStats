@@ -82,7 +82,7 @@ class Database:
         self.execute_query(query, commit=True)
 
     def drop_table(self, table):
-        query = ''' drop table {}; '''.formt(table)
+        query = ''' drop table {}; '''.format(table)
         self.execute_query(query, commit=True)
 
     def insert_movie(self, tuple):
