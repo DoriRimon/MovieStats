@@ -109,7 +109,7 @@ function menuChange() {
   let cat = document.getElementById('menu').value;
   let input = document.getElementById('myInput');
   let l = 'a';
-  if (cat[0] in ['a', 'e', 'i', 'o', 'u'])
+  if (cat.charAt(0) in ['a', 'e', 'i', 'o', 'u'])
     l = 'an'
   input.placeholder = `Type ${l} ${cat} name..`;
 }
