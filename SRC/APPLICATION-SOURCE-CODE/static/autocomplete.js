@@ -41,7 +41,7 @@ function autocomplete(inp) {
       let select = document.getElementById('menu');
       let table = select.value;
       alert(table);
-      xhr.send('q=' + inp.value);
+      xhr.send(`q=${inp.value}$table=${table}`);
 
   });
 
