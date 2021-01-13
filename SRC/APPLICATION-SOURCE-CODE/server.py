@@ -14,8 +14,9 @@ def upload_form():
 
 @app.route('/search', methods=['POST'])
 def search():
-    table = request.form['table']
-    text = request.form['text']
+    content = request.get_json()
+    table = content['table']
+    text = content['text']
     print('text: ', text)
     
     arr = db.ft_search(table, text)
