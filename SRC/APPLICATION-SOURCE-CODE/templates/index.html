@@ -10,13 +10,13 @@
         <h1>MovieStats</h1>
         <h3>Get statistics over millions of movies</h3>
         <form autocomplete="off" action="/action_page.php">
-          <select id='menu'>
+          <select id='menu' onchange='menuChange()'>
             <option value='movie'>Movies</option>
             <option value='actor'>Actors</option>
             <option value='genre'>Geners</option>
           </select>
           <div class="autocomplete">
-              <input id="myInput" type="text" name="myCountry" placeholder="Type a movie name"></input>
+              <input id="myInput" type="text" name="myCountry" placeholder="Type a movie name.."></input>
           </div>
           <input type="submit"></input>
         </form>
