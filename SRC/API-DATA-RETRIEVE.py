@@ -6,6 +6,7 @@ import json
 import mysql.connector
 from Database import Database
 from data_fill import *
+from datetime import strptime
 
 NAME = 'DbMysql04'
 HOST = 'mysqlsrv1.cs.tau.ac.il'
@@ -47,7 +48,7 @@ def get_movies_from_api(movies_df):
                 movieDetails = movieDetailsRes.json()
                 print("Got details")
                 db.insert_movie((row['id'], movieDetails['original_title'], movieDetails['budget'], movieDetails['revenue'], \
-                pd.to_datetime(movieDetails['release_date']), movieDetails['poster_path'], movieDetails['overview'], row['rating']))
+                strptime(movieDetails['release_date']), movieDetails['poster_path'], movieDetails['overview'], row['rating']))
                 print("Inserted into movie table")
                 for genre in movieDetails['genres']:
                     db.insert_movie_genre((row['id'], genre['id']))
