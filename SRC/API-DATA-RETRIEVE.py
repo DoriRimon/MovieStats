@@ -37,12 +37,12 @@ def get_movies_from_api(movies_df):
     for index, row in movies_df.iterrows():
         findMovieRes = requests.get("https://api.themoviedb.org/3/find/{}?api_key={}&external_source=imdb_id".format(row['id'], API_KEY))
         if findMovieRes.status_code == 200:
-            foundMovie = json.loads(findMovieRes.json())
+            foundMovie = findMovieRes.json()
             id = str(foundMovie['movie_results'][0].id)
             print("Got id from api: {}".format(id))
             movieDetailsRes = requests.get("https://api.themoviedb.org/3/movie/{}?api_key={}&language=en-US".format(id, API_KEY))
             if movieDetailsRes.status_code == 200:
-                movieDetails = json.loads(movieDetailsRes.json())
+                movieDetails = movieDetailsRes.json()
                 print("Got details")
                 db.insert_movie((row['id'], movieDetails['original_title'], movieDetails['budget'], movieDetails['revenue'], \
                 movieDetails['release_date'], movieDetails['poster_path'], movieDetails['overview'], row['rating']))
