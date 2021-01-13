@@ -19,12 +19,11 @@ helping methods
 '''
 db = Database()
 db.connect()
-db.drop_table('movie')
-db.drop_table('actors')
-db.drop_table('movie_actor')
-db.drop_table('movie_genre')
-db.drop_table('movie_names')
-db.drop_table('genre')
+db.drop_table('MovieActor')
+db.drop_table('MovieGenre')
+db.drop_table('Movie')
+db.drop_table('Actor')
+db.drop_table('Genre')
 
 db.create_movie_table()
 db.create_actor_table()
