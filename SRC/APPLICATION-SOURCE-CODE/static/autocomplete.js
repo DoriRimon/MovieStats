@@ -40,8 +40,7 @@ function autocomplete(inp) {
       }
       let select = document.getElementById('menu');
       let table = select.value;
-      // xhr.send(`q=${inp.value}$table=movie`);
-      xhr.send("q=hi&table=hello");
+      xhr.send(`table=${table}&text=${inp.value}`);
 
   });
 
