@@ -40,11 +40,8 @@ function autocomplete(inp) {
       }
       let select = document.getElementById('menu');
       let table = select.value;
-      let data = {
-        'table' : table, 
-        'text'  : inp.value
-      }
-      xhr.send(JSON.stringify(data));
+      console.log(table)
+      xhr.send('text=' + inp.value + '&' + 'table=' + table);
 
   });
 
