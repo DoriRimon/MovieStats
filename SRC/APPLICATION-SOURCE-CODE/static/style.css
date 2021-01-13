@@ -127,6 +127,8 @@ a:hover {
 	top: 100%;
 	left: 0;
 	right: 0;
+	max-height: 150px;
+	overflow-y: scroll;
 }
 
 .autocomplete-items div {

@@ -318,3 +318,26 @@ API retrieve
 # result = requests.get('https://api.themoviedb.org/3/movie/550?api_key=7e759b2920f15726a47aecff3b17d4fb')
 # result_dict = result.json()
 # print(result_dict['id'])
+
+
+
+def filter_movies_csv():
+    df = pd.read_csv('./APPLICATION-SOURCE-CODE/static/data/ratings.csv', usecols=['imdb_title_id', 'weighted_average_vote'])
+    df.rename(columns={'imdb_title_id': 'id', 'weighted_average_vote': 'rating'}, inplace=True)
+    return df.nlargest(10_000, 'rating')
+
+
+def filter_actors_csv(movies_df):
+    df = pd.read_csv('./APPLICATION-SOURCE-CODE/static/data/movie_actors.csv', usecols=['imdb_title_id', 'imdb_name_id', 'category'])
+    df.rename(columns={'imdb_title_id': 'movie_id', 'imdb_name_id': 'actor_id'}, inplace=True)
+    movies_df.rename(columns={'id' : 'movie_id'})
+    df.merge(movies_df, how='inner', on='movie_id')
+    df = df.iloc(df['category'] == 'actress' | df['category'] == 'actor')
+    df = df['actor_id']
+    return df.drop_duplicates('actor_id')
+
+
+def filter_movieActors_csv():
+    pass
+
+

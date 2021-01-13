@@ -10,7 +10,7 @@ db = None
 
 @app.route('/')
 def upload_form():
-	return render_template('index.html')
+    return render_template('index.html')
 
 @app.route('/search', methods=['POST'])
 def search():
