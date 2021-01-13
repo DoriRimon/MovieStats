@@ -69,6 +69,7 @@ class Database:
     def ft_search(self, table, text):
         if table == 'movie':
             return self.search_movie(text)
+        return []
         
 
     
