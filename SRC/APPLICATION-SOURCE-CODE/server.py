@@ -1,43 +1,37 @@
-from flask import Flask, render_template, request
-import csv
-import os.path
+import os, json
+from flask import Flask, jsonify, request, redirect, render_template
+import sys
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from Database import Database
-
+from globe import *
 
 app = Flask(__name__)
-PORT = 44444
-HOST = 'delta-tomcat-vm'
-
-my_path = os.path.abspath(os.path.dirname(__file__))
-path = os.path.join(my_path, "static/data/filename.csv")
-with open(path) as f:
-    # reader = csv.reader(f)
-    test = list(csv.reader(f))
-    # print(test)
-
-# with open('MovieStats\SRC\APPLICATION-SOURCE-CODE\static\data\filename.csv') as csvfile:
-#     spamreader = csv.reader(csvfile, delimiter=' ', quotechar='|')
-#     for i in range(max(5, len(spamreader))):
-#         print(', '.join(spamreader[i]))
-
-# print('here')
-# df = pandas.read_csv('/static/data/filename.csv')
-# df.head()
-
-@app.route('/search')
-def search_return_html():
-    query = request.args.get('query')
-    # with connector get to your mysql server and query the DB
-    # return the answer to number_of_songs var.
-    number_of_songs = 5 #should be retrieved from the DB
-    return render_template('searchResults.html', count=5, query=query)
+db = None
 
 @app.route('/')
-@app.route('/index')
-def index():
-    return render_template('index.html')
+def upload_form():
+	return render_template('index.html')
+
+@app.route('/search', methods=['POST'])
+def search():
+    table = request.form['table']
+    text = request.form['text']
+    print('text: ', text)
+    
+    arr = db.ft_search(table, text)
+
+    resp = jsonify(arr)
+    print(resp)
+    resp.status_code = 200
+    resp.headers.add('Access-Control-Allow-Origin', '*')
+    return resp
 
 
-if __name__ == '__main__':  
-    app.run(host=HOST, port=str(PORT), debug=True)
-    print('server running at port ', PORT)
+if __name__ == "__main__":
+    if LOCAL:
+        app.run()
+    else:
+        db = Database()
+        db.connect()
+        app.run(host=HOST, port=str(PORT), debug=True)
+        print('server running at port ', PORT)

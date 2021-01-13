@@ -41,7 +41,7 @@ a:hover {
 	background-repeat: no-repeat;
 	background-size: cover;
 	position: relative;
-	height: 90%;
+	height: 100%;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -73,62 +73,78 @@ a:hover {
 }
 
 .top-inner form {
-	margin-top: 20%;
+	margin-top: 14%;
 	text-align: center;
+	width: 100%;
+	align-items: center;
 }
 
 .autocomplete {
-  /*the container must be positioned relative:*/
-  position: relative;
-  display: inline-block;
+	/*the container must be positioned relative:*/
+	position: relative;
+	display: inline-block;
 }
 
-input {
-  border: 1px solid transparent;
-  background-color: #f1f1f1;
-  padding: 10px;
-  font-size: 16px;
-  text-align: center;
+.top-inner form input, select {
+	border: 1px solid transparent;
+	background-color: #f1f1f1;
+	padding: 10px;
+	font-size: 16px;
+	text-align: center;
 }
 
-input[type=text] {
-  background-color: #f1f1f1;
-  width: 100%;
+.top-inner form input[type=text] {
+	background-color: #f1f1f1;
+	width: 470px;
+	outline: none;
 }
 
-input[type=submit] {
-  background-color: #e0ab66;
-  color: #fff;
+.top-inner form input[type=submit] {
+	background-color: #e0ab66;
+	color: #fff;
+	outline: none;
+}
+
+.top-inner form select {
+	width: fit-content;
+	outline: none;
+}
+
+.top-inner form select option{
+	background: #f1f1f1;
+	padding: 10px;
+	font-size: 16px;
+	text-align: center;
 }
 
 .autocomplete-items {
-  position: absolute;
-  border: 1px solid #d4d4d4;
-  border-bottom: none;
-  border-top: none;
-  z-index: 99;
-  /*position the autocomplete items to be the same width as the container:*/
-  top: 100%;
-  left: 0;
-  right: 0;
+	position: absolute;
+	border: 1px solid #d4d4d4;
+	border-bottom: none;
+	border-top: none;
+	z-index: 99;
+	/*position the autocomplete items to be the same width as the container:*/
+	top: 100%;
+	left: 0;
+	right: 0;
 }
 
 .autocomplete-items div {
-  padding: 10px;
-  cursor: pointer;
-  background-color: #fff;
-  border-bottom: 1px solid #d4d4d4;
+	padding: 10px;
+	cursor: pointer;
+	background-color: #fff;
+	border-bottom: 1px solid #d4d4d4;
 }
 
 .autocomplete-items div:hover {
-  /*when hovering an item:*/
-  background-color: #e9e9e9;
+	/*when hovering an item:*/
+	background-color: #e9e9e9;
 }
 
 .autocomplete-active {
-  /*when navigating through the items using the arrow keys:*/
-  background-color: #e0ab66 !important;
-  color: #ffffff;
+	/*when navigating through the items using the arrow keys:*/
+	background-color: #e0ab66 !important;
+	color: #ffffff;
 }
 
 
@@ -206,14 +222,8 @@ nav {
 
 /*-----|| Main ||-----*/
 
-.homepage main {
-	height: 70%;
-	padding: 5px;
-}
-
-.icon img {
-    width: 20px;
-    vertical-align: middle;
+.homepage {
+	overflow: hidden;
 }
 
 

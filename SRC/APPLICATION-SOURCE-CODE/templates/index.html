@@ -3,7 +3,6 @@
   <head>
     <title>MovieStats</title>
     <link type='text/css' rel='stylesheet' href="{{ url_for('static', filename='style.css') }}">
-    <link type='text/css' rel='stylesheet' href="{{ url_for('static', filename='c.css') }}">
   </head>
   <body class='homepage'>
     <div class='top-section'>
@@ -11,53 +10,18 @@
         <h1>MovieStats</h1>
         <h3>Get statistics over millions of movies</h3>
         <form autocomplete="off" action="/action_page.php">
-          <div class="autocomplete" style="width:300px;">
-              <input id="myInput" type="text" name="myCountry" placeholder="Type a movie name">
+          <select id='menu'>
+            <option value='movie'>Movies</option>
+            <option value='actor'>Actors</option>
+            <option value='genre'>Geners</option>
+          </select>
+          <div class="autocomplete">
+              <input id="myInput" type="text" name="myCountry" placeholder="Type a movie name"></input>
           </div>
-          <input type="submit">
+          <input type="submit"></input>
         </form>
         <script type="text/javascript" src="{{ url_for('static', filename='autocomplete.js') }}"></script>
       </div>
     </div>
-    <nav class='homepage-nav'>
-      <div class='nav-inner hover-effect'>
-        <a href='search.html'>
-            <span class='icon'>
-                <img src="../static/img/camera.png" alt="">
-            </span>
-             Search
-        </a>
-        <a href='statistics.html'>
-            <span class='icon'>
-                <img src="../static/img/notebook.png" alt="">
-            </span>
-                Statistics
-        </a>
-        <a href='actors.html'>
-            <span class='icon'>
-                <img src="../static/img/chair.png" alt="">
-            </span>
-                Actors
-        </a>
-        <a href='about.html'>
-            <span class='icon'>
-                <img src="../static/img/glasses.png" alt="">
-            </span>
-            About
-        </a>
-      </div>
-    </nav>
-    <main>
-
-    </main>
-    <footer>
-      <p>
-        This is an open source project - the code can be found on  
-        <a href='https://github.com/DoriRimon/MovieStats' target='_blank'>GitHub</a>
-      </p>
-      <p>
-        Having a problem? Issues are welcomed on the GitHub page
-      </p>
-    </footer>
   </body>
 </html>

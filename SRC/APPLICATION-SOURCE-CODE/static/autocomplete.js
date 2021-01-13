@@ -38,7 +38,9 @@ function autocomplete(inp) {
               }
           }
       }
-      xhr.send('q=' + inp.value);
+      let select = document.getElementById('menu');
+      let table = select.value;
+      xhr.send('table=' + table + '&' + 'text=' + inp.value);
 
   });
 
