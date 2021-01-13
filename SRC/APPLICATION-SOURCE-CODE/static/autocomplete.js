@@ -40,8 +40,8 @@ function autocomplete(inp) {
       }
       let select = document.getElementById('menu');
       let table = select.value;
-      alert(table)
-      xhr.send('q=' + inp.value + '&' + 'b=' + table);
+      alert(table);
+      xhr.send('text=' + inp.value + '&table=' + table);
 
   });
 
