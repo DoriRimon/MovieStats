@@ -25,6 +25,7 @@ class Database:
 
         if commit:
             self.ctx.commit()
+            return
 
         res = self.cursor.fetchall()
 
