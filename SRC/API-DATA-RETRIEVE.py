@@ -18,7 +18,7 @@ helping methods
 '''
 db = Database()
 db.connect()
-db.drop_table('movie')
+# db.drop_table('movie')
 db.drop_table('actors')
 db.drop_table('movie_actor')
 db.drop_table('movie_genre')
