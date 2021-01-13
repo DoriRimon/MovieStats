@@ -18,16 +18,18 @@ helping methods
 '''
 db = Database()
 db.connect()
-# db.drop_table('movie')
-# db.drop_table('actors')
-# db.drop_table('movie_actor')
-# db.drop_table('movie_genre')
-# db.drop_table('movie_names')
+db.drop_table('movie')
+db.drop_table('actors')
+db.drop_table('movie_actor')
+db.drop_table('movie_genre')
+db.drop_table('movie_names')
+db.drop_table('genre')
 
 db.create_movie_table()
 db.create_actor_table()
 db.create_movieActor_table()
 db.create_movieGenre_table()
+db.create_genre_table()
 
 movies_df = filter_movies_csv()
 
