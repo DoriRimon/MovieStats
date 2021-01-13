@@ -67,8 +67,8 @@ class Database:
         query = ''' create table if not exists MovieActor (
                     movieID char(9) not null,
                     actorID char(9) not null,
-                    foreign key (movieID) refrences Movie(id),
-                    foreign key (actorID) refrences Actor(id)
+                    foreign key (movieID) references Movie(id),
+                    foreign key (actorID) references Actor(id)
                     ); '''
         self.execute_query(query, commit=True)
 
@@ -76,8 +76,8 @@ class Database:
         query = ''' create table if not exists MovieGenre (
                     movieID char(9) not null,
                     genreID int not null,
-                    foreign key (movieID) refrences Movie(id),
-                    foreign key (genreID) refrences Genre(id)
+                    foreign key (movieID) references Movie(id),
+                    foreign key (genreID) references Genre(id)
                     ); '''
         self.execute_query(query, commit=True)
 
