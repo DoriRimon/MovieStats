@@ -40,7 +40,7 @@ def get_movies_from_api(movies_df):
             foundMovie = findMovieRes.json()
             if not foundMovie['movie_results']:
                 continue
-            id = str(foundMovie['movie_results'][0].id)
+            id = str(foundMovie['movie_results'][0]['id'])
             print("Got id from api: {}".format(id))
             movieDetailsRes = requests.get("https://api.themoviedb.org/3/movie/{}?api_key={}&language=en-US".format(id, API_KEY))
             if movieDetailsRes.status_code == 200:
