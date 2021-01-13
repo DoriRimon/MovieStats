@@ -90,7 +90,7 @@ class Database:
         r = ', '.join(s)
         query = ''' insert into Movie (id, title, budget, revenue, releaseDate, posterPath, overview, rating)
                     values({}); '''.format(r)
-        self.execute_query(query, commit=True)
+        self.execute_query(query, tuple, commit=True)
 
     def insert_actor(self, tuple):
         s = ['%s' for t in tuple]
