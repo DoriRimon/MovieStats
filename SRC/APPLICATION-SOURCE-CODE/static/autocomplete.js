@@ -40,6 +40,7 @@ function autocomplete(inp) {
       }
       let select = document.getElementById('menu');
       let table = select.value;
+      print(table);
       alert(table);
       xhr.send(`q=${inp.value}$table=${table}`);
 
