@@ -27,9 +27,9 @@ db.drop_table('genre')
 
 db.create_movie_table()
 db.create_actor_table()
+db.create_genre_table()
 db.create_movieActor_table()
 db.create_movieGenre_table()
-db.create_genre_table()
 
 movies_df = filter_movies_csv()
 
