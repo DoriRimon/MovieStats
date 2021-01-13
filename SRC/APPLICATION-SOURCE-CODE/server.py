@@ -29,7 +29,7 @@ def search():
 
 
 if __name__ == "__main__":
-    if LOCAL:
+    if RUN_LOCALLY:
         app.run()
     else:
         db = Database()

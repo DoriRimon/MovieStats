@@ -102,21 +102,21 @@ class Database:
     def insert_genre(self, tuple):
         s = ['%s' for t in tuple]
         r = ', '.join(s)
-        query = ''' insert into movie (id, name)
+        query = ''' insert into Movie (id, name)
                     values({}); '''.format(r)
         self.execute_query(query, tuple, commit=True)
 
     def insert_movie_actor(self, tuple):
         s = ['%s' for t in tuple]
         r = ', '.join(s)
-        query = ''' insert into movie (movieID, actorID)
+        query = ''' insert into Movie (movieID, actorID)
                     values({}); '''.format(r)
         self.execute_query(query, tuple, commit=True)
 
     def insert_movie_genre(self, tuple):
         s = ['%s' for t in tuple]
         r = ', '.join(s)
-        query = ''' insert into movie (movieID, genreID)
+        query = ''' insert into Movie (movieID, genreID)
                     values({}); '''.format(r)
         self.execute_query(query, tuple, commit=True)
 
