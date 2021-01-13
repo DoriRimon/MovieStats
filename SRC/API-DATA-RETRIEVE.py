@@ -37,13 +37,19 @@ def get_movies_from_api(movies_df):
         if findMovieRes.status_code == 200:
             foundMovie = json.loads(findMovieRes.json())
             id = str(foundMovie['movie_results'][0].id)
+            print("Got id from api: {}".format(id))
             movieDetailsRes = requests.get("https://api.themoviedb.org/3/movie/{}?api_key={}&language=en-US".format(id, API_KEY))
             if movieDetailsRes.status_code == 200:
                 movieDetails = json.loads(movieDetailsRes.json())
+                print("Got details")
                 db.insert_movie((row['id'], movieDetails['original_title'], movieDetails['budget'], movieDetails['revenue'], \
                 movieDetails['release_date'], movieDetails['poster_path'], movieDetails['overview'], row['rating']))
+                print("Inserted into movie table")
                 for genre in movieDetails['genres']:
                     db.insert_movie_genre((row['id'], genre['id']))
+                    print("Inserted into movieGenre table")
+
+get_movies_from_api(movies_df)
 #
 #
 # def drop_tables(cursor):
