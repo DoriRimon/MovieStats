@@ -36,7 +36,7 @@ class Database:
                     id char(9) not null,
                     title varchar(200) not null,
                     budget int,
-                    revenue int,
+                    revenue bigint,
                     releaseDate date,
                     posterPath varchar(100),
                     overview text,
