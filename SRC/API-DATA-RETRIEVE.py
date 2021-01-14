@@ -68,6 +68,14 @@ def actor_movie_from_csv_to_db(movieActors_df):
             
 
 
+db.drop_table('MovieActor')
+
+db.drop_table('Actor')
+
+db.create_actor_table()
+
+db.create_movieActor_table()
+
 # genres_from_api_to_db()
 
 movies_df = filter_movies_csv()
