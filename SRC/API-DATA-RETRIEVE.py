@@ -38,6 +38,7 @@ def genres_from_api_to_db():
     genresArr = genres.json()['genres']
     for genre in genresArr:
         db.insert_genre((genre['id'], genre['name']))
+    print("Genres are alive")
 
 #Insert movies from api to db
 def movies_from_api_to_db(movies_df):
@@ -48,19 +49,17 @@ def movies_from_api_to_db(movies_df):
             if not foundMovie['movie_results']:
                 continue
             id = str(foundMovie['movie_results'][0]['id'])
-            print("Got id from api: {}".format(id))
             movieDetailsRes = requests.get(BASE_API_URL + "/movie/{}?api_key={}&language=en-US".format(id, API_KEY))
             if movieDetailsRes.status_code == 200:
                 movieDetails = movieDetailsRes.json()
-                print("Got details")
                 db.insert_movie((row['id'], movieDetails['original_title'], movieDetails['budget'], movieDetails['revenue'], \
                 (datetime.strptime(movieDetails['release_date'], '%Y-%m-%d') if movieDetails['release_date'] else None), \
                 movieDetails['poster_path'], movieDetails['overview'], row['rating']))
-                print("Inserted into movie table")
                 for genre in movieDetails['genres']:
                     db.insert_movie_genre((row['id'], genre['id']))
-                    print("Inserted into movieGenre table")
-
+        if index % 1000 == 0:
+            print('inserted {} movies'.format(index))
+    print("Movies are alive")
 
 genres_from_api_to_db()
 
