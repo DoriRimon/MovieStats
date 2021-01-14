@@ -135,3 +135,15 @@ function menuChange() {
     l = 'an'
   input.placeholder = `Type ${l} ${cat} name..`;
 }
+
+
+function getEntities() {
+  let type = document.getElementById('menu').value;
+  let text = document.getElementById('myInput').value;
+
+  var xhr = new XMLHttpRequest();
+  xhr.open("POST", `/blocks/${type}`, true);
+  xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+  xhr.send(`text=${text}`);
+}

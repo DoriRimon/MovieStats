@@ -83,18 +83,6 @@ def main():
     # connect to db
     db.connect()
 
-    # drop existing tables
-    drop = ['MovieGenre', 'MovieActor', 'Movie', 'Actor', 'Genre']
-    for table in drop:
-        db.drop_table(table)
-
-    # create all tables
-    db.create_genre_table()
-    db.create_actor_table()
-    db.create_movie_table()
-    db.create_movieActor_table()
-    db.create_movieGenre_table()
-
     # filter csv data
     movies_df = filter_movies_csv()
     movieActors_df = filter_movieActors_csv(movies_df)

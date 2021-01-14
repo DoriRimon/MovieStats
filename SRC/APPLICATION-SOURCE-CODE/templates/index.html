@@ -18,7 +18,7 @@
           <div class="autocomplete">
               <input id="myInput" type="text" name="myCountry" placeholder="Type a movie name.."></input>
           </div>
-          <input type="submit"></input>
+          <input type="submit" onclick="getEntities()"></input>
         </form>
         <script type="text/javascript" src="{{ url_for('static', filename='autocomplete.js') }}"></script>
       </div>

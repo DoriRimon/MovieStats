@@ -4,13 +4,39 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from Database import Database
 from globe import *
+from server_utils import render_page
+
 
 app = Flask(__name__)
 db = None
 
+
 @app.route('/')
 def upload_form():
     return render_template('index.html')
+
+
+@app.route('/blocks/<type>', methods=['POST'])
+def render_blocks(type):
+    # text - user input text
+    text = request.form['text']
+    print('text: ', text)
+    print('type: ', type)
+    
+    attributes = []
+    if type == 'Movie':
+        attributes = ['title', 'posterPath'] 
+        
+    if type == 'Actor':
+        attributes = ['name', 'profilePath']
+
+
+    # full text search
+    records = db.ft_list_search(type, text, attributes)
+
+    return render_template('blocks.html', type, records)
+
+
 
 @app.route('/search', methods=['POST'])
 def search():
@@ -21,15 +47,17 @@ def search():
     # text - user input text
     text = request.form['text']
     print('text: ', text)
+
     
     # full text search
-    arr = db.ft_search(table, text)
+    records = db.ft_search(table, text)
 
     # build response
-    resp = jsonify(arr)
+    resp = jsonify(records)
     print(resp)
     resp.status_code = 200
     resp.headers.add('Access-Control-Allow-Origin', '*')
+
     return resp
 
 

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <div id='blocks'>
+        </div>
+        <script>
+            var type = '{{ type }}';
+            var rec = ['{{ ', '.join(records) }}'];
+        </script>
+        <script type="text/javascript" src="{{ url_for('static', filename='blocks.js') }}"></script>
+        <script>
+            blocks();
+        </script>
+    </body>
+</html>

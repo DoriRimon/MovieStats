@@ -130,8 +130,8 @@ class Database:
 
         print(query)
         
-        movies = self.execute_query(query)
-        return [v[0] for v in movies]
+        genres = self.execute_query(query)
+        return [v[0] for v in genres]
 
     # full text search
     def ft_search(self, table, text):
@@ -151,13 +151,37 @@ class Database:
 
             print(query)
             
-            movies = self.execute_query(query)
-            return [v[0] for v in movies]
+            res = self.execute_query(query)
+            return [v[0] for v in res]
         
         if table == 'Genre':
             return self.serach_genre(text)
         
         return []
-        
 
-    
+
+    def ft_list_search(self, table, text, attributes):
+        att = ', '.join(attributes)
+        titles = {'Movie' : 'title', 'Actor' : 'name'}
+        if table == 'Movie' or table == 'Actor':
+            if not text:
+                return []
+        
+            words = text.split()
+            bf = ['+' + word if len(word) > 2 else word for word in words] # creating boolean format
+            bf[-1] += '*'
+            t = ' '.join(bf)
+
+            query = ''' select  {}
+                        from    {}
+                        where   match({}) against('{}' in boolean mode); '''.format(att, table, titles[table], t)
+
+            print(query)
+            
+            res = self.execute_query(query)
+            return [v[0] for v in res]
+        
+        if table == 'Genre':
+            return self.serach_genre(text)
+        
+        return []
