@@ -6,6 +6,7 @@ import json
 import mysql.connector
 from Database import Database
 import zipfile
+from globe import *
 
 with zipfile.ZipFile('./APPLICATION-SOURCE-CODE/static/data/data.zip', 'r') as zip_ref:
     zip_ref.extractall('./APPLICATION-SOURCE-CODE/static/data')
@@ -16,7 +17,7 @@ def filter_movies_csv():
     df['id'] = df['id'].astype('str')
     exp = (df['id'].str.len() == 9)
     df = df.loc[exp]
-    return df.nlargest(4_000, 'rating')
+    return df.nlargest(MOVIES_BATCH_SIZE, 'rating')
 
 
 def filter_actors_csv(movieActors_df):
@@ -33,4 +34,3 @@ def filter_movieActors_csv(movies_df):
     df = df.loc[(df['category'] == 'actress') | (df['category'] == 'actor')]
     df = df.drop(['category', 'rating'], axis=1)
     return df
-    

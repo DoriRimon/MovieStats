@@ -66,21 +66,24 @@ def actor_movie_from_csv_to_db(movieActors_df):
             print(err)
             continue
             
-
-
+db.drop_table('MovieGenre')
 db.drop_table('MovieActor')
-
+db.drop_table('Movie')
 db.drop_table('Actor')
+db.drop_table('Genre')
 
+db.create_genre_table()
 db.create_actor_table()
-
+db.create_movie_table()
 db.create_movieActor_table()
+db.create_movieGenre_table()
 
-# genres_from_api_to_db()
+
+genres_from_api_to_db()
 
 movies_df = filter_movies_csv()
 
-# movies_from_api_to_db(movies_df)
+movies_from_api_to_db(movies_df)
 
 movieActors_df = filter_movieActors_csv(movies_df)
 
