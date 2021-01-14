@@ -83,7 +83,7 @@ def main():
     actors_df = filter_actors_csv(movieActors_df)
 
     # fill tables
-    genres_from_api_to_db()
+    # genres_from_api_to_db()
     movies_from_api_to_db(movies_df)
     actors_from_api_to_db(actors_df)
     actor_movie_from_csv_to_db(movieActors_df)
