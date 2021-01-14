@@ -1,5 +1,5 @@
 .vscode/**/*
 .idea/**/*
-SRC/**/__pycache__
+SRC/__pycache__/**/*
 .DS_Store
 SRC/APPLICATION-SOURCE-CODE/static/data/*.csv
