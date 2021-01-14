@@ -4,6 +4,7 @@ import pandas as pd
 import requests
 import json
 import mysql.connector
+from globe import *
 from Database import Database
 from data_fill import *
 from datetime import datetime
@@ -35,19 +36,20 @@ movies_df = filter_movies_csv()
 
 def get_movies_from_api(movies_df):
     for index, row in movies_df.iterrows():
-        findMovieRes = requests.get("https://api.themoviedb.org/3/find/{}?api_key={}&external_source=imdb_id".format(row['id'], API_KEY))
+        findMovieRes = requests.get(BASE_API_URL + "/find/{}?api_key={}&external_source=imdb_id".format(row['id'], API_KEY))
         if findMovieRes.status_code == 200:
             foundMovie = findMovieRes.json()
             if not foundMovie['movie_results']:
                 continue
             id = str(foundMovie['movie_results'][0]['id'])
             print("Got id from api: {}".format(id))
-            movieDetailsRes = requests.get("https://api.themoviedb.org/3/movie/{}?api_key={}&language=en-US".format(id, API_KEY))
+            movieDetailsRes = requests.get(BASE_API_URL + "/movie/{}?api_key={}&language=en-US".format(id, API_KEY))
             if movieDetailsRes.status_code == 200:
                 movieDetails = movieDetailsRes.json()
                 print("Got details")
                 db.insert_movie((row['id'], movieDetails['original_title'], movieDetails['budget'], movieDetails['revenue'], \
-                datetime.strptime(movieDetails['release_date'], '%Y-%m-%d') if movieDetails['release_date'] else None, movieDetails['poster_path'], movieDetails['overview'], row['rating']))
+                (datetime.strptime(movieDetails['release_date'], '%Y-%m-%d') if movieDetails['release_date'] else None), \
+                movieDetails['poster_path'], movieDetails['overview'], row['rating']))
                 print("Inserted into movie table")
                 for genre in movieDetails['genres']:
                     db.insert_movie_genre((row['id'], genre['id']))
