@@ -23,7 +23,10 @@ def filter_movies_csv():
     df['id'] = df['id'].astype('str')
     exp = (df['id'].str.len() == 9)
     df = df.loc[exp]
-    return df.nlargest(MOVIES_BATCH_SIZE, 'rating')
+    res = df.nlargest(MOVIES_BATCH_SIZE, 'rating')
+    print(res.head())
+    print(res.tail())
+    return res
 
 
 # return    : df
@@ -31,7 +34,10 @@ def filter_movies_csv():
 # content   : relevant (play in existing movies) actors ids
 def filter_actors_csv(movieActors_df):
     movieActors_df = movieActors_df.drop(['movie_id'], axis=1)
-    return movieActors_df.drop_duplicates('actor_id')
+    res =  movieActors_df.drop_duplicates('actor_id')
+    print(res.head())
+    print(res.tail())
+    return res
 
 
 # return    : df
@@ -47,4 +53,12 @@ def filter_movieActors_csv(movies_df):
     df['actor_id'] = df['actor_id'].astype('str')
     df = df.loc[(df['actor_id'].str.len() == 9)]
     df = df.drop(['category', 'rating'], axis=1)
+    print(df.head())
+    print(df.tail())
     return df
+
+
+if RUN_LOCALLY:
+    movies_df = filter_movies_csv()
+    movieActors_df = filter_movieActors_csv(movies_df)
+    actors_df = filter_actors_csv(movieActors_df)
