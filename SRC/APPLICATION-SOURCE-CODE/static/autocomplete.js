@@ -13,52 +13,64 @@ function autocomplete(inp) {
           {
               arr = JSON.parse(xhr.response)
               var a, b, i;
+
               closeAllLists();
+
               if (arr.length === 0)
               {
                 return;
               }
+
               currentFocus = -1;
+
+              // create wrapper element
               a = document.createElement("div");
               a.setAttribute("id", inp.id + "autocomplete-list");
               a.setAttribute("class", "autocomplete-items");
               inp.parentNode.appendChild(a);
+
               for (i = 0; i < arr.length; i++) 
               {
-                  b = document.createElement("div");
-                  b.innerHTML = arr[i]
-                  b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
-                  b.addEventListener("click", function(e) 
-                  {
-                      inp.value = this.getElementsByTagName("input")[0].value;
-                      closeAllLists();
-                  });
-                  a.appendChild(b);
+                // create new inner element
+                b = document.createElement("div");
+                b.innerHTML = arr[i]
+                b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+                b.addEventListener("click", function(e) 
+                {
+                    inp.value = this.getElementsByTagName("input")[0].value;
+                    closeAllLists();
+                });
 
+                a.appendChild(b);
               }
           }
       }
+
       let select = document.getElementById('menu');
       let table = select.value;
+
+      // table - selected talbe, text - user input text
       xhr.send(`table=${table}&text=${inp.value}`);
 
   });
 
+
+  // navigate through drop down with keys
   inp.addEventListener("keydown", function(e) 
   {
       var x = document.getElementById(this.id + "autocomplete-list");
       if (x) x = x.getElementsByTagName("div");
-      if (e.key == 'ArrowDown') // down key
+      if (e.key == 'ArrowDown')
       { 
         currentFocus++;
         addActive(x);
       } 
-      else if (e.key == 'ArrowUp') // up key
+      else if (e.key == 'ArrowUp')
       { 
         currentFocus--;
         addActive(x);
       } 
-      else if (e.key == 'Enter') // enter key
+      else if (e.key == 'Enter')
       { 
         e.preventDefault();
         if (currentFocus > -1) 
@@ -66,12 +78,14 @@ function autocomplete(inp) {
           if (x) x[currentFocus].click();
         }
       }
-      else if (e.key === "Escape") // esc key
+      else if (e.key === "Escape")
       {
         closeAllLists(null);
       }
   });
 
+
+  // activate inner row
   function addActive(x) {
     if (!x) 
       return false;
@@ -83,6 +97,8 @@ function autocomplete(inp) {
     x[currentFocus].classList.add("autocomplete-active");
   }
 
+
+  // deactivate inner row
   function removeActive(x) {
     for (var i = 0; i < x.length; i++)
       x[i].classList.remove("autocomplete-active");
@@ -97,14 +113,20 @@ function autocomplete(inp) {
     }
 }
 
+
+// close on click
 document.addEventListener("click", function (e) {
     closeAllLists(e.target);
 });
 }
 
 
+
+// send request and create autocomplete drop down based on result
 autocomplete(document.getElementById("myInput"));
 
+
+// change input place holder when table selection have been changed
 function menuChange() {
   let cat = document.getElementById('menu').value;
   let input = document.getElementById('myInput');

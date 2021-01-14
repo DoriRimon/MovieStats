@@ -14,13 +14,18 @@ def upload_form():
 
 @app.route('/search', methods=['POST'])
 def search():
+    # table - relevant table from the user select options (Movie / Actor / Genere)
     table = request.form['table']
     print('table: ', table)
+
+    # text - user input text
     text = request.form['text']
     print('text: ', text)
     
+    # full text search
     arr = db.ft_search(table, text)
 
+    # build response
     resp = jsonify(arr)
     print(resp)
     resp.status_code = 200

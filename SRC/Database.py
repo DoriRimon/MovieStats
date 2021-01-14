@@ -6,6 +6,9 @@ import json
 import mysql.connector
 import numpy as np
 
+
+# The Database class handles all the transactions with the db
+
 class Database:
     def __init__(self):
         self.curser = None
@@ -130,6 +133,7 @@ class Database:
         movies = self.execute_query(query)
         return [v[0] for v in movies]
 
+    # full text search
     def ft_search(self, table, text):
         titles = {'Movie' : 'title', 'Actor' : 'name'}
         if table == 'Movie' or table == 'Actor':

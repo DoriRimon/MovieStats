@@ -1,3 +1,5 @@
+# general global constants
+
 NAME    =               'DbMysql04'
 HOST    =               'mysqlsrv1.cs.tau.ac.il'
 LOCAL   =               '127.0.0.1'
