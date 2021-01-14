@@ -32,9 +32,15 @@ db.create_genre_table()
 db.create_movieActor_table()
 db.create_movieGenre_table()
 
-movies_df = filter_movies_csv()
+#Insert genres from api to db
+def genres_from_api_to_db():
+    genres = requests.get(BASE_API_URL + '/genre/movie/list?api_key={}'.format(API_KEY))
+    genresArr = genres.json()['genres']
+    for genre in genresArr:
+        db.insert_genre((genre['id'], genre['name']))
 
-def get_movies_from_api(movies_df):
+#Insert movies from api to db
+def movies_from_api_to_db(movies_df):
     for index, row in movies_df.iterrows():
         findMovieRes = requests.get(BASE_API_URL + "/find/{}?api_key={}&external_source=imdb_id".format(row['id'], API_KEY))
         if findMovieRes.status_code == 200:
@@ -55,7 +61,12 @@ def get_movies_from_api(movies_df):
                     db.insert_movie_genre((row['id'], genre['id']))
                     print("Inserted into movieGenre table")
 
-get_movies_from_api(movies_df)
+
+genres_from_api_to_db()
+
+movies_df = filter_movies_csv()
+
+movies_from_api_to_db(movies_df)
 #
 #
 # def drop_tables(cursor):
@@ -267,19 +278,6 @@ get_movies_from_api(movies_df)
 #     ctx.commit()
 #
 #
-# # insert genres into table from api
-# def get_genres(cursor):
-#     genres = requests.get('https://api.themoviedb.org/3/genre/movie/list?api_key=7e759b2920f15726a47aecff3b17d4fb')
-#     genres_dict = genres.json()
-#     query = '''INSERT INTO genre(
-#                 id, genre_name)
-#                 VALUES (%s, %s)'''
-#     for gen in genres_dict['genres']:
-#         query_params = gen['id'], gen['name']
-#         cursor.execute(query, query_params)
-#         print("params:")
-#         print(query_params)
-#     ctx.commit()
 #
 #
 # '''
