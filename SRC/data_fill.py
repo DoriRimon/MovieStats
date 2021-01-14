@@ -31,6 +31,8 @@ def filter_movies_csv():
 # content   : relevant (play in existing movies) actors ids
 def filter_actors_csv(movieActors_df):
     movieActors_df = movieActors_df.drop(['movie_id'], axis=1)
+    movieActors_df['actor_id'] = movieActors_df['actor_id'].astype('str')
+    movieActors_df = movieActors_df.loc[movieActors_df['actor_id'].str.len == 9]
     return movieActors_df.drop_duplicates('actor_id')
 
 

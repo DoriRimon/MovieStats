@@ -77,6 +77,7 @@ def main():
     # connect to db
     db.connect()
 
+    ''' 
     # drop existing tables
     drop = ['MovieGenre', 'MovieActor', 'Movie', 'Actor', 'Genre']
     for table in drop:
@@ -88,6 +89,7 @@ def main():
     db.create_movie_table()
     db.create_movieActor_table()
     db.create_movieGenre_table()
+    '''
 
     # filter csv data
     movies_df = filter_movies_csv()
@@ -95,9 +97,11 @@ def main():
     actors_df = filter_actors_csv(movieActors_df)
 
     # fill tables
+    '''
     genres_from_api_to_db()
     movies_from_api_to_db(movies_df)
     actors_from_api_to_db(actors_df)
+    '''
     actor_movie_from_csv_to_db(movieActors_df)
 
     # disconnect from db
