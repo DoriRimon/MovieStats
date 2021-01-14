@@ -25,9 +25,10 @@ def genres_from_api_to_db():
 
 # insert movies from api to db
 def movies_from_api_to_db(movies_df):
+    count = 0
     for index, row in movies_df.iterrows():
         print(row)
-        findMovieRes = requests.get(BASE_API_URL + "/find/{}?api_key={}&external_source=imdb_id".format(row['id'], API_KEY))
+        findMovieRes = requests.get(BASE_API_URL + "/find/{}?api_key={}&external_source=imdb_id".format(row['movie_id'], API_KEY))
         if findMovieRes.status_code == 200:
             foundMovie = findMovieRes.json()
             if not foundMovie['movie_results']:
@@ -36,18 +37,21 @@ def movies_from_api_to_db(movies_df):
             movieDetailsRes = requests.get(BASE_API_URL + "/movie/{}?api_key={}&language=en-US".format(id, API_KEY))
             if movieDetailsRes.status_code == 200:
                 movieDetails = movieDetailsRes.json()
-                db.insert_movie((row['id'], movieDetails['original_title'], movieDetails['budget'], movieDetails['revenue'], \
+                db.insert_movie((row['movie_id'], movieDetails['original_title'], movieDetails['budget'], movieDetails['revenue'], \
                 (datetime.strptime(movieDetails['release_date'], '%Y-%m-%d') if movieDetails['release_date'] else None), \
                 movieDetails['poster_path'], movieDetails['overview'], row['rating']))
                 for genre in movieDetails['genres']:
-                    db.insert_movie_genre((row['id'], genre['id']))
-        if index % 1000 == 0:
-            print('inserted {} movies'.format(index))
-    print("Movies are alive")
+                    db.insert_movie_genre((row['movie_id'], genre['id']))
+                
+                count += 1
+                if count % 1000 == 0:
+                    print('inserted {} movies'.format(count))
+    print("Movies are alive - includes {} rows".format(count))
 
 
 # insert actors from api to db
 def actors_from_api_to_db(actors_df):
+    count = 0
     for index, row in actors_df.iterrows():
         findActorRes = requests.get(BASE_API_URL + "/find/{}?api_key={}&external_source=imdb_id".format(row['actor_id'], API_KEY))
         if findActorRes.status_code == 200:
@@ -59,9 +63,11 @@ def actors_from_api_to_db(actors_df):
             if actorDetailsRes.status_code == 200:
                 actorDetails = actorDetailsRes.json()
                 db.insert_actor((row['actor_id'], actorDetails['name'], actorDetails['profile_path'], actorDetails['biography']))
-        if index % 1000 == 0:
-            print('inserted {} actors'.format(index))
-    print("Actors are alive")
+            
+            count += 1
+            if count % 1000 == 0:
+                print('inserted {} movies'.format(count))
+    print("Actors are alive - includes {} rows".format(count))
 
 
 # insert actorMovies from csv to db
