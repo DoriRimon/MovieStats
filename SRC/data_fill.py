@@ -33,16 +33,4 @@ def filter_movieActors_csv(movies_df):
     df = df.loc[(df['category'] == 'actress') | (df['category'] == 'actor')]
     df = df.drop(['category', 'rating'], axis=1)
     return df
-
-
-movies_df = filter_movies_csv()
-print(len(movies_df.index))
-print(movies_df.head())
-
-movieActors = filter_movieActors_csv(movies_df)
-print(len(movieActors.index))
-print(movieActors.head())
-
-actors_df = filter_actors_csv(movieActors)
-print(len(actors_df.index))
-print(actors_df.head())
+    
