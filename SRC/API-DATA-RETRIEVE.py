@@ -27,7 +27,6 @@ def genres_from_api_to_db():
 def movies_from_api_to_db(movies_df):
     count = 0
     for index, row in movies_df.iterrows():
-        print(row)
         findMovieRes = requests.get(BASE_API_URL + "/find/{}?api_key={}&external_source=imdb_id".format(row['movie_id'], API_KEY))
         if findMovieRes.status_code == 200:
             foundMovie = findMovieRes.json()
