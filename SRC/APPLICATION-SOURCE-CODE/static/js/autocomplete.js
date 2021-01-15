@@ -129,6 +129,7 @@ autocomplete(document.getElementById("myInput"));
 // change input place holder when table selection have been changed
 function menuChange() {
   let cat = document.getElementById('menu').value;
+  cat = cat.toLowerCase();
   let input = document.getElementById('myInput');
   let l = 'a';
   if (['a', 'e', 'i', 'o', 'u'].includes(cat.charAt(0)))
