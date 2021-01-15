@@ -7,14 +7,8 @@
         <script>
             var type = '{{ type }}';
             var rec = [];
-            {% for record in records %}
-                let inner = []
-                {% for elem in record %}
-                    inner.push((elem))
-                {% endfor %}
-                rec.push(inner)
-            {% endfor %}
-            blocks(type, rec);
+            var rec = '{{ records | tojson }}';
+            blocks(type, JSON.parse(rec));
         </script>
     </body>
 </html>
