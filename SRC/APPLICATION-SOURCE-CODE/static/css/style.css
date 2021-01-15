@@ -36,7 +36,7 @@ a:hover {
 /*-----|| Hero - Top Section ||-----*/
 
 .homepage .top-section {
-	background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0)), url('./img/background.jpg');
+	background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0)), url('../img/background.jpg');
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
