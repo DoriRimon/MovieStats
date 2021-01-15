@@ -1,5 +1,6 @@
 import sys
 import os, json
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.path.insert(1, './SRC/')
 
 from flask import Flask, jsonify, request, redirect, render_template
