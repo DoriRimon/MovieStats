@@ -6,7 +6,7 @@ function blocks() {
         let title = entity[0];
         let image = basePosterPath + size + entity[1];
         if (!entity[1])
-            image = 'https://www.google.com/url?sa=i&url=https%3A%2F%2F123moviesfree.zone%2Ftvshows.php&psig=AOvVaw2_0OQ_47am7iDNxGmfEr-_&ust=1610765735450000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCMDpsI34nO4CFQAAAAAdAAAAABAO';
+            image = 'https://123moviesfree.zone/no-poster.png';
 
         let card = document.createElement("div");
         card.setAttribute('class', 'card');
