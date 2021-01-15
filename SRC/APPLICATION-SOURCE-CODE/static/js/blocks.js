@@ -5,7 +5,7 @@ function blocks() {
     rec.forEach(entity => {
         let title = entity[0];
         let image = basePosterPath + size + entity[1];
-        if (!image)
+        if (!entity[1])
             image = '../img/no-poster.png';
 
         let card = document.createElement("div");
