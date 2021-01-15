@@ -142,8 +142,8 @@ function getEntities() {
   let text = document.getElementById('myInput').value;
 
   var xhr = new XMLHttpRequest();
-  xhr.open("POST", `/blocks/${type}`, true);
+  xhr.open("GET", `/blocks/${type}/${text}`, true);
   xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
-  xhr.send(`text=${text}`);
+  xhr.send();
 }

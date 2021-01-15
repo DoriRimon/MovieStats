@@ -19,12 +19,11 @@ def upload_form():
     return render_template('index.html')
 
 
-@app.route('/blocks/<type>', methods=['POST'])
-def render_blocks(type):
+@app.route('/blocks/<type>/<text>', methods=['GET'])
+def render_blocks(type, text):
     # text - user input text
-    text = request.form['text']
-    print('text: ', text)
     print('type: ', type)
+    print('text: ', text)
     
     attributes = []
     if type == 'Movie':
