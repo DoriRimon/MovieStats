@@ -7,8 +7,9 @@
         <script>
             var type = '{{ type }}';
             var rec = [];
-            var rec = '{{ records | tojson }}';
-            blocks(type, JSON.parse(rec));
+            var j = '{{ records | tojson }}';
+            var rec = JSON.parse(j); 
+            blocks(type, rec);
         </script>
     </body>
 </html>
