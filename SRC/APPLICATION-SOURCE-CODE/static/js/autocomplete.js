@@ -141,9 +141,10 @@ function getEntities() {
   let type = document.getElementById('menu').value;
   let text = document.getElementById('myInput').value;
 
-  var xhr = new XMLHttpRequest();
-  xhr.open("GET", `/blocks/${type}/${text}`, true);
-  xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+  // var xhr = new XMLHttpRequest();
+  // xhr.open("GET", `/blocks/${type}/${text}`, true);
+  // xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+  // xhr.send();
 
-  xhr.send();
+  window.location.href = `/blocks/${type}/${text}`;
 }

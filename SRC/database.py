@@ -180,7 +180,7 @@ class Database:
             print(query)
             
             res = self.execute_query(query)
-            return [v[0] for v in res]
+            return res
         
         if table == 'Genre':
             return self.serach_genre(text)
