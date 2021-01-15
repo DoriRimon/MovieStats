@@ -5,7 +5,7 @@
         </div>
         <script>
             var type = '{{ type }}';
-            var rec = ['{{ ', '.join(records) }}'];
+            var rec = ['{{ str(records)[1:-1] }}'];
         </script>
         <script type="text/javascript" src="{{ url_for('static', filename='js/blocks.js') }}"></script>
         <script>
