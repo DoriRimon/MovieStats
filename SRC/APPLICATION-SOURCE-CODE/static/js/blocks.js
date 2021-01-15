@@ -1,4 +1,4 @@
-function blocks() {
+function blocks(type, rec) {
     rec.forEach(entity => {
         let title = entity[0];
         let card = document.createElement("div");
