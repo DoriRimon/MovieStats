@@ -3,6 +3,7 @@
     <body>
         <div id='blocks'>
         </div>
+        <script type="text/javascript" src="{{ url_for('static', filename='js/blocks.js') }}"></script>
         <script>
             var type = '{{ type }}';
             var rec = [];
@@ -13,9 +14,6 @@
                 {% endfor %}
                 rec.push(inner)
             {% endfor %}
-        </script>
-        <script type="text/javascript" src="{{ url_for('static', filename='js/blocks.js') }}"></script>
-        <script>
             blocks(type, rec);
         </script>
     </body>
