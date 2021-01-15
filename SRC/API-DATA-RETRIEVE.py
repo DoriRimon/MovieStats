@@ -1,11 +1,13 @@
-import os.path
+import sys
+import os, json
+sys.path.insert(1, './SRC/APPLICATION-SOURCE-CODE/dal/')
+
 import numpy as np
 import pandas as pd
 import requests
-import json
 import mysql.connector
 from globe import *
-from Database import Database
+from database import Database
 from data_fill import *
 from datetime import datetime
 

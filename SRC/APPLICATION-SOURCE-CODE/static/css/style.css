@@ -1,0 +1,250 @@
+/*-----|| Normalize ||-----*/
+
+/*! normalize.css v7.0.0 | MIT License | github.com/necolas/normalize.css */
+button,hr,input{overflow:visible}audio,canvas,progress,video{display:inline-block}progress,sub,sup{vertical-align:baseline}[type=checkbox],[type=radio],legend{box-sizing:border-box;padding:0}html{line-height:1.15;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}body{margin:0}article,aside,details,figcaption,figure,footer,header,main,menu,nav,section{display:block}h1{font-size:2em;margin:.67em 0}figure{margin:1em 40px}hr{box-sizing:content-box;height:0}code,kbd,pre,samp{font-family:monospace,monospace;font-size:1em}a{background-color:transparent;-webkit-text-decoration-skip:objects}abbr[title]{border-bottom:none;text-decoration:underline;text-decoration:underline dotted}b,strong{font-weight:bolder}dfn{font-style:italic}mark{background-color:#ff0;color:#000}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative}sub{bottom:-.25em}sup{top:-.5em}audio:not([controls]){display:none;height:0}img{border-style:none}svg:not(:root){overflow:hidden}button,input,optgroup,select,textarea{font-family:sans-serif;font-size:100%;line-height:1.15;margin:0}button,select{text-transform:none}[type=reset],[type=submit],button,html [type=button]{-webkit-appearance:button}[type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner,button::-moz-focus-inner{border-style:none;padding:0}[type=button]:-moz-focusring,[type=reset]:-moz-focusring,[type=submit]:-moz-focusring,button:-moz-focusring{outline:ButtonText dotted 1px}fieldset{padding:.35em .75em .625em}legend{color:inherit;display:table;max-width:100%;white-space:normal}textarea{overflow:auto}[type=number]::-webkit-inner-spin-button,[type=number]::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}[type=search]::-webkit-search-cancel-button,[type=search]::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}[hidden],template{display:none}
+
+
+/*-----|| General ||-----*/
+
+* {
+	font-family: 'Courier New', arial, sans-serif !important;
+}
+
+html,
+.homepage {
+	height: 100%;
+}
+
+body {
+	font-family: 'Courier New', arial, sans-serif;
+	cursor: default;
+	height: 100%;
+}
+
+body .webkit, 
+body .leaderboard {
+	background-color: #fff;
+	display: flex;
+	flex-direction: column;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+
+/*-----|| Hero - Top Section ||-----*/
+
+.homepage .top-section {
+	background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0)), url('./img/background.jpg');
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	position: relative;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.top-inner {
+	text-align: center;
+	position: absolute;
+}
+
+.top-inner ::selection {
+	background: #e0ab66;
+}
+
+.top-inner h1 {
+	color: #fff;
+	font-size: 40px;
+	font-weight: 400;
+	margin: 28px 0 0 0;
+	padding: 0;
+}
+
+.top-inner h3 {
+	color: #fff;
+	font-size: 20px;
+	font-weight: 100;
+	margin: 0;
+	padding-top: 8px;
+}
+
+.top-inner form {
+	margin-top: 14%;
+	text-align: center;
+	width: 100%;
+	align-items: center;
+}
+
+.autocomplete {
+	/*the container must be positioned relative:*/
+	position: relative;
+	display: inline-block;
+}
+
+.top-inner form input, select {
+	border: 1px solid transparent;
+	background-color: #f1f1f1;
+	padding: 10px;
+	font-size: 16px;
+	text-align: center;
+}
+
+.top-inner form input[type=text] {
+	background-color: #f1f1f1;
+	width: 470px;
+	outline: none;
+}
+
+.top-inner form input[type=submit] {
+	background-color: #e0ab66;
+	color: #fff;
+	outline: none;
+}
+
+.top-inner form select {
+	width: fit-content;
+	outline: none;
+}
+
+.top-inner form select option{
+	background: #f1f1f1;
+	padding: 10px;
+	font-size: 16px;
+	text-align: center;
+}
+
+.autocomplete-items {
+	position: absolute;
+	border: 1px solid #d4d4d4;
+	border-bottom: none;
+	border-top: none;
+	z-index: 99;
+	/*position the autocomplete items to be the same width as the container:*/
+	top: 100%;
+	left: 0;
+	right: 0;
+	max-height: 150px;
+	overflow-y: scroll;
+}
+
+.autocomplete-items div {
+	padding: 10px;
+	cursor: pointer;
+	background-color: #fff;
+	border-bottom: 1px solid #d4d4d4;
+}
+
+.autocomplete-items div:hover {
+	/*when hovering an item:*/
+	background-color: #e9e9e9;
+}
+
+.autocomplete-active {
+	/*when navigating through the items using the arrow keys:*/
+	background-color: #e0ab66 !important;
+	color: #ffffff;
+}
+
+
+/*-----|| Navigation ||-----*/
+
+.top-section {
+	display: flex;
+	flex-direction: row;
+	border-bottom: 1px solid #efefef;
+	background-color: #333;
+}
+
+.top-section img {
+	flex: 1;
+	width: 50px;
+	height: 47px;
+	margin: 3px 10px 3px 5px;
+	transition: 0.2s ease-out;
+}
+
+nav {
+	flex: 1;
+	cursor: pointer;
+	position: relative;
+}
+
+.homepage nav {
+	border-bottom: 1px solid #efefef;
+}
+
+.about nav {
+    background-color: #e0ab66;
+}
+
+.nav-inner	{
+	display: flex;
+}
+
+.nav-inner a {
+	display: block;
+	flex: 1;
+	font-size: 18px;
+	padding: 20px;
+	text-align: center;
+	text-decoration: none;
+	position: relative;
+	border: none;
+	transition: font-size 0.1s ease-out;
+}
+
+.about .nav-inner a, 
+.search .nav-inner a,
+.statistics .nav-inner a,
+.actors .nav-inner a {
+	color: #eeeded;
+}
+
+.homepage .nav-inner a {
+	color: #444;
+}
+
+.nav-inner a:hover {
+	font-size: 19px;
+}
+
+.nav-inner .icon {
+	  opacity: 0%;
+	  transition: opacity 0.07s linear;
+}
+
+.hover-effect a:hover .icon {
+	  opacity: 100%;
+}
+
+
+/*-----|| Main ||-----*/
+
+.homepage {
+	overflow: hidden;
+}
+
+
+/*-----|| Footer ||-----*/
+
+footer {
+	background: #333;
+	color: #999;
+	font-size: 14px;
+	padding: 30px;
+	margin-top: auto;
+	text-align: center;
+  }
+  
+  footer a {
+	color: #fff;
+	text-decoration: none;
+  }
+  
+  footer a:hover {
+	text-decoration: underline;
+  }

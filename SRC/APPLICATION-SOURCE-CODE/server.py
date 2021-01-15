@@ -1,9 +1,10 @@
-import os, json
-from flask import Flask, jsonify, request, redirect, render_template
 import sys
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from Database import Database
+import os, json
+sys.path.insert(1, './SRC/')
+
 from globe import *
+from flask import Flask, jsonify, request, redirect, render_template
+from database import Database
 from server_utils import render_page
 
 
