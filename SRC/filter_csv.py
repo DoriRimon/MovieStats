@@ -1,8 +1,5 @@
 import sys
 import os, json
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-sys.path.insert(1, './SRC/')
-sys.path.insert(1, './SRC/APPLICATION-SOURCE-CODE/dal/')
 
 from globe import *
 import numpy as np
