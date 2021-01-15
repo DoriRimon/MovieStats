@@ -5,7 +5,14 @@
         </div>
         <script>
             var type = '{{ type }}';
-            var rec = ['{{ str(records)[1:-1] }}'];
+            var rec = [];
+            {% for record in records %}
+                let inner = []
+                {% for elem in record %}
+                    inner.push((elem))
+                {% endfor %}
+                rec.push(inner)
+            {% endfor %}
         </script>
         <script type="text/javascript" src="{{ url_for('static', filename='js/blocks.js') }}"></script>
         <script>
