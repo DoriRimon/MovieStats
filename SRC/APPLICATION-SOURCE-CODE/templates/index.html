@@ -9,17 +9,19 @@
       <div class='top-inner'>
         <h1>MovieStats</h1>
         <h3>Get statistics over millions of movies</h3>
-        <form autocomplete="off">
+        <!-- <form autocomplete="off"> -->
+        <div class="form">
           <select id='menu' onchange='menuChange()'>
             <option value='Movie'>Movies</option>
             <option value='Actor'>Actors</option>
             <option value='Genre'>Geners</option>
           </select>
           <div class="autocomplete">
-              <input id="myInput" type="text" name="myCountry" placeholder="Type a movie name.."></input>
+              <input id="myInput" type="text" placeholder="Type a movie name.."></input>
           </div>
           <input type="submit" onclick="getEntities()"></input>
-        </form>
+        </div>
+        <!-- </form> -->
         <script type="text/javascript" src="{{ url_for('static', filename='js/autocomplete.js') }}"></script>
       </div>
     </div>
