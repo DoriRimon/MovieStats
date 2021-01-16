@@ -55,9 +55,11 @@ def render_top(text):
 
     for movie in movies:
         movie[3] = movie[3].replace('"', '')
+        movie[3] = movie[3].replace('\n', '')
 
     for actor in actors:
         actor[2] = actor[2].replace('"', '')
+        actor[2] = actor[2].replace('\n', '')
 
 
     return render_template('genre.html', movies=movies, actors=actors)

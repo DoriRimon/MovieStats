@@ -16,8 +16,8 @@
         <div id='actors'>
         </div>
         <script>
-            let jMovies = '{{ movies | tojson }}';
-            let jActors = '{{ actors | tojson }}';
+            let jMovies = '{{ movies | tojson | safe }}';
+            let jActors = '{{ actors | tojson | safe }}';
             let movies = JSON.parse(jMovies); 
             let actors = JSON.parse(jActors);
         </script>
