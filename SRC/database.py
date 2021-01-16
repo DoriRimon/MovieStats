@@ -134,6 +134,22 @@ class Database:
         genres = self.execute_query(query)
         return [v[0] for v in genres]
 
+    def search_movie(self, id):
+        query = ''' select  *
+                    from    Movie
+                    where   id = '{}'
+                '''.format(id)
+
+        res = self.execute_query(query)
+        movies =  [list(v) for v in res]
+
+        for movie in movies:
+            movie[6] = movie[6].replace('"', '')
+            movie[6] = movie[6].replace('\n', '')
+
+        return movies
+
+
     # full text search
     def ft_search(self, table, text):
         titles = {'Movie' : 'title', 'Actor' : 'name'}
@@ -199,7 +215,13 @@ class Database:
                 '''.format(genre)
 
         movies = self.execute_query(query)
-        return [list(v) for v in movies]
+        movies =  [list(v) for v in movies]
+
+        for movie in movies:
+            movie[3] = movie[3].replace('"', '')
+            movie[3] = movie[3].replace('\n', '')
+
+        return movies
 
     def search_genre_actors(self, genre):
         query = ''' select      Actor.name, Actor.profilePath, Actor.biography, count(*) AS amount, Actor.id
@@ -213,5 +235,22 @@ class Database:
                     limit       10        
                 '''.format(genre)
 
+        actors = self.execute_query(query)
+        actors = [list(v) for v in actors]
+
+        for actor in actors:
+            actor[2] = actor[2].replace('"', '')
+            actor[2] = actor[2].replace('\n', '')
+
+        return actors
+
+
+    def get_movie_actors(self, id):
+        query = ''' select      Actor.name, Actor.profilePath, Actor.id
+                    from        Actor, Movie, MovieActor
+                    where       Actor.id = MovieActor.actorID and
+                                Movie.id = MovieActor.movieID and Movie.id = '{}'
+                '''.format(id)
+        
         actors = self.execute_query(query)
         return [list(v) for v in actors]

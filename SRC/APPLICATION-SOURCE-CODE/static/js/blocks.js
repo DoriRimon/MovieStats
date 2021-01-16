@@ -24,6 +24,11 @@ function blocks() {
         card.appendChild(h);
         card.appendChild(cardOverlay);
         wrapper.appendChild(card);
+
+
+        card.addEventListener('click', e => {
+            window.location.href = `/${type.toLowerCase()}/${card.id}`;
+        });
     });
 }
 

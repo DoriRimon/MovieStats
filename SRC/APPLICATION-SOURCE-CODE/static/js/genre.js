@@ -56,7 +56,6 @@ function createTopMovies() {
         rev.innerText = createRevText(revenue);
         text.appendChild(rev);
 
-        // handle no overview
         let t = document.createElement('div');
         t.setAttribute('class', 'description')
         if (!overview) 
@@ -64,6 +63,15 @@ function createTopMovies() {
         else
             t.innerText = overview;
         text.appendChild(t);
+
+
+        h.addEventListener('click', e => {
+            window.location.href = `/movie/id`;
+        });
+
+        poster.addEventListener('click', e => {
+            window.location.href = `/movie/id`;
+        });
     });
 }
 
@@ -122,7 +130,6 @@ function createTopActors() {
         movieAmount.innerText = `Acted in ${amount} movies`;
         text.appendChild(movieAmount);
 
-        // handle no overview
         let t = document.createElement('div');
         t.setAttribute('class', 'description')
         if (!biography) 
@@ -130,6 +137,14 @@ function createTopActors() {
         else
             t.innerText = biography;
         text.appendChild(t);
+
+        h.addEventListener('click', e => {
+            window.location.href = `/actor/id`;
+        });
+
+        poster.addEventListener('click', e => {
+            window.location.href = `/actor/id`;
+        });
     });
 }
 

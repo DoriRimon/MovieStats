@@ -53,16 +53,17 @@ def render_top(text):
     movies = db.search_genre_movies(genre)
     actors = db.search_genre_actors(genre)
 
-    for movie in movies:
-        movie[3] = movie[3].replace('"', '')
-        movie[3] = movie[3].replace('\n', '')
-
-    for actor in actors:
-        actor[2] = actor[2].replace('"', '')
-        actor[2] = actor[2].replace('\n', '')
-
-
     return render_template('genre.html', movies=movies, actors=actors)
+
+
+@app.route('/movie/<id>', methods=['GET'])
+def render_movie(id):
+    print('id: ', id)
+
+    movie = db.search_movie(id)
+    actors = db.get_movie_actors(id)
+
+    return render_template('movie.html', movie=movie, actors=actors)
 
 
 @app.route('/search', methods=['POST'])
