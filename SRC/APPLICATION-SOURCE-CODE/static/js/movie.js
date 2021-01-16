@@ -7,8 +7,26 @@ function createPage() {
     let budget = movieRec[2];
     let revenue = movieRec[3];
     let date = movieRec[4];
+
+    if (!date)
+        date = 'Date not available';
+    else {
+        let day = date.getDate();
+        let month = date.getMonth();
+        let year = date.getFullYear();
+        date = day + '.' + (month + 1) + '.' + year; 
+    }
+
     let image = basePosterPath + size + movieRec[5];
-    let overview = movieRec[6] + movieRec[6] + movieRec[6];
+
+    if (!entity[1])
+        image = 'https://123moviesfree.zone/no-poster.png';
+    
+    let overview = movieRec[6];
+
+    if (!overview) 
+            overview = "The creators of the movie kept the description from us )-:";
+    
     let rating = movieRec[7];
 
 
@@ -58,11 +76,15 @@ function createPage() {
     let budgetElem = document.createElement('div');
     budgetElem.setAttribute('id', 'budget');
     budgetElem.innerText = 'Budget: ' + createMoneyText(budget)
+    if (!budget)
+        budgetElem.innerText = "Budget isn't available";
     money.appendChild(budgetElem);
 
     let revenueElem = document.createElement('div');
     revenueElem.setAttribute('id', 'revenue');
     revenueElem.innerText = 'Revenue: ' + createMoneyText(revenue);
+    if (!revenue)
+        revenueElem.innerText = "Revenue isn't available";
     money.appendChild(revenueElem);
 
     let overviewElem = document.createElement('div');

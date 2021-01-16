@@ -5,6 +5,10 @@ function createTopMovies() {
     topMovies.forEach((entity, index) => {
         let title = entity[0];
         let image = basePosterPath + size + entity[1];
+
+        if (!entity[1])
+            image = 'https://123moviesfree.zone/no-poster.png';
+
         let revenue = entity[2];
         let overview = entity[3];
         let id = entity[4];
