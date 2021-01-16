@@ -4,15 +4,14 @@ const size = 'w780';
 function createPage() {
     let id = actorRec[0];
     let name = actorRec[1];
-    let profile = actorRec[2];
-    let biography = basePosterPath + size;
-
-    if (!actorRec[3])
+    let profile = basePosterPath + size;
+    if (!actorRec[2])
         profile = 'https://123moviesfree.zone/no-poster.png';
 
     else
-        profile += actorRec[3];
-
+        profile += actorRec[2];
+    
+    let biography = actorRec[3];
     if (!biography) 
             biography = "The actor didn't want to share his biography with us )-:";
 
