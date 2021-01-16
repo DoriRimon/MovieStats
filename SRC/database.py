@@ -255,7 +255,7 @@ class Database:
 
         return actors
     
-    def search_genre_movies_count():
+    def search_genre_movies_count(self):
         query = ''' select 		Genre.name, count(*) as totalMovies
                     from		Movie, MovieGenre, Genre
                     where		Movie.id = MovieGenre.movieID and
