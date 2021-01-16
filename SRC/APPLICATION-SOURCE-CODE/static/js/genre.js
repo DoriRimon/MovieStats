@@ -66,11 +66,11 @@ function createTopMovies() {
 
 
         h.addEventListener('click', e => {
-            window.location.href = `/movie/id`;
+            window.location.href = `/movie/${id}`;
         });
 
         poster.addEventListener('click', e => {
-            window.location.href = `/movie/id`;
+            window.location.href = `/movie/${id}`;
         });
     });
 }
@@ -139,11 +139,11 @@ function createTopActors() {
         text.appendChild(t);
 
         h.addEventListener('click', e => {
-            window.location.href = `/actor/id`;
+            window.location.href = `/actor/${id}`;
         });
 
         poster.addEventListener('click', e => {
-            window.location.href = `/actor/id`;
+            window.location.href = `/actor/${id}`;
         });
     });
 }
