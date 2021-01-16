@@ -12,7 +12,7 @@ function createTopMovies() {
         // create row div
         let row = document.createElement('div');
         row.setAttribute('class', 'row');
-        wrapper.appendChild(row);
+        movies.appendChild(row);
 
 
         // create row > number div
@@ -78,7 +78,7 @@ function createTopActors() {
         // create row div
         let row = document.createElement('div');
         row.setAttribute('class', 'row');
-        wrapper.appendChild(row);
+        actors.appendChild(row);
 
 
         // create row > number div
