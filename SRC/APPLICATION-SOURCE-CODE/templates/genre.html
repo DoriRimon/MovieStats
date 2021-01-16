@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link type='text/css' rel='stylesheet' href="genre.css">
+        <link rel="stylesheet" href="{{url_for('static', filename='css/genre.css')}}">
     </head>
     <body>
         <div id='wrapper'>
@@ -12,7 +12,7 @@
             let movies = JSON.parse(jMovies); 
             let actors = JSON.parse(jActors);
         </script>
-        <script type="text/javascript" src="genre.js"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='js/genre.js') }}"></script>
         <script>
             createTop();
         </script>
