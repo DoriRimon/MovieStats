@@ -68,6 +68,17 @@ def render_movie(id):
     return render_template('movie.html', movie=movie, pos=pos, actors=actors, rec=rec)
 
 
+@app.route('/actor/<id>', methods=['GET'])
+def render_actor(id):
+    print('id: ', id)
+
+    actor = db.search_actor(id)
+    movies = db.get_actor_movies(id)
+    rec = db.get_actor_recommendations(id)
+
+    return render_template('actor.html', actor=actor, movies=movies, rec=rec)
+
+
 @app.route('/search', methods=['POST'])
 def search():
     # table - relevant table from the user select options (Movie / Actor / Genere)

@@ -147,6 +147,19 @@ class Database:
 
         return movie
 
+    def search_actor(self, id):
+        query = ''' select  *
+                    from    Actor
+                    where   id = '{}';
+                '''.format(id)
+
+        actor = list(self.execute_query(query)[0])
+
+        actor[3] = actor[3].replace('"', '')
+        actor[3] = actor[3].replace('\n', '')
+
+        return actor
+
 
     # full text search
     def ft_search(self, table, text):
@@ -280,6 +293,36 @@ class Database:
                     group by    M1.id
                     order by    count(*) desc
                     limit       5;
+                '''.format(id)
+
+        rec = self.execute_query(query)
+        return [list(v) for v in rec]
+
+    
+    def get_actor_movies(self, id):
+        query = ''' select  Movie.title, Movie.posterPath, Movie.id
+                    from    Movie, MovieActor, Actor
+                    where   Actor.id = MovieActor.actorID and
+                            Movie.id = MovieActor.movieID and Actor.id = '{}'
+                '''.format(id)
+
+        movies = self.execute_query(query)
+        return [list(v) for v in movies]
+
+
+    def get_actor_recommendations(self, id):
+        query = ''' select      A1.name, A1.profilePath
+                    from        Movie, Actor as A1, MovieActor
+                    where       Movie.id = MovieActor.movieID and 
+                                A1.id = MovieActor.actorID and
+                                Movie.id IN (   select M2.id
+                                                from Movie as M2, Actor as A2, MovieActor as MA2
+                                                where M2.id = MA2.movieID and 
+                                                        A2.id = MA2.actorID and A2.id = '{}' and
+                                                        A1.id <> A2.id  )
+                    group by A1.id
+                    order by count(*) desc
+                    limit 5;
                 '''.format(id)
 
         rec = self.execute_query(query)

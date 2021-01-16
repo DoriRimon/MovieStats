@@ -2,7 +2,6 @@ const basePosterPath = 'https://image.tmdb.org/t/p/';
 const size = 'w780';
 
 function createPage() {
-    let id = movieRec[0];
     let title = movieRec[1];
     let budget = movieRec[2];
     let revenue = movieRec[3];
