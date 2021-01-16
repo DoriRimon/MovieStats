@@ -147,5 +147,9 @@ function getEntities() {
   // xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
   // xhr.send();
 
-  window.location.href = `/blocks/${type}/${text}`;
+  if (type === 'Genre')
+    window.location.href = `/top/${text}`;
+  
+  else
+    window.location.href = `/blocks/${type}/${text}`;
 }

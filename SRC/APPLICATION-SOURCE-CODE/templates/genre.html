@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link type='text/css' rel='stylesheet' href="genre.css">
+    </head>
+    <body>
+        <div id='wrapper'>
+        </div>
+        <script>
+            let jMovies = '{{ movies | tojson }}';
+            let jActors = '{{ actors | tojson }}';
+            let movies = JSON.parse(jMovies); 
+            let actors = JSON.parse(jActors);
+        </script>
+        <script type="text/javascript" src="genre.js"></script>
+        <script>
+            createTop();
+        </script>
+    </body>
+</html>

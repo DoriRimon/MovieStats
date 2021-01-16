@@ -8,10 +8,9 @@
         </div>
         <script type="text/javascript" src="{{ url_for('static', filename='js/blocks.js') }}"></script>
         <script>
-            var type = '{{ type }}';
-            var rec = [];
-            var j = '{{ records | tojson }}';
-            var rec = JSON.parse(j); 
+            let type = '{{ type }}';
+            let j = '{{ records | tojson }}';
+            let rec = JSON.parse(j); 
             blocks(type, rec);
         </script>
     </body>

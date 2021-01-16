@@ -124,7 +124,7 @@ class Database:
                     values({}); '''.format(r)
         self.execute_query(query, tuple, commit=True)
 
-    def serach_genre(self, text):
+    def search_genre(self, text):
         query = ''' select  name
                     from    Genre
                     where   name like '%{}%'; '''.format(text)
@@ -156,7 +156,7 @@ class Database:
             return [v[0] for v in res]
         
         if table == 'Genre':
-            return self.serach_genre(text)
+            return self.search_genre(text)
         
         return []
 
@@ -182,7 +182,23 @@ class Database:
             res = self.execute_query(query)
             return [list(v) for v in res]
         
-        if table == 'Genre':
-            return self.serach_genre(text)
-        
         return []
+
+    
+    def search_genre_movies(self, genre):
+        query = ''' select Movie.title, Movie.posterPath, (Movie.revenue - Movie.budget) AS pureRevenue
+                    from Movie, MovieGenre, Genre
+                    where Movie.id = MovieGenre.movieID and
+                            Genre.id = MovieGenre.genreID 
+                            and Genre.name = '{}'
+                            and Movie.revenue > 0
+                            and Movie.budget > 0
+                    order by pureRevenue desc
+                    limit 10
+                '''.format(genre)
+
+        movies = self.execute_query(query)
+        return [list(v) for v in movies]
+
+    def search_genre_actors(self, genre):
+        pass

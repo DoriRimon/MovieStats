@@ -27,17 +27,36 @@ def render_blocks(type, text):
     
     attributes = []
     if type == 'Movie':
-        attributes = ['title', 'posterPath'] 
+        attributes = ['title', 'posterPath']
         
     if type == 'Actor':
         attributes = ['name', 'profilePath']
-
 
     # full text search
     records = db.ft_list_search(type, text, attributes)
 
     return render_template('blocks.html', type=type, records=records)
 
+
+@app.route('/top/<text>', methods=['GET'])
+def render_top(text):
+    # text - user input text
+    print('text: ', text)
+
+    genres = db.search_genre(text)
+    if (len(genres) != 1):
+        return
+
+    genre = genres[0]
+    
+    # movieAttributes = ['title', 'posterPath', 'revenue', 'overview']
+    # actorAttributes = ['name', 'profilePath', 'amount', 'biography']
+
+    # full text search
+    movies = db.search_genre_movies(genre)
+    actors = db.search_genre_actors(genre)
+
+    return render_template('genre.html', movies=movies, actors=actors)
 
 
 @app.route('/search', methods=['POST'])
