@@ -11,10 +11,11 @@ function createPage() {
     if (!date)
         date = 'Date not available';
     else {
-        let day = date.getDate();
-        let month = date.getMonth();
-        let year = date.getFullYear();
-        date = day + '.' + (month + 1) + '.' + year; 
+        date = date.slice(0, -13);
+        // let day = date.getDate();
+        // let month = date.getMonth();
+        // let year = date.getFullYear();
+        // date = day + '.' + (month + 1) + '.' + year; 
     }
 
     let image = basePosterPath + size + movieRec[5];
