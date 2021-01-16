@@ -119,6 +119,7 @@ body {
 
 .card {
     min-width: 155px;
+    max-width: 155px;
     height: 230px;
     transition: 0.2s;
     margin: 5px;
