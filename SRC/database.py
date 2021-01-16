@@ -311,7 +311,7 @@ class Database:
 
 
     def get_actor_recommendations(self, id):
-        query = ''' select      A1.name, A1.profilePath
+        query = ''' select      A1.name, A1.profilePath, A1.id
                     from        Movie, Actor as A1, MovieActor
                     where       Movie.id = MovieActor.movieID and 
                                 A1.id = MovieActor.actorID and
