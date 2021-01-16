@@ -20,7 +20,7 @@ function createPage() {
 
     let image = basePosterPath + size;
 
-    if (!movieRec[1])
+    if (!movieRec[5])
         image = 'https://123moviesfree.zone/no-poster.png';
 
     else
