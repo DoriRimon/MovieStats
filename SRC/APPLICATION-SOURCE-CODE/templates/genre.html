@@ -7,8 +7,8 @@
         <div id='wrapper'>
         </div>
         <script>
-            let jMovies = '{{ movies | tojson }}'.replace(/\\"/g, "'");
-            let jActors = '{{ actors | tojson }}'.replace(/\\"/g, "'");
+            let jMovies = '{{ movies | tojson }}'.replace(/\\\"/g, "'");
+            let jActors = '{{ actors | tojson }}'.replace(/\\\"/g, "'");
             let movies = JSON.parse(jMovies); 
             let actors = JSON.parse(jActors);
         </script>
