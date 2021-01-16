@@ -25,6 +25,7 @@ body {
     opacity: 0.3;
     transition: opacity, width, height 0.1s linear;
     cursor: pointer;
+    z-index: 100;
 }
 
 #homepage:hover {
