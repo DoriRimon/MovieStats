@@ -56,6 +56,13 @@ def render_top(text):
     movies = db.search_genre_movies(genre)
     actors = db.search_genre_actors(genre)
 
+    for movie in movies:
+        movie[3] = movie[3].replace('"', '')
+
+    for actor in actors:
+        actor[3] = actor[3].replace('"', '')
+
+
     return render_template('genre.html', movies=movies, actors=actors)
 
 
