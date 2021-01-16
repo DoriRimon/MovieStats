@@ -8,7 +8,7 @@ function blocks() {
         let id = entity[2];
 
         if (!entity[1])
-            image = '../img/no-poster-bright.png';
+            image = '/SRC/APPLICATION-SOURCE-CODE/static/img/no-poster-bright.png';
 
         else
             image += entity[1];

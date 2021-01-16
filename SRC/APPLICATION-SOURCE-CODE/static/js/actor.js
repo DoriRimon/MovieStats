@@ -6,7 +6,7 @@ function createPage() {
     let name = actorRec[1];
     let profile = basePosterPath + size;
     if (!actorRec[2])
-        profile = '../img/no-poster-dark.png';
+        profile = '/SRC/APPLICATION-SOURCE-CODE/static/img/no-poster-dark.png';
 
     else
         profile += actorRec[2];
@@ -60,7 +60,7 @@ function createPage() {
 
         
         if (!entity[1])
-            image = '../img/no-poster-bright.png';
+            image = '/SRC/APPLICATION-SOURCE-CODE/static/img/no-poster-bright.png';
 
         else
             image += entity[1];
@@ -106,7 +106,7 @@ function createPage() {
             let recImage = basePosterPath + size;
 
             if (!entity[1])
-                recImage = '../img/no-poster-bright.png';
+                recImage = '/SRC/APPLICATION-SOURCE-CODE/static/img/no-poster-bright.png';
 
             else
                 recImage += entity[1];
