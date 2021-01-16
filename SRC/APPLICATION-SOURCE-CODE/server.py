@@ -61,7 +61,10 @@ def render_movie(id):
     print('id: ', id)
 
     movie = db.search_movie(id)
+    print('movie: ', movie)
+
     actors = db.get_movie_actors(id)
+    print('actors: ', actors)
 
     return render_template('movie.html', movie=movie, actors=actors)
 
