@@ -7,7 +7,7 @@ button,hr,input{overflow:visible}audio,canvas,progress,video{display:inline-bloc
 /*-----|| General ||-----*/
 
 * {
-	font-family: 'Impact', arial, fantasy;
+    font-family: 'Verdana', arial, sans-serif;
 }
 
 html,
@@ -99,7 +99,7 @@ a:hover {
 }
 
 .top-inner .form input[type=submit] {
-	background-color: #b6e2e0;
+	background-color: #43b3adad;
 	color: #fff;
 	outline: none;
 }

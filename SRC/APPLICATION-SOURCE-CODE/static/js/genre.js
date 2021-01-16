@@ -7,6 +7,7 @@ function createTop() {
         let image = basePosterPath + size + entity[1];
         let revenue = entity[2];
         let overview = entity[3];
+        let id = entity[4];
 
         // create row div
         let row = document.createElement('div');
@@ -26,6 +27,7 @@ function createTop() {
 
         // create row > card div
         let card = document.createElement("div");
+        card.setAttribute('id', id);
         card.setAttribute('class', 'card');
         row.appendChild(card);
 

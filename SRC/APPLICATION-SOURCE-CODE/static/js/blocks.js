@@ -5,10 +5,13 @@ function blocks() {
     rec.forEach(entity => {
         let title = entity[0];
         let image = basePosterPath + size + entity[1];
+        let id = entity[2];
+
         if (!entity[1])
             image = 'https://123moviesfree.zone/no-poster.png';
 
         let card = document.createElement("div");
+        card.setAttribute('id', id);
         card.setAttribute('class', 'card');
         card.style.backgroundImage = `url('${image}')`;
 

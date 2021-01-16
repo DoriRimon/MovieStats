@@ -173,7 +173,7 @@ class Database:
             bf[-1] += '*'
             t = ' '.join(bf)
 
-            query = ''' select  {}
+            query = ''' select  {}, id
                         from    {}
                         where   match({}) against('{}' in boolean mode); '''.format(att, table, titles[table], t)
 
@@ -186,7 +186,8 @@ class Database:
 
     
     def search_genre_movies(self, genre):
-        query = ''' select Movie.title, Movie.posterPath, (Movie.revenue - Movie.budget) AS pureRevenue
+        query = ''' select Movie.title, Movie.posterPath, (Movie.revenue - Movie.budget) as pureRevenue,
+                           Movie.overview, Movie.id
                     from Movie, MovieGenre, Genre
                     where Movie.id = MovieGenre.movieID and
                             Genre.id = MovieGenre.genreID 

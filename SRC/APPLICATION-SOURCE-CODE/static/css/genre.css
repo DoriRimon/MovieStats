@@ -1,7 +1,7 @@
 html {
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
-    font-family: 'Impact', arial, fantasy;
+    font-family: 'Verdana', arial, sans-serif;
 }
 
 html::-webkit-scrollbar {

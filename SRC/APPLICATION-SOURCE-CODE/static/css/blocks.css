@@ -1,3 +1,7 @@
+* {
+    font-family: 'Verdana', arial, sans-serif;
+}
+
 body {
     background-color: #3aafa9ad;
 }
@@ -51,7 +55,6 @@ body {
 
 .card h1 {
     color: #fff;
-    font-family: 'Papyrus', arial, sans-serif;
 	font-size: 25px;
     font-weight: bold;
     opacity: 0;
