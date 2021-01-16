@@ -176,6 +176,10 @@ function createPage() {
             let recName = document.createElement("h1");
             recName.innerText = recTitle;
             card.appendChild(recName);
+
+            card.addEventListener('click', e => {
+                window.location.href = `/movie/${recId}`;
+            });
         });
     }
 }
