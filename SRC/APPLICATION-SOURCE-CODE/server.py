@@ -64,7 +64,6 @@ def render_movie(id):
     actors = db.get_movie_actors(id)
     pos = db.get_movie_position(id)
     rec = db.get_movie_recommendations(id)
-    print(rec)
 
     return render_template('movie.html', movie=movie, pos=pos, actors=actors, rec=rec)
 
