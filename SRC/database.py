@@ -265,3 +265,22 @@ class Database:
         
         rating = self.execute_query(query)
         return rating[0][0]
+
+    
+    def get_movie_recommendations(self, id):
+        query = ''' select      M1.id, M1.title, M1.posterPath
+                    from        Movie as M1, Actor, MovieActor
+                    where       M1.id = MovieActor.movieID and 
+                                Actor.id = MovieActor.actorID and
+                                Actor.id IN (   select A2.id
+                                                from Movie as M2, Actor as A2, MovieActor as MA2
+                                                where M2.id = MA2.movieID and 
+                                                A2.id = MA2.actorID and M2.id = '{}' and
+                                                M1.id <> M2.id  )
+                    group by    M1.id
+                    order by    count(*) desc
+                    limit       5;
+                '''.format(id)
+
+        rec = self.execute_query(query)
+        return [list(v) for v in rec]

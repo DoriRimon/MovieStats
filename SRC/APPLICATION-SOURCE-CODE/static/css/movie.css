@@ -98,11 +98,34 @@ body {
     display: none;
 }
 
+#rec-wrapper {
+    margin: 20px 0px 0px 5px;
+    align-self: center;
+}
+
+#rec-text {
+    text-align: center;
+    padding: 5px;
+    color: #17252a;
+	font-size: 20px;
+    font-weight: bold;
+}
+
+#rec-cards {
+    width: fit-content;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+#rec-cards::-webkit-scrollbar {
+    display: none;
+}
+
 
 
 /* --- || actors cards || ---*/
 
-#actors {
+#actors, #rec-cards {
     margin-top: 5px;
     overflow-x: scroll;
     display: flex;

@@ -136,6 +136,45 @@ function createPage() {
         actorName.innerHTML = name;
         card.appendChild(actorName);
     });
+
+    let recWrapper = document.createElement('div');
+    recWrapper.setAttribute('id', 'rec-wrapper');
+    wrapper.appendChild(recWrapper);
+
+    let recText = document.createElement('div');
+    recText.setAttribute('id', 'rec-text');
+    recText.innerText = `If you liked the actors in ${title} you may also like...`
+    recWrapper.appendChild(recText);
+
+    let recMovies = document.createElement('div');
+    recMovies.setAttribute('id', 'rec-cards');
+    recWrapper.appendChild(recMovies);
+
+    recMoviesRec.forEach(entity => {
+        let recId = entity[0];
+        let recTitle = entity[1];
+        let recImage = basePosterPath + size;
+
+        if (!entity[2])
+            recImage = 'https://123moviesfree.zone/no-poster.png';
+
+        else
+            profile += entity[2];
+
+        let card = document.createElement("div");
+        card.setAttribute('id', recId);
+        card.setAttribute('class', 'card');
+        card.style.backgroundImage = `url('${recImage}')`;
+        recMovies.appendChild(card);
+
+        let cardOverlay = document.createElement('div');
+        cardOverlay.setAttribute('class', 'overlay');
+        card.appendChild(cardOverlay);
+
+        let recName = document.createElement("h1");
+        recName.innerText = recTitle;
+        card.appendChild(recName);
+    });
 }
 
 function createMoneyText(revenue) {
