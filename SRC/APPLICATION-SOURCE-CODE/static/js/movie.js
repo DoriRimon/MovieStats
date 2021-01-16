@@ -134,6 +134,10 @@ function createPage() {
         let actorName = document.createElement("h1");
         actorName.innerHTML = name;
         card.appendChild(actorName);
+
+        card.addEventListener('click', e => {
+            window.location.href = `/actor/${actorId}`;
+        });
     });
 
     if (recMoviesRec.length > 0) {

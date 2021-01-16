@@ -80,6 +80,10 @@ function createPage() {
         let movieTitle = document.createElement("h1");
         movieTitle.innerText = title;
         card.appendChild(movieTitle);
+
+        card.addEventListener('click', e => {
+            window.location.href = `/movie/${movieId}`;
+        });
     });
 
     if (recActorsRec.length > 0) {
