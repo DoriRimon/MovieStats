@@ -13,7 +13,7 @@ function createPage() {
     
     let biography = actorRec[3];
     if (!biography) 
-            biography = "The actor didn't want to share his biography with us )-:";
+            biography = "The actor didn't want to share their biography with us )-:";
 
 
     // create movie div

@@ -95,6 +95,7 @@ function autocomplete(inp) {
     if (currentFocus < 0) 
       currentFocus = (x.length - 1);
     x[currentFocus].classList.add("autocomplete-active");
+    x[currentFocus].focus();
   }
 
 

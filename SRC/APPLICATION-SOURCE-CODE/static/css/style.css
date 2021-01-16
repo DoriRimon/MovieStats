@@ -52,7 +52,7 @@ a:hover {
 }
 
 .top-inner ::selection {
-	background: #e0ab66;
+	background: #43b3adad;
 }
 
 .top-inner h1 {
@@ -145,7 +145,7 @@ a:hover {
 
 .autocomplete-active {
 	/*when navigating through the items using the arrow keys:*/
-	background-color: #e0ab66 !important;
+	background-color: #43b3adad !important;
 	color: #ffffff;
 }
 
@@ -175,10 +175,6 @@ nav {
 
 .homepage nav {
 	border-bottom: 1px solid #efefef;
-}
-
-.about nav {
-    background-color: #e0ab66;
 }
 
 .nav-inner	{
