@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" href="{{url_for('static', filename='css/movie.css')}}">
+        <link rel="stylesheet" href="{{url_for('static', filename='css/actor.css')}}">
     </head>
     <body>
         <div id='wrapper'></div>
@@ -9,10 +9,10 @@
             let jActor = '{{ actor | tojson | safe }}';
             let jMovies = '{{ movies | tojson | safe }}';
             let jRec = '{{ rec | tojson | safe }}';
-            let actorRec = JSON.parse(jAcotr); 
+            let actorRec = JSON.parse(jActor); 
             let moviesRec = JSON.parse(jMovies);
             let recActorsRec = JSON.parse(jRec);
         </script>
-        <script type="text/javascript" src="{{ url_for('static', filename='js/movie.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='js/actor.js') }}"></script>
     </body>
 </html>
