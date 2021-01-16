@@ -62,4 +62,5 @@ body {
     transition: opacity 0.25s linear;
     padding: 3px;
     cursor: pointer;
+    overflow: hidden;
 }
