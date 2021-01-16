@@ -4,11 +4,14 @@ const size = 'w780'
 function blocks() {
     rec.forEach(entity => {
         let title = entity[0];
-        let image = basePosterPath + size + entity[1];
+        let image = basePosterPath + size;
         let id = entity[2];
 
         if (!entity[1])
             image = 'https://123moviesfree.zone/no-poster.png';
+
+        else
+            image += entity[1];
 
         let card = document.createElement("div");
         card.setAttribute('id', id);

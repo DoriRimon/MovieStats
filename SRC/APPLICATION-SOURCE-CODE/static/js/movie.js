@@ -18,10 +18,13 @@ function createPage() {
         // date = day + '.' + (month + 1) + '.' + year; 
     }
 
-    let image = basePosterPath + size + movieRec[5];
+    let image = basePosterPath + size;
 
     if (!movieRec[1])
         image = 'https://123moviesfree.zone/no-poster.png';
+
+    else
+        image += movieRec[5];
     
     let overview = movieRec[6];
 
