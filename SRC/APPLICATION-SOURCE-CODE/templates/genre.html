@@ -4,7 +4,16 @@
         <link rel="stylesheet" href="{{url_for('static', filename='css/genre.css')}}">
     </head>
     <body>
-        <div id='wrapper'>
+        <div id='switch'>
+            <input id="on" name="state-d" type="radio" checked="" />
+            <label for="on" onclick="swtichToMovies()">Movies</label>
+          
+            <input id="off" name="state-d" type="radio" />
+            <label for="off" onclick="switchToActors()">Actors</label>     
+        </div>
+        <div id='movies'>
+        </div>
+        <div id='actors'>
         </div>
         <script>
             let jMovies = '{{ movies | tojson }}';
@@ -14,7 +23,8 @@
         </script>
         <script type="text/javascript" src="{{ url_for('static', filename='js/genre.js') }}"></script>
         <script>
-            createTop();
+            createTopMovies();
+            creaetTopActors();
         </script>
     </body>
 </html>

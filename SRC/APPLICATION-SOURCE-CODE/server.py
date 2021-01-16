@@ -48,9 +48,6 @@ def render_top(text):
         return
 
     genre = genres[0]
-    
-    # movieAttributes = ['title', 'posterPath', 'revenue', 'overview']
-    # actorAttributes = ['name', 'profilePath', 'amount', 'biography']
 
     # full text search
     movies = db.search_genre_movies(genre)
@@ -59,8 +56,8 @@ def render_top(text):
     for movie in movies:
         movie[3] = movie[3].replace('"', '')
 
-    # for actor in actors:
-    #     actor[3] = actor[3].replace('"', '')
+    for actor in actors:
+        actor[2] = actor[2].replace('"', '')
 
 
     return render_template('genre.html', movies=movies, actors=actors)

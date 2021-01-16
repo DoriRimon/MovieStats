@@ -12,7 +12,11 @@ body {
     background-color: #3aafa9ad;
 }
 
-#top {
+#switch {
+    margin: 50px;
+}
+
+#movies, #actors {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
@@ -24,6 +28,7 @@ body {
     display: flex;
     gap: 10px;
     margin: 20px 0px;
+    justify-content: center;
 }
 
 .number {
@@ -44,7 +49,7 @@ body {
 
 .card {
     display: flex;
-    margin: 5px;
+    margin: 5px 20px;
     text-align: center;
     width: 80vw;
     height: 310px;
@@ -82,14 +87,14 @@ body {
     padding: 3px;
 }
 
-.text .revenue {
+.text .subtitle {
     color: #17252a;
 	font-size: 15px;
     font-weight: bold;
     padding: 3px;
 }
 
-.text .overview {
+.text .description {
     color: #17252a;
     height: 100px;
     padding: 20px;
@@ -98,7 +103,7 @@ body {
     scrollbar-width: none;  /* Firefox */
 }
 
-.text .overview::-webkit-scrollbar {
+.text .description::-webkit-scrollbar {
     display: none;
 }
 

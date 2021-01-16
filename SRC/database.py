@@ -186,20 +186,32 @@ class Database:
 
     
     def search_genre_movies(self, genre):
-        query = ''' select Movie.title, Movie.posterPath, (Movie.revenue - Movie.budget) as pureRevenue,
-                           Movie.overview, Movie.id
-                    from Movie, MovieGenre, Genre
-                    where Movie.id = MovieGenre.movieID and
-                            Genre.id = MovieGenre.genreID 
-                            and Genre.name = '{}'
-                            and Movie.revenue > 0
-                            and Movie.budget > 0
-                    order by pureRevenue desc
-                    limit 10
+        query = ''' select      Movie.title, Movie.posterPath, (Movie.revenue - Movie.budget) as pureRevenue,
+                                Movie.overview, Movie.id
+                    from        Movie, MovieGenre, Genre
+                    where       Movie.id = MovieGenre.movieID and
+                                Genre.id = MovieGenre.genreID 
+                                and Genre.name = '{}'
+                                and Movie.revenue > 0
+                                and Movie.budget > 0
+                    order by    pureRevenue desc
+                    limit       10
                 '''.format(genre)
 
         movies = self.execute_query(query)
         return [list(v) for v in movies]
 
     def search_genre_actors(self, genre):
-        pass
+        query = ''' select      Actor.name, Actor.profilePath, Actor.biography, count(*) AS amount, Actor.id
+                    from        Actor, Movie, MovieActor, MovieGenre, Genre
+                    where       Actor.id = MovieActor.actorID and
+                                Movie.id = MovieActor.movieID and
+                                MovieGenre.genreID = Genre.id and
+                                MovieGenre.movieID = Movie.id and Genre.name = '{}'
+                    group by    Actor.id
+                    order by    amount desc
+                    limit       10        
+                '''.format(genre)
+
+        actors = self.execute_query(query)
+        return [list(v) for v in actors]

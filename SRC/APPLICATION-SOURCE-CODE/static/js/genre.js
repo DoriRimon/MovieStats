@@ -1,7 +1,7 @@
 const basePosterPath = 'https://image.tmdb.org/t/p/' 
 const size = 'w780'
 
-function createTop() {
+function createTopMovies() {
     movies.forEach((entity, index) => {
         let title = entity[0];
         let image = basePosterPath + size + entity[1];
@@ -52,13 +52,13 @@ function createTop() {
         text.appendChild(h);
 
         let rev = document.createElement('div');
-        rev.setAttribute('class', 'revenue');
+        rev.setAttribute('class', 'subtitle');
         rev.innerText = createRevText(revenue);
         text.appendChild(rev);
 
         // handle no overview
         let t = document.createElement('div');
-        t.setAttribute('class', 'overview')
+        t.setAttribute('class', 'description')
         if (!overview) 
             t.innerText = "The creators of the movie kept the description from us )-:";
         else
@@ -67,8 +67,86 @@ function createTop() {
     });
 }
 
+function createTopActors() {
+    actors.forEach((entity, index) => {
+        let name = entity[0];
+        let image = basePosterPath + size + entity[1];
+        let biography = entity[2];
+        let amount = entity[3];
+        let id = entity[4];
+
+        // create row div
+        let row = document.createElement('div');
+        row.setAttribute('class', 'row');
+        wrapper.appendChild(row);
+
+
+        // create row > number div
+        let num = document.createElement("div");
+        num.setAttribute('class', 'number');
+        row.appendChild(num);
+
+        let digit = document.createElement('h1');
+        digit.innerText = index + 1;
+        num.appendChild(digit);
+
+
+        // create row > card div
+        let card = document.createElement("div");
+        card.setAttribute('id', id);
+        card.setAttribute('class', 'card');
+        row.appendChild(card);
+
+
+        // create card > poster div
+        let poster = document.createElement('div');
+        poster.setAttribute('class', 'poster');
+        card.appendChild(poster);
+
+        let img = document.createElement('img');
+        img.setAttribute('src', image);
+        poster.appendChild(img);
+
+
+        // create card > text div
+        let text = document.createElement('div');
+        text.setAttribute('class', 'text')
+        card.appendChild(text);
+
+        let h = document.createElement("h1");
+        h.innerText = name;
+        text.appendChild(h);
+
+        let movieAmount = document.createElement('div');
+        movieAmount.setAttribute('class', 'subtitle');
+        movieAmount.innerText = `Acted in ${amount} movies`;
+        text.appendChild(movieAmount);
+
+        // handle no overview
+        let t = document.createElement('div');
+        t.setAttribute('class', 'description')
+        if (!biography) 
+            t.innerText = "The actor didn't want to share his biography with us )-:";
+        else
+            t.innerText = biography;
+        text.appendChild(t);
+    });
+}
+
 function createRevText(revenue) {
     return 'Revenue: ' + revenue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '$';
 }
 
-let wrapper = document.getElementById('wrapper');
+
+function switchToActors() {
+    movies.style.display = 'none';
+    actors.style.display = 'flex';
+}
+
+function swtichToMovies() {
+    actors.style.display = 'none';
+    movies.style.display = 'flex';
+}
+
+let movies = document.getElementById('movies');
+let actors = document.getElementById('actors');
