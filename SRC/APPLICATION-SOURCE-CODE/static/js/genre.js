@@ -1,8 +1,8 @@
-const basePosterPath = 'https://image.tmdb.org/t/p/' 
-const size = 'w780'
+const basePosterPath = 'https://image.tmdb.org/t/p/';
+const size = 'w780';
 
 function createTopMovies() {
-    movies.forEach((entity, index) => {
+    topMovies.forEach((entity, index) => {
         let title = entity[0];
         let image = basePosterPath + size + entity[1];
         let revenue = entity[2];
@@ -68,7 +68,7 @@ function createTopMovies() {
 }
 
 function createTopActors() {
-    actors.forEach((entity, index) => {
+    topActors.forEach((entity, index) => {
         let name = entity[0];
         let image = basePosterPath + size + entity[1];
         let biography = entity[2];

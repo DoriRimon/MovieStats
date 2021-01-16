@@ -18,8 +18,8 @@
         <script>
             let jMovies = '{{ movies | tojson | safe }}';
             let jActors = '{{ actors | tojson | safe }}';
-            let movies = JSON.parse(jMovies); 
-            let actors = JSON.parse(jActors);
+            let topMovies = JSON.parse(jMovies); 
+            let topActors = JSON.parse(jActors);
         </script>
         <script type="text/javascript" src="{{ url_for('static', filename='js/genre.js') }}"></script>
         <script>
