@@ -7,7 +7,7 @@ button,hr,input{overflow:visible}audio,canvas,progress,video{display:inline-bloc
 /*-----|| General ||-----*/
 
 * {
-    font-family: 'Verdana', arial, sans-serif;
+	font-family: 'Courier New', arial, sans-serif !important;
 }
 
 html,

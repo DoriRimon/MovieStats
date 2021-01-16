@@ -37,3 +37,6 @@ function blocks() {
 
 var wrapper = document.getElementById('blocks');
 
+function home() {
+    window.location.href = '/';
+}

@@ -181,3 +181,7 @@ function swtichToMovies() {
 
 let movies = document.getElementById('movies');
 let actors = document.getElementById('actors');
+
+function home() {
+    window.location.href = '/';
+}

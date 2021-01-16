@@ -136,3 +136,7 @@ function createPage() {
 
 let wrapper = document.getElementById('wrapper');
 createPage();
+
+function home() {
+    window.location.href = '/';
+}
