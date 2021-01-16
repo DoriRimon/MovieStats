@@ -102,7 +102,15 @@ function createPage() {
 
     actorsRec.forEach(entity => {
         let name = entity[0];
-        let profile = basePosterPath + size + entity[1];
+        let profile = basePosterPath + size;
+
+        
+        if (!entity[1])
+            profile = 'https://123moviesfree.zone/no-poster.png';
+
+        else
+            profile += entity[1];
+        
         let actorId = entity[2];
 
         let card = document.createElement("div");

@@ -61,6 +61,8 @@ function createTopMovies() {
         let rev = document.createElement('div');
         rev.setAttribute('class', 'subtitle');
         rev.innerText = createRevText(revenue);
+        if (!revenue)
+            rev.innerText = "Renenue isn't availabe";
         text.appendChild(rev);
 
         let t = document.createElement('div');
@@ -85,7 +87,14 @@ function createTopMovies() {
 function createTopActors() {
     topActors.forEach((entity, index) => {
         let name = entity[0];
-        let image = basePosterPath + size + entity[1];
+        let image = basePosterPath + size;
+
+        if (!entity[1])
+            image = 'https://123moviesfree.zone/no-poster.png';
+
+        else
+            image += entity[1];
+
         let biography = entity[2];
         let amount = entity[3];
         let id = entity[4];
