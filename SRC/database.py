@@ -261,7 +261,7 @@ class Database:
                     where		Movie.id = MovieGenre.movieID and
                                 MovieGenre.genreID = Genre.id
                     group by	Genre.id
-                    order by	totalMovie desc;
+                    order by	totalMovies desc;
                 '''
         
         genres = self.execute_query(query)
