@@ -7,7 +7,7 @@ function createTopMovies() {
         let image = basePosterPath + size;
 
         if (!entity[1])
-            image = 'https://123moviesfree.zone/no-poster-bright.png';
+            image = '../img/no-poster-bright.png';
 
         else
             image += entity[1];
@@ -90,7 +90,7 @@ function createTopActors() {
         let image = basePosterPath + size;
 
         if (!entity[1])
-            image = 'https://123moviesfree.zone/no-poster-bright.png';
+            image = '../img/no-poster-bright.png';
 
         else
             image += entity[1];

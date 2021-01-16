@@ -8,7 +8,7 @@ function blocks() {
         let id = entity[2];
 
         if (!entity[1])
-            image = 'https://123moviesfree.zone/no-poster-dark.png';
+            image = '../img/no-poster-bright.png';
 
         else
             image += entity[1];

@@ -6,7 +6,7 @@ function createPage() {
     let name = actorRec[1];
     let profile = basePosterPath + size;
     if (!actorRec[2])
-        profile = 'https://123moviesfree.zone/no-poster-bright.png';
+        profile = '../img/no-poster-dark.png';
 
     else
         profile += actorRec[2];
@@ -60,7 +60,7 @@ function createPage() {
 
         
         if (!entity[1])
-            image = 'https://123moviesfree.zone/no-poster.png';
+            image = '../img/no-poster-bright.png';
 
         else
             image += entity[1];
@@ -106,7 +106,7 @@ function createPage() {
             let recImage = basePosterPath + size;
 
             if (!entity[1])
-                recImage = 'https://123moviesfree.zone/no-poster.png';
+                recImage = '../img/no-poster-bright.png';
 
             else
                 recImage += entity[1];
