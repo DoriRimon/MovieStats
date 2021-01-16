@@ -7,7 +7,7 @@ button,hr,input{overflow:visible}audio,canvas,progress,video{display:inline-bloc
 /*-----|| General ||-----*/
 
 * {
-	font-family: 'Courier New', arial, sans-serif !important;
+	font-family: 'Impact', arial, fantasy;
 }
 
 html,
@@ -16,7 +16,6 @@ html,
 }
 
 body {
-	font-family: 'Courier New', arial, sans-serif;
 	cursor: default;
 	height: 100%;
 }
@@ -100,7 +99,7 @@ a:hover {
 }
 
 .top-inner .form input[type=submit] {
-	background-color: #e0ab66;
+	background-color: #b6e2e0;
 	color: #fff;
 	outline: none;
 }

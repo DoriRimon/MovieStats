@@ -66,7 +66,7 @@ function createTop() {
 }
 
 function createRevText(revenue) {
-    return revenue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '$';
+    return 'Revenue: ' + revenue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '$';
 }
 
 let wrapper = document.getElementById('wrapper');
