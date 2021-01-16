@@ -24,7 +24,8 @@ toggleCloud = () => {
         hover: addTitleOnSpan,
         gridSize: 40,
         backgroundColor: "transparent",
-        color: 'random-light'
+        color: 'random-dark',
+        fontWeight: 'bold',
     });
 }
 
