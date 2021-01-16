@@ -140,12 +140,12 @@ class Database:
                     where   id = '{}'
                 '''.format(id)
 
-        movie = self.execute_query(query)[0]
+        movie = list(self.execute_query(query)[0])
 
         movie[6] = movie[6].replace('"', '')
         movie[6] = movie[6].replace('\n', '')
 
-        return list(movie)
+        return movie
 
 
     # full text search
