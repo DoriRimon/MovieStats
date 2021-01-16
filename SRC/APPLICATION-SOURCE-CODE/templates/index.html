@@ -5,25 +5,37 @@
     <link type='text/css' rel='stylesheet' href="{{ url_for('static', filename='css/style.css') }}">
   </head>
   <body class='homepage'>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/wordcloud.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/indexUtils.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/autocomplete.js') }}"></script>
     <div class='top-section'>
       <div class='top-inner'>
-        <h1>MovieStats</h1>
-        <h3>Get statistics over millions of movies</h3>
-        <!-- <form autocomplete="off"> -->
-        <div class="form">
-          <select id='menu' onchange='menuChange()'>
-            <option value='Movie'>Movies</option>
-            <option value='Actor'>Actors</option>
-            <option value='Genre'>Geners</option>
-          </select>
-          <div class="autocomplete">
-              <input id="myInput" type="text" placeholder="Type a movie name.."></input>
-          </div>
-          <input type="submit" value="Search" onclick="getEntities()"></input>
+        <div id="search-interface">
+            <h1>MovieStats</h1>
+            <h3>Get statistics over millions of movies</h3>
+            <!-- <form autocomplete="off"> -->
+            <div class="form">
+                <select id='menu' onchange='menuChange()'>
+                    <option value='Movie'>Movies</option>
+                    <option value='Actor'>Actors</option>
+                    <option value='Genre'>Geners</option>
+                </select>
+                <div class="autocomplete">
+                    <input id="myInput" type="text" placeholder="Type a movie name.."></input>
+                </div>
+                <input type="submit" value="Search" onclick="getEntities()"></input>
+            </div>
+        </div>
+        <div id="wordcloud-container" class="hidden">
+            <h1>Discover movies from all these genres...</h1>
+            <div id="wordcloud"></div>
         </div>
         <!-- </form> -->
-        <script type="text/javascript" src="{{ url_for('static', filename='js/autocomplete.js') }}"></script>
       </div>
+    </div>
+    <div class="footer-nav">
+        <div id="searchToggle" class="btn selected" onclick="toggleSearch()"><span>Take Me To Search</span></div>
+        <div id="cloudToggle" class="btn" onclick="toggleCloud()" disabled="true"><span>Show Me A Cloud</span></div>
     </div>
   </body>
 </html>

@@ -248,3 +248,65 @@ footer {
   footer a:hover {
 	text-decoration: underline;
   }
+
+  .btn {
+    border: none;
+    text-align: center;
+    transition: all 0.1s;
+    margin: 5px;
+    background-color: #43b3adad;
+    color: #fff;
+    outline: none;
+    width: 250px;
+    padding: 10px 5px;
+    cursor: pointer;
+  }
+
+  .btn.selected {
+    border: 1px solid white
+  }
+
+  .btn span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+  }
+
+  .btn span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+  }
+  
+
+  .btn:hover span {
+    padding-right: 25px;
+  }
+
+  .btn:hover span:after {
+    opacity: 1;
+    right: 0;
+  }
+
+  .footer-nav {
+    display: flex;
+    justify-content: space-evenly;
+    position: fixed;
+    bottom: 5px;
+    left: 5px;
+    width: 500px;
+    padding: 5px;
+  }
+
+  #wordcloud {
+      height: 500px;
+      width: 1000px;
+  }
+
+  .hidden {
+      display: none;
+  }
