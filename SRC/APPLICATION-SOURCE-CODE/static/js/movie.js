@@ -20,7 +20,7 @@ function createPage() {
     let image = basePosterPath + size;
 
     if (!movieRec[5])
-        image = '/SRC/APPLICATION-SOURCE-CODE/static/img/no-poster-dark.png';
+        image = 'https://123moviesfree.zone/no-poster.png';
 
     else
         image += movieRec[5];
@@ -114,7 +114,7 @@ function createPage() {
 
         
         if (!entity[1])
-            profile = '/SRC/APPLICATION-SOURCE-CODE/static/img/no-poster-bright.png';
+            profile = 'https://123moviesfree.zone/no-poster.png';
 
         else
             profile += entity[1];
@@ -161,7 +161,7 @@ function createPage() {
             let recImage = basePosterPath + size;
 
             if (!entity[2])
-                recImage = '/SRC/APPLICATION-SOURCE-CODE/static/img/no-poster-bright.png';
+                recImage = 'https://123moviesfree.zone/no-poster.png';
 
             else
                 recImage += entity[2];
