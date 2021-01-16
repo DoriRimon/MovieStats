@@ -18,6 +18,19 @@ db = None
 def upload_form():
     return render_template('index.html')
 
+@app.route('/allGenres')
+def fetch_genres():
+    # get genres and amount of movies for them
+    records = db.search_genre_movies_count()
+
+    # build response
+    resp = jsonify(records)
+    print(resp)
+    resp.status_code = 200
+    resp.headers.add('Access-Control-Allow-Origin', '*')
+
+    return resp
+
 
 @app.route('/blocks/<type>/<text>', methods=['GET'])
 def render_blocks(type, text):

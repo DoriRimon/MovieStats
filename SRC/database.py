@@ -254,6 +254,20 @@ class Database:
             actor[2] = actor[2].replace('\n', '')
 
         return actors
+    
+    def search_genre_movies_count():
+        query = ''' select 		Genre.name, count(*) as totalMovies
+                    from		Movie, MovieGenre, Genre
+                    where		Movie.id = MovieGenre.movieID and
+                                MovieGenre.genreID = Genre.id
+                    group by	Genre.id
+                    order by	totalMovie desc;
+                '''
+        
+        genres = self.execute_query(query)
+        genres = [list(v) for v in genres]
+
+        return genres
 
 
     def get_movie_actors(self, id):

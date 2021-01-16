@@ -1,7 +1,9 @@
-const words = [['Drama', 6876], ['Comedy', 2723], ['Romance', 1851], ['Thriller', 1211], ['Action', 1162], ['Crime', 1125], 
-            ['Adventure', 699], ['Family', 658], ['History', 631], ['War', 596], ['Fantasy', 530], ['Animation', 476], 
-            ['Mystery', 474], ['Music', 359], ['Science Fiction', 307], ['Horror', 254], ['Western', 161], ['Documentary', 44],
-            ['TV Movie', 8]];
+// let words = [['Drama', 6876], ['Comedy', 2723], ['Romance', 1851], ['Thriller', 1211], ['Action', 1162], ['Crime', 1125], 
+//             ['Adventure', 699], ['Family', 658], ['History', 631], ['War', 596], ['Fantasy', 530], ['Animation', 476], 
+//             ['Mystery', 474], ['Music', 359], ['Science Fiction', 307], ['Horror', 254], ['Western', 161], ['Documentary', 44],
+//             ['TV Movie', 8]];
+
+let genres = [];
 
 toggleSearch = () => {
     document.getElementById("cloudToggle").classList.remove("selected");
@@ -19,7 +21,7 @@ toggleCloud = () => {
     document.getElementById("wordcloud-container").classList.remove("hidden");
     WordCloud(document.getElementById("wordcloud"), 
     {
-        list: factorWeights(words),
+        list: factorWeights(genres),
         wait: 500,
         hover: addTitleOnSpan,
         gridSize: 40,
@@ -45,4 +47,21 @@ addTitleOnSpan = (item) => {
             spanTags[i].setAttribute("title", `${words.find(word => word[0] === item[0])[1]} ${item[0]} movies`)
         }
     }
+}
+
+fetchGenres = () => {
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", '/allGenres', true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+    xhr.onreadystatechange = function() 
+    {
+        if (this.readyState === XMLHttpRequest.DONE && this.status === 200) 
+        {
+            genres = JSON.parse(xhr.response)
+            document.getElementById("cloudToggle").classList.remove("hidden")
+        }
+    }
+
+    xhr.send();
 }
