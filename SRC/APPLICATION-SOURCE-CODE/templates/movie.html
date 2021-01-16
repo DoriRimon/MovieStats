@@ -8,8 +8,10 @@
         <script>
             let jMovie = '{{ movie | tojson | safe }}';
             let jActors = '{{ actors | tojson | safe }}';
+            let jPos = '{{ pos | tojson | safe }}';
             let movieRec = JSON.parse(jMovie); 
             let actorsRec = JSON.parse(jActors);
+            let moviePos = JSON.parse(jPos);
         </script>
         <script type="text/javascript" src="{{ url_for('static', filename='js/movie.js') }}"></script>
     </body>

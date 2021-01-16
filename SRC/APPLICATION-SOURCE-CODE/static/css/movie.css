@@ -68,7 +68,12 @@ body {
     margin: 0 0 20px 0;
 }
 
-#rating {
+#rate {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    margin-bottom: 7px;
+    justify-content: center;
     margin-bottom: 7px;
 }
 
@@ -78,12 +83,6 @@ body {
     align-items: center;
     margin-bottom: 7px;
     justify-content: center;
-}
-
-#budget {
-}
-
-#revenue {
 }
 
 #overview {

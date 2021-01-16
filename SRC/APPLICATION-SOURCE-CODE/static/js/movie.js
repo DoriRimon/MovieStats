@@ -68,10 +68,19 @@ function createPage() {
     dateElem.innerText = date;
     text.appendChild(dateElem);
 
+    let rate = document.createElement('div');
+    rate.setAttribute('id', 'rate');
+    text.appendChild(rate);
+
     let ratingElem = document.createElement('div');
     ratingElem.setAttribute('id', 'rating');
-    ratingElem.innerText = 'Rating: ' + rating;
-    text.appendChild(ratingElem);
+    ratingElem.innerText = `Rating: ${rating}/10`;
+    rate.appendChild(ratingElem);
+
+    let ratingPos = document.createElement('div');
+    ratingPos.setAttribute('id', 'rating-pos');
+    ratingPos.innerText = `This is rated at #${moviePos}`;
+    rate.appendChild(ratingPos);
 
     let money = document.createElement('div');
     money.setAttribute('id', 'money');

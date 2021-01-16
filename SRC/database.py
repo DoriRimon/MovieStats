@@ -137,7 +137,7 @@ class Database:
     def search_movie(self, id):
         query = ''' select  *
                     from    Movie
-                    where   id = '{}'
+                    where   id = '{}';
                 '''.format(id)
 
         movie = list(self.execute_query(query)[0])
@@ -209,7 +209,7 @@ class Database:
                                 and Movie.revenue > 0
                                 and Movie.budget > 0
                     order by    pureRevenue desc
-                    limit       10
+                    limit       10;
                 '''.format(genre)
 
         movies = self.execute_query(query)
@@ -230,7 +230,7 @@ class Database:
                                 MovieGenre.movieID = Movie.id and Genre.name = '{}'
                     group by    Actor.id
                     order by    amount desc
-                    limit       10        
+                    limit       10;       
                 '''.format(genre)
 
         actors = self.execute_query(query)
@@ -247,8 +247,21 @@ class Database:
         query = ''' select      Actor.name, Actor.profilePath, Actor.id
                     from        Actor, Movie, MovieActor
                     where       Actor.id = MovieActor.actorID and
-                                Movie.id = MovieActor.movieID and Movie.id = '{}'
+                                Movie.id = MovieActor.movieID and Movie.id = '{}';
                 '''.format(id)
         
         actors = self.execute_query(query)
         return [list(v) for v in actors]
+
+    
+    def get_movie_position(self, id):
+        query = ''' select  (count(*) + 1) as globalRating
+                    from    Movie
+                    where   Movie.rating > (    select Movie.rating
+                                                from Movie
+                                                where Movie.id = '{}' );
+		
+                '''.format(id)
+        
+        rating = self.execute_query(query)
+        return rating[0][0]

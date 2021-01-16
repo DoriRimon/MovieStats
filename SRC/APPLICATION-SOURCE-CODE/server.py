@@ -62,8 +62,9 @@ def render_movie(id):
 
     movie = db.search_movie(id)
     actors = db.get_movie_actors(id)
+    moviePos = db.get_movie_position(id)
 
-    return render_template('movie.html', movie=movie, actors=actors)
+    return render_template('movie.html', movie=movie, moviePos=moviePos, actors=actors)
 
 
 @app.route('/search', methods=['POST'])
