@@ -6,7 +6,7 @@ function createPage() {
     let name = actorRec[1];
     let profile = basePosterPath + size;
     if (!actorRec[2])
-        profile = 'https://123moviesfree.zone/no-poster.png';
+        profile = 'https://123moviesfree.zone/no-poster-bright.png';
 
     else
         profile += actorRec[2];
