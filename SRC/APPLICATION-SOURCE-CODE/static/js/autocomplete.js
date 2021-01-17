@@ -40,7 +40,7 @@ function autocomplete(inp) {
                     inp.value = this.getElementsByTagName("input")[0].value;
                     closeAllLists();
                 });
-
+                b.setAttribute('tabIndex', '-1');
                 a.appendChild(b);
               }
           }
@@ -58,17 +58,28 @@ function autocomplete(inp) {
   // navigate through drop down with keys
   inp.addEventListener("keydown", function(e) 
   {
+      var listElm = document.getElementById(this.id + "autocomplete-list");
       var x = document.getElementById(this.id + "autocomplete-list");
       if (x) x = x.getElementsByTagName("div");
       if (e.key == 'ArrowDown')
       { 
         currentFocus++;
         addActive(x);
+        let selectedElm = listElm.childNodes[currentFocus];
+        selectedElm.focus();
+        setTimeout(function(){ 
+        	inp.focus();
+        }, 200);
       } 
       else if (e.key == 'ArrowUp')
       { 
         currentFocus--;
         addActive(x);
+        let selectedElm = listElm.childNodes[currentFocus];
+        selectedElm.focus();
+        setTimeout(function(){ 
+        	inp.focus();
+        }, 200);
       } 
       else if (e.key == 'Enter')
       { 

@@ -129,6 +129,8 @@ a:hover {
 	right: 0;
 	max-height: 150px;
 	overflow-y: scroll;
+	list-style: none; 
+	scroll-behavior: smooth;
 }
 
 .autocomplete-items div {
