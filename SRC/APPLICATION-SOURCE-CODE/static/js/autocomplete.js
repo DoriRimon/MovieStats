@@ -186,7 +186,7 @@ let genreNames;
 
 cloud = document.getElementById("cloudToggle")
 
-while (!(cloud.classList.includes('hidden'))) {
+while (!(cloud.classList.value.includes('hidden'))) {
   setTimeout(function(){
   
   }, 200);
