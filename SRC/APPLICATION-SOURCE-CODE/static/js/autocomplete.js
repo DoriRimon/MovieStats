@@ -159,7 +159,7 @@ function getEntities() {
   // xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
   // xhr.send();
 
-  if (type === 'Genre' && text in genreNames)
+  if (type === 'Genre' && genreNames.includes(text))
     window.location.href = `/top/${text}`;
   
   else
