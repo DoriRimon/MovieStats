@@ -64,3 +64,5 @@ fetchGenres = () => {
 
     xhr.send();
 }
+
+fetchGenres();

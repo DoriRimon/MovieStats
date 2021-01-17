@@ -167,6 +167,6 @@ function getEntities() {
   if (type === 'Genre' && genreNames.includes(text))
     window.location.href = `/top/${text}`;
   
-  else
+  else if (type !== 'Genre')
     window.location.href = `/blocks/${type}/${text}`;
 }
