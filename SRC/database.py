@@ -194,9 +194,7 @@ class Database:
         
             t = self.__format_ft_match_expr(text)
 
-            query = ''' select  {}, id
-                        from    {}
-                        where   match({}) against('{}' in boolean mode); '''.format(att, table, titles[table], t)
+            query = ' select  {}, id  from    {}  where   match({}) against(\'''{}\''' in boolean mode); '.format(att, table, titles[table], t)
 
             print(query)
             
