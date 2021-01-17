@@ -1,6 +1,9 @@
 const basePosterPath = 'https://image.tmdb.org/t/p/';
 const size = 'w780';
 
+/**
+ * Create the movie page
+ */
 function createPage() {
     let title = movieRec[1];
     let budget = movieRec[2];
@@ -11,10 +14,6 @@ function createPage() {
         date = 'Date not available';
     else {
         date = date.slice(0, -13);
-        // let day = date.getDate();
-        // let month = date.getMonth();
-        // let year = date.getFullYear();
-        // date = day + '.' + (month + 1) + '.' + year; 
     }
 
     let image = basePosterPath + size;
@@ -194,6 +193,9 @@ function createMoneyText(revenue) {
 let wrapper = document.getElementById('wrapper');
 createPage();
 
+/**
+ * Return to the homepage
+ */
 function home() {
     window.location.href = '/';
 }

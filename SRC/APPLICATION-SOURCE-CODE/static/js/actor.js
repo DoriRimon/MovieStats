@@ -1,6 +1,9 @@
 const basePosterPath = 'https://image.tmdb.org/t/p/';
 const size = 'w780';
 
+/**
+ * Build the actor page
+ */
 function createPage() {
     let id = actorRec[0];
     let name = actorRec[1];
@@ -137,6 +140,9 @@ function createPage() {
 let wrapper = document.getElementById('wrapper');
 createPage();
 
+/**
+ * Navigate back to the home page
+ */
 function home() {
     window.location.href = '/';
 }
