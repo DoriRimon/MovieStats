@@ -166,5 +166,6 @@ function getEntities() {
     window.location.href = `/blocks/${type}/${text}`;
 }
 
+await fetchGenres();
 let genreNames = genres.map(genre => genre[0]);
 
