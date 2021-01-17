@@ -338,7 +338,7 @@ class Database:
 
     def __format_ft_match_expr(self, text):
         words = text.split()
-        bf = ['"' + word + '"' if '-' in word else word for word in words] # sorround word in quotes if contains '-'
+        bf = ['\"' + word + '\"' if '-' in word else word for word in words] # sorround word in quotes if contains '-'
         bf = ['+' + word if len(word) > 3 or index == (len(word) - 1) else word for index, word in enumerate(words)] # creating boolean format
         bf[-1] += '*'
         t = ' '.join(bf)
