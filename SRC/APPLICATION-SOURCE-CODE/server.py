@@ -25,7 +25,6 @@ def fetch_genres():
 
     # build response
     resp = jsonify(records)
-    print(resp)
     resp.status_code = 200
     resp.headers.add('Access-Control-Allow-Origin', '*')
 
@@ -35,8 +34,6 @@ def fetch_genres():
 @app.route('/blocks/<type>/<text>', methods=['GET'])
 def render_blocks(type, text):
     # text - user input text
-    print('type: ', type)
-    print('text: ', text)
     
     attributes = []
     if type == 'Movie':
@@ -54,7 +51,6 @@ def render_blocks(type, text):
 @app.route('/top/<text>', methods=['GET'])
 def render_top(text):
     # text - user input text
-    print('text: ', text)
 
     genres = db.search_genre(text)
     if (len(genres) != 1):
@@ -71,7 +67,6 @@ def render_top(text):
 
 @app.route('/movie/<id>', methods=['GET'])
 def render_movie(id):
-    print('id: ', id)
 
     movie = db.search_movie(id)
     actors = db.get_movie_actors(id)
@@ -83,7 +78,6 @@ def render_movie(id):
 
 @app.route('/actor/<id>', methods=['GET'])
 def render_actor(id):
-    print('id: ', id)
 
     actor = db.search_actor(id)
     movies = db.get_actor_movies(id)
@@ -96,11 +90,9 @@ def render_actor(id):
 def search():
     # table - relevant table from the user select options (Movie / Actor / Genere)
     table = request.form['table']
-    print('table: ', table)
 
     # text - user input text
     text = request.form['text']
-    print('text: ', text)
 
     
     # full text search
@@ -108,12 +100,21 @@ def search():
 
     # build response
     resp = jsonify(records)
-    print(resp)
     resp.status_code = 200
     resp.headers.add('Access-Control-Allow-Origin', '*')
 
     return resp
 
+
+@app.route('/genres', methods=['GET'])
+def genres():
+    geners = db.get_genres()
+
+    resp = jsonify(genres)
+    resps.status_code = 200
+    resp.headers.add('Access-Control-Allow-Origin', '*')
+
+    return resp
 
 if __name__ == "__main__":
     if RUN_LOCALLY:

@@ -147,6 +147,15 @@ class Database:
 
         return movie
 
+    def get_genres(self):
+        query = ''' select  name
+                    from    Genre
+                '''
+
+        genres = list(self.execute_query(query)[0])
+
+        return genres
+
     def search_actor(self, id):
         query = ''' select  *
                     from    Actor

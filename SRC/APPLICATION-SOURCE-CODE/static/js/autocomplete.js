@@ -159,9 +159,28 @@ function getEntities() {
   // xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
   // xhr.send();
 
-  if (type === 'Genre')
+  if (type === 'Genre' && text in genreNames)
     window.location.href = `/top/${text}`;
   
   else
     window.location.href = `/blocks/${type}/${text}`;
 }
+
+genres = () => {
+  var xhr = new XMLHttpRequest();
+  xhr.open("GET", '/genres', true);
+  xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+  xhr.onreadystatechange = function() 
+  {
+      if (this.readyState === XMLHttpRequest.DONE && this.status === 200) 
+      {
+          genreNames = JSON.parse(xhr.response);
+      }
+  }
+
+  xhr.send();
+}
+
+let genreNames;
+genres();
