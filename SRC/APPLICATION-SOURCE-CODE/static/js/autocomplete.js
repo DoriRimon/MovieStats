@@ -154,6 +154,8 @@ function getEntities() {
   let type = document.getElementById('menu').value;
   let text = document.getElementById('myInput').value;
 
+  let genreNames = genres.map(genre => genre[0]);
+
   // var xhr = new XMLHttpRequest();
   // xhr.open("GET", `/blocks/${type}/${text}`, true);
   // xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -165,6 +167,4 @@ function getEntities() {
   else
     window.location.href = `/blocks/${type}/${text}`;
 }
-
-let genreNames = genres.map(genre => genre[0]);
 
