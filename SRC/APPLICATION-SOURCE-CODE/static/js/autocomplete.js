@@ -1,5 +1,3 @@
-import genres from './indexUtils.js'
-
 function autocomplete(inp) {
   var currentFocus;
   inp.addEventListener("input", function(e) {
