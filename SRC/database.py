@@ -343,6 +343,11 @@ class Database:
     def __format_ft_match_expr(self, text):
         words = text.split()
         words = list(map(self.__rep, words))
+        w = []
+        for word in words:
+            w += word.split()
+
+        words = w
         bf = ['+' + word if len(word) > 3 or index == (len(words) - 1) else word for index, word in enumerate(words)] # creating boolean format
         bf[-1] += '*'
         t = ' '.join(bf)
