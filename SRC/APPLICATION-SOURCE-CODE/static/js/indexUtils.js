@@ -3,7 +3,7 @@
 //             ['Mystery', 474], ['Music', 359], ['Science Fiction', 307], ['Horror', 254], ['Western', 161], ['Documentary', 44],
 //             ['TV Movie', 8]];
 
-let genres = [];
+let genres;
 
 toggleSearch = () => {
     document.getElementById("cloudToggle").classList.remove("selected");
