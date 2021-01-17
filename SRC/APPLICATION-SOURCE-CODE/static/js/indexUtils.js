@@ -23,7 +23,6 @@ toggleCloud = () => {
     {
         list: factorWeights(genres),
         wait: 500,
-        hover: addTitleOnSpan,
         gridSize: 40,
         backgroundColor: "transparent",
         color: '#DEF2F1',
@@ -40,14 +39,14 @@ factorWeights = (sortedWordsArr) => {
     return sortedWordsArr.map(word => [word[0], ((word[1] - rMin) / (rMax - rMin)) * (tMax - tMin) + tMin ])
 }
 
-addTitleOnSpan = (item) => {
-    let spanTags = document.getElementsByTagName("span");
-    for (let i = 0; i < spanTags.length; i++) {
-        if (spanTags[i].textContent === item[0]) {
-            spanTags[i].setAttribute("title", `${genres.find(genre => genre[0] === item[0])[1]} ${item[0]} movies`)
-        }
-    }
-}
+// addTitleOnSpan = (item) => {
+//     let spanTags = document.getElementsByTagName("span");
+//     for (let i = 0; i < spanTags.length; i++) {
+//         if (spanTags[i].textContent === item[0]) {
+//             spanTags[i].setAttribute("title", `${genres.find(genre => genre[0] === item[0])[1]} ${item[0]} movies`)
+//         }
+//     }
+// }
 
 fetchGenres = () => {
     var xhr = new XMLHttpRequest();
