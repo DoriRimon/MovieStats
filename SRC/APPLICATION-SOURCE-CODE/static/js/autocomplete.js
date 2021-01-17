@@ -183,4 +183,14 @@ genres = () => {
 }
 
 let genreNames;
+
+cloud = document.getElementById("cloudToggle")
+
+while (!(cloud.classList.includes('hidden'))) {
+  setTimeout(function(){
+  
+  }, 200);
+}
+
 genres();
+

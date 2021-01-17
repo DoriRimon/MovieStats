@@ -149,7 +149,7 @@ class Database:
 
     def get_genres(self):
         query = ''' select  name
-                    from    Genre
+                    from    Genre;
                 '''
 
         genres = list(self.execute_query(query)[0])
