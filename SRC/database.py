@@ -168,10 +168,7 @@ class Database:
             if not text:
                 return []
         
-            words = text.split()
-            bf = ['+' + word if len(word) > 3 or index == (len(word) - 1) else word for index, word in enumerate(words)] # creating boolean format
-            bf[-1] += '*'
-            t = ' '.join(bf)
+            t = self.__format_ft_match_expr(text)
 
             query = ''' select  {}
                         from    {}
@@ -195,10 +192,7 @@ class Database:
             if not text:
                 return []
         
-            words = text.split()
-            bf = ['+' + word if len(word) > 3 or index == (len(word) - 1) else word for index, word in enumerate(words)] # creating boolean format
-            bf[-1] += '*'
-            t = ' '.join(bf)
+            t = self.__format_ft_match_expr(text)
 
             query = ''' select  {}, id
                         from    {}
@@ -341,3 +335,11 @@ class Database:
 
         rec = self.execute_query(query)
         return [list(v) for v in rec]
+
+    def __format_ft_match_expr(self, text):
+        words = text.split()
+        bf = ['"' + word + '"' if '-' in word else word for word in words] # sorround word in quotes if contains '-'
+        bf = ['+' + word if len(word) > 3 or index == (len(word) - 1) else word for index, word in enumerate(words)] # creating boolean format
+        bf[-1] += '*'
+        t = ' '.join(bf)
+        return t
