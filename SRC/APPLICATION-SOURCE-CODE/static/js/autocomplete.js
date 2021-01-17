@@ -1,5 +1,9 @@
 let genreNames = [];
 
+/**
+ * create the autocomplete functionality for the main page search bar
+ * @param {*} inp the input element to where the text is inserted
+ */
 function autocomplete(inp) {
   var currentFocus;
   inp.addEventListener("input", function(e) {

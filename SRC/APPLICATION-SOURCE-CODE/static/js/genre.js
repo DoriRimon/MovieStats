@@ -1,6 +1,9 @@
 const basePosterPath = 'https://image.tmdb.org/t/p/';
 const size = 'w780';
 
+/**
+ * create the page layout for the top 10 movies of a genre
+ */
 function createTopMovies() {
     topMovies.forEach((entity, index) => {
         let title = entity[0];
@@ -84,6 +87,9 @@ function createTopMovies() {
     });
 }
 
+/**
+ * create the page layout for the top 10 actors of a genre
+ */
 function createTopActors() {
     topActors.forEach((entity, index) => {
         let name = entity[0];
@@ -164,16 +170,27 @@ function createTopActors() {
     });
 }
 
+/**
+ * 
+ * @param {number} revenue number
+ * 
+ * @returns {string} of the number with commas seperating each 3 digits
+ */
 function createRevText(revenue) {
     return 'Revenue: ' + revenue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + '$';
 }
 
-
+/**
+ * Switch from movies to actors
+ */
 function switchToActors() {
     movies.style.display = 'none';
     actors.style.display = 'flex';
 }
 
+/**
+ * Switch from actors to movies
+ */
 function swtichToMovies() {
     actors.style.display = 'none';
     movies.style.display = 'flex';
@@ -182,6 +199,9 @@ function swtichToMovies() {
 let movies = document.getElementById('movies');
 let actors = document.getElementById('actors');
 
+/**
+ * Return to home page
+ */
 function home() {
     window.location.href = '/';
 }

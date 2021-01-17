@@ -1,10 +1,8 @@
-// let words = [['Drama', 6876], ['Comedy', 2723], ['Romance', 1851], ['Thriller', 1211], ['Action', 1162], ['Crime', 1125], 
-//             ['Adventure', 699], ['Family', 658], ['History', 631], ['War', 596], ['Fantasy', 530], ['Animation', 476], 
-//             ['Mystery', 474], ['Music', 359], ['Science Fiction', 307], ['Horror', 254], ['Western', 161], ['Documentary', 44],
-//             ['TV Movie', 8]];
-
 let genres = [];
 
+/**
+ * Toggle the main page search
+ */
 toggleSearch = () => {
     document.getElementById("cloudToggle").classList.remove("selected");
     searchToggleBtn = document.getElementById("searchToggle");
@@ -13,6 +11,9 @@ toggleSearch = () => {
     document.getElementById("search-interface").classList.remove("hidden");
 }
 
+/**
+ * Toggle the main page genres cloud
+ */
 toggleCloud = () => {
     document.getElementById("searchToggle").classList.remove("selected");
     toggleCloudBtn = document.getElementById("cloudToggle");
@@ -30,6 +31,9 @@ toggleCloud = () => {
     });
 }
 
+/**
+ * normalize the weights of the genres, so that these amounts can be used as font sizes for the words cloud
+ */
 factorWeights = (sortedWordsArr) => {
     rMin = sortedWordsArr[sortedWordsArr.length - 1][1];
     rMax = sortedWordsArr[0][1];
@@ -39,15 +43,9 @@ factorWeights = (sortedWordsArr) => {
     return sortedWordsArr.map(word => [word[0], ((word[1] - rMin) / (rMax - rMin)) * (tMax - tMin) + tMin ])
 }
 
-// addTitleOnSpan = (item) => {
-//     let spanTags = document.getElementsByTagName("span");
-//     for (let i = 0; i < spanTags.length; i++) {
-//         if (spanTags[i].textContent === item[0]) {
-//             spanTags[i].setAttribute("title", `${genres.find(genre => genre[0] === item[0])[1]} ${item[0]} movies`)
-//         }
-//     }
-// }
-
+/**
+ * Fetch the genres and their movies amount fro the server
+ */
 fetchGenres = () => {
     var xhr = new XMLHttpRequest();
     xhr.open("GET", '/allGenres', true);

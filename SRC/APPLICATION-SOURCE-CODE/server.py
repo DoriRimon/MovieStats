@@ -16,6 +16,7 @@ db = None
 
 @app.route('/')
 def upload_form():
+    #Render homepage
     return render_template('index.html')
 
 @app.route('/allGenres')
@@ -33,7 +34,9 @@ def fetch_genres():
 
 @app.route('/blocks/<type>/<text>', methods=['GET'])
 def render_blocks(type, text):
-    # text - user input text
+    # Fetch from db all the names and images found from the full text query
+    # type decides whether we query Actor or Movie table
+    # render the blocks page accordignly
     
     attributes = []
     if type == 'Movie':
@@ -50,7 +53,8 @@ def render_blocks(type, text):
 
 @app.route('/top/<text>', methods=['GET'])
 def render_top(text):
-    # text - user input text
+    # Fetch top 10 movies and top 10 actors from the db, and their details.
+    # render the top 10 of genre page accordignly
 
     genres = db.search_genre(text)
     if (len(genres) != 1):
@@ -67,6 +71,8 @@ def render_top(text):
 
 @app.route('/movie/<id>', methods=['GET'])
 def render_movie(id):
+    #fetch from db movie details of the given id and render movie page,
+    #also fetch all the actors of the movie, and 5 recommended movies
 
     movie = db.search_movie(id)
     actors = db.get_movie_actors(id)
@@ -78,6 +84,8 @@ def render_movie(id):
 
 @app.route('/actor/<id>', methods=['GET'])
 def render_actor(id):
+    #fetch from db actpr details of the given id and render actor page
+    #also fetch all movies the actor acted in and 5 recommended actors
 
     actor = db.search_actor(id)
     movies = db.get_actor_movies(id)
@@ -88,6 +96,7 @@ def render_actor(id):
 
 @app.route('/search', methods=['POST'])
 def search():
+    # run a full text query on the db and return the results
     # table - relevant table from the user select options (Movie / Actor / Genere)
     table = request.form['table']
 
@@ -105,22 +114,8 @@ def search():
 
     return resp
 
-
-@app.route('/genres', methods=['GET'])
-def genres():
-    genreNames = db.get_genres()
-
-    resp = jsonify(genreNames)
-    resps.status_code = 200
-    resp.headers.add('Access-Control-Allow-Origin', '*')
-
-    return resp
-
 if __name__ == "__main__":
-    if RUN_LOCALLY:
-        app.run()
-    else:
-        db = Database()
-        db.connect()
-        app.run(host=HOST, port=str(PORT), debug=True)
-        print('server running at port ', PORT)
+    db = Database()
+    db.connect()
+    app.run(host=HOST, port=str(PORT), debug=True)
+    print('server running at port ', PORT)

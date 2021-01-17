@@ -1,6 +1,9 @@
 const basePosterPath = 'https://image.tmdb.org/t/p/' 
 const size = 'w780'
 
+/**
+ * create the blocks page, which is where we see all the actors/movies found
+ */
 function blocks() {
     rec.forEach(entity => {
         let title = entity[0];
@@ -37,6 +40,9 @@ function blocks() {
 
 var wrapper = document.getElementById('blocks');
 
+/**
+ * return to the home page
+ */
 function home() {
     window.location.href = '/';
 }
