@@ -1,7 +1,9 @@
+let genreNames = [];
+
 function autocomplete(inp) {
   var currentFocus;
   inp.addEventListener("input", function(e) {
-      let arr = []
+      let arr = [];
 
       var xhr = new XMLHttpRequest();
       xhr.open("POST", '/search', true);
@@ -12,6 +14,9 @@ function autocomplete(inp) {
           if (this.readyState === XMLHttpRequest.DONE && this.status === 200) 
           {
               arr = JSON.parse(xhr.response)
+              if (document.getElementById("menu").value === 'Genre') {
+                genreNames = arr;
+              }
               var a, b, i;
 
               closeAllLists();
@@ -165,7 +170,3 @@ function getEntities() {
   else
     window.location.href = `/blocks/${type}/${text}`;
 }
-
-await fetchGenres();
-let genreNames = genres.map(genre => genre[0]);
-
