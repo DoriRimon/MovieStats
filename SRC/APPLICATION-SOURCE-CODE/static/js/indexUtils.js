@@ -44,7 +44,7 @@ addTitleOnSpan = (item) => {
     let spanTags = document.getElementsByTagName("span");
     for (let i = 0; i < spanTags.length; i++) {
         if (spanTags[i].textContent === item[0]) {
-            spanTags[i].setAttribute("title", `${words.find(word => word[0] === item[0])[1]} ${item[0]} movies`)
+            spanTags[i].setAttribute("title", `${genres.find(genre => genre[0] === item[0])[1]} ${item[0]} movies`)
         }
     }
 }
