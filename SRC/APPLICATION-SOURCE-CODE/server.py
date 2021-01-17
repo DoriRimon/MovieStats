@@ -108,9 +108,9 @@ def search():
 
 @app.route('/genres', methods=['GET'])
 def genres():
-    geners = db.get_genres()
+    genreNames = db.get_genres()
 
-    resp = jsonify(genres)
+    resp = jsonify(genreNames)
     resps.status_code = 200
     resp.headers.add('Access-Control-Allow-Origin', '*')
 
