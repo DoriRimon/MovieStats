@@ -1,3 +1,5 @@
+import genres from './indexUtils.js'
+
 function autocomplete(inp) {
   var currentFocus;
   inp.addEventListener("input", function(e) {
@@ -166,30 +168,5 @@ function getEntities() {
     window.location.href = `/blocks/${type}/${text}`;
 }
 
-genres = () => {
-  while (cloud.classList.value.includes('hidden')) {
-    setTimeout(function(){
-    
-    }, 200);
-  }
-  
-  var xhr = new XMLHttpRequest();
-  xhr.open("GET", '/genres', true);
-  xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-
-  xhr.onreadystatechange = function() 
-  {
-      if (this.readyState === XMLHttpRequest.DONE && this.status === 200) 
-      {
-          genreNames = JSON.parse(xhr.response);
-      }
-  }
-
-  xhr.send();
-}
-
-cloud = document.getElementById("cloudToggle")
-
-let genreNames;
-genres();
+let genreNames = genres.map(genre => genre[0]);
 
