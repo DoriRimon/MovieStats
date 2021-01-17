@@ -65,21 +65,21 @@ function autocomplete(inp) {
       { 
         currentFocus++;
         addActive(x);
-        let selectedElm = listElm.childNodes[currentFocus];
-        selectedElm.focus();
-        setTimeout(function(){ 
-        	inp.focus();
-        }, 200);
+        // let selectedElm = listElm.childNodes[currentFocus];
+        // selectedElm.focus();
+        // setTimeout(function(){ 
+        // 	inp.focus();
+        // }, 200);
       } 
       else if (e.key == 'ArrowUp')
       { 
         currentFocus--;
         addActive(x);
-        let selectedElm = listElm.childNodes[currentFocus];
-        selectedElm.focus();
-        setTimeout(function(){ 
-        	inp.focus();
-        }, 200);
+        // let selectedElm = listElm.childNodes[currentFocus];
+        // selectedElm.focus();
+        // setTimeout(function(){ 
+        // 	inp.focus();
+        // }, 200);
       } 
       else if (e.key == 'Enter')
       { 
