@@ -182,8 +182,6 @@ genres = () => {
   xhr.send();
 }
 
-let genreNames;
-
 cloud = document.getElementById("cloudToggle")
 
 while (!(cloud.classList.value.includes('hidden'))) {
@@ -192,5 +190,6 @@ while (!(cloud.classList.value.includes('hidden'))) {
   }, 200);
 }
 
+let genreNames;
 genres();
 
