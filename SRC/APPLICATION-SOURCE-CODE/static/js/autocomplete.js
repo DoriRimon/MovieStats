@@ -167,6 +167,12 @@ function getEntities() {
 }
 
 genres = () => {
+  while (cloud.classList.value.includes('hidden')) {
+    setTimeout(function(){
+    
+    }, 200);
+  }
+  
   var xhr = new XMLHttpRequest();
   xhr.open("GET", '/genres', true);
   xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -183,12 +189,6 @@ genres = () => {
 }
 
 cloud = document.getElementById("cloudToggle")
-
-while (cloud.classList.value.includes('hidden')) {
-  setTimeout(function(){
-  
-  }, 200);
-}
 
 let genreNames;
 genres();
