@@ -47,6 +47,7 @@ def render_blocks(type, text):
 
     # full text search
     records = db.ft_list_search(type, text, attributes)
+    print(records)
 
     return render_template('blocks.html', type=type, records=records)
 
