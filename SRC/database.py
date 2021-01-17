@@ -169,7 +169,7 @@ class Database:
                 return []
         
             words = text.split()
-            bf = ['+' + word if len(word) > 3 or index == (len(word) - 1) else word for word, index in enumerate(words)] # creating boolean format
+            bf = ['+' + word if len(word) > 3 or index == (len(word) - 1) else word for index, word in enumerate(words)] # creating boolean format
             bf[-1] += '*'
             t = ' '.join(bf)
 
@@ -196,7 +196,7 @@ class Database:
                 return []
         
             words = text.split()
-            bf = ['+' + word if len(word) > 3 or index == (len(word) - 1) else word for word, index in enumerate(words)] # creating boolean format
+            bf = ['+' + word if len(word) > 3 or index == (len(word) - 1) else word for index, word in enumerate(words)] # creating boolean format
             bf[-1] += '*'
             t = ' '.join(bf)
 
