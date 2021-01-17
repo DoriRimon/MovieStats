@@ -40,7 +40,7 @@ function autocomplete(inp) {
                     inp.value = this.getElementsByTagName("input")[0].value;
                     closeAllLists();
                 });
-                b.setAttribute('tabIndex', '-1');
+                // b.setAttribute('tabIndex', '-1');
                 a.appendChild(b);
               }
           }
