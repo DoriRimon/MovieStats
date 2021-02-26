@@ -7,7 +7,6 @@ sys.path.insert(1, './SRC/')
 from globe import *
 from flask import Flask, jsonify, request, redirect, render_template
 from database import Database
-from server_utils import render_page
 
 
 app = Flask(__name__)
