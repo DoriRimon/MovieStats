@@ -4,7 +4,7 @@
 
 ## What is MovieStats?
 MovieStats is a site which provides data about movies, actors and genres, as well as statistical connections between them.
-This was the end project of the course "Data Based Systems - 0368-3458-01
+This was the end project of the course "Database Systems - 0368-3458-01
 " I did at Tel-Aviv University 
 
 ## Movies
